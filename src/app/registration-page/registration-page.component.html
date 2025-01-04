@@ -1,0 +1,30 @@
+<div class="login-page">
+  <div class="login-form">
+    <h1>Registration form</h1>
+    <div class="input-group">
+      <p [ngClass]="{ 'hidden': !isValidationActive || getEmailValid() }" class="text-fields-not-valid">
+        Email address is not valid
+      </p>
+      <input type="text" placeholder="Email" [(ngModel)]="email" />
+    </div>
+    <div class="input-group">
+      <p [ngClass]="{ 'hidden': !isValidationActive || getUsernameValid() }" class="text-fields-not-valid">
+        Username is not valid
+      </p>
+      <input type="text" placeholder="Username" [(ngModel)]="username" />
+    </div>
+    <div class="input-group">
+      <p [ngClass]="{ 'hidden': !isValidationActive || getPasswordValid() }" class="text-fields-not-valid">
+        Password is not valid
+      </p>
+      <input type="password" placeholder="Password" [(ngModel)]="password" />
+    </div>
+    <div class="input-group">
+      <p [ngClass]="{ 'hidden': !isValidationActive || getRepeatPasswordValid() }" class="text-fields-not-valid">
+        Passwords don't match
+      </p>
+      <input type="password" placeholder="Repeat password" [(ngModel)]="repeatPassword" />
+    </div>
+    <input type="button" value="Sign up" (click)="signUpClick()"/>
+  </div>
+</div>
