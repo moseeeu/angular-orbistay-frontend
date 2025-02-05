@@ -1,25 +1,25 @@
 .card {
-  width: 100%;
-  max-width: 350px;
-  height: 400px;
+  width: 12vw;
+  height: 18vw;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   font-family: "Open Sans", sans-serif;
   display: flex;
   flex-direction: column;
   border: 0;
   background-color: #fff;
+  z-index: -1;
 }
 
 .image-container {
   position: relative;
-  height: 50%;
+  height: 20vw;
 }
 
 .card-image {
-  width: 100%;
-  height: 200px;
+  width: auto;
+  height: 265px;
   object-fit: cover;
 }
 
@@ -44,24 +44,34 @@
 }
 
 .card-content {
-  padding: 16px;
+  padding: 0 16px 16px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 50%;
+  height: 70%;
 }
-
+.card-header {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border: none;
+  height: auto;
+  padding: 0;
+}
 .card-title {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: bold;
   margin: 0;
-  height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
+  overflow-wrap: break-word; /* Додаємо перенос слів */
+  display: -webkit-box;       /* Використовуємо для багаторядкового обмеження */
+  -webkit-line-clamp: 2;      /* Обмежуємо до 2 рядків */
+  -webkit-box-orient: vertical;
 }
 
 .card-location {
-  font-size: 14px;
+  font-size: 17px;
   color: #666;
   margin: 4px 0 16px;
   height: 20px;
@@ -73,10 +83,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
   background-color: transparent;
   border: none;
-  padding: 0 0 20px 0;
+  padding: 0;
 }
 
 .rating {
@@ -88,7 +97,7 @@
 .rating-score {
   width: 40px;
   height: 40px;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 700;
   background-color: #07195F;
   color: #fff;
@@ -99,13 +108,13 @@
 }
 
 .rating-text {
-  font-size: 14px;
+  font-size: 17px;
   color: #0C0C20B2;
   font-weight: 400;
 }
 
 .reviews {
-  font-size: 14px;
+  font-size: 17px;
   color: #0C0C20B2;
   margin: 0;
   font-weight: 400;

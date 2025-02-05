@@ -8,9 +8,9 @@ import {Component, Input} from '@angular/core';
   styleUrl: './hotel-view-card.component.css'
 })
 export class HotelViewCardComponent {
-  @Input() title: string = ''; // Заголовок карточки
-  @Input() location: string = ''; // Локация
-  @Input() rating: number = 0; // Рейтинг
-  @Input() reviews: number = 0; // Количество отзывов
+  @Input() title: string = '';
+  @Input() location: string = '';
+  @Input() rating: number = 0;
+  @Input() reviews: number = 0;
   @Input() image: string = '';
 }
