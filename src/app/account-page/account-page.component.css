@@ -1,0 +1,235 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.main-page-banner {
+  background-color: #A93F05;
+  padding: 0 20vw 0 20vw;
+  height: 100px;
+  color: white;
+  font-family: OpenSans, sans-serif;
+  align-content: center;
+}
+.main-page-banner span {
+  font-weight: 400;
+  font-size: 14px;
+  color: #F6FAF9;
+}
+.main-page-content {
+  display: flex;
+  flex-direction: row;
+  padding: 2vh 20vw 2vh 20vw;
+  width: 100%;
+  height: 100%;
+  gap: 1.5vw;
+}
+.account-pages-list {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  border: 3px solid #E6EBF2;
+  border-radius: 4px;
+  z-index: 10;
+}
+.account-pages-list ul {
+  margin: 0;
+  padding: 0;
+}
+.account-pages-list ul hr {
+  background: #E6EBF2;
+  opacity: 10;
+  height: 3px;
+  margin: 0;
+}
+.account-pages-list li {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 6vh;
+  align-items: center;
+  padding: 0 1vw 0 1vw;
+  gap: 20px;
+  cursor: pointer;
+}
+.account-pages-list li:hover svg path {
+  fill: #A93F05;
+  transition: 0.2s ease-in-out;
+}
+
+.account-pages-list li:hover .account-list-item-text {
+  color: #A93F05;
+  transition: 0.2s ease-in-out;
+}
+.icon-bg {
+  width: 1.5vw;
+  height: 1.5vw;
+  background-color: #E6EBF2;
+  border-radius: 100px;
+}
+.account-list-item-text {
+  font-weight: 400;
+  font-size: 16px;
+}
+.personal-details {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 100%;
+}
+.personal-details hr {
+  border: 2px solid rgba(230, 235, 242, 1);
+  opacity: 10;
+}
+.customization-preferences hr {
+  border: 2px solid rgba(230, 235, 242, 1);
+  opacity: 10;
+}
+.personal-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.header-info {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.header-info h1 {
+  font-weight: 700;
+  font-size: 1.6vw;
+  color: #07195F;
+}
+
+.header-info span {
+  color: #555563;
+  font-weight: 400;
+  font-size: 0.7vw;
+}
+.photo-container {
+  position: relative;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  border: 2px solid #07195F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E6EBF2;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.half-circle {
+  display: flex;
+  position: absolute;
+  bottom: -50%;
+  width: 100%;
+  height: 50%;
+  background: rgba(149, 149, 149, 0.52);
+  transition: bottom 0.3s ease;
+  justify-content: center;
+  padding-top: 0.2vw;
+  z-index: 2;
+}
+
+.photo-container:hover .half-circle {
+  bottom: 0;
+}
+
+.photo-icon {
+  position: relative;
+  z-index: 1;
+  color: #07195F;
+  font-weight: bold;
+  font-size: 1.5vw;
+}
+.user-info-field {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
+  padding: 0.5vw 1vw 0.5vw 1vw;
+}
+.header-field, .header-field-mail {
+  width: 25%;
+  color: rgba(12, 12, 32, 1);
+  font-weight: 400;
+  font-size: 0.7vw;
+  align-content: center;
+}
+.display-info-field, .display-info-field-mail {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 400;
+  font-size: 0.7vw;
+  align-self: center;
+  width: 100%;
+}
+.display-info-field-mail {
+  display: flex;
+  flex-direction: column;
+}
+.verified-plank {
+  background-color: rgba(7, 25, 95, 1);
+  font-weight: 400;
+  height: 22px;
+  font-size: 0.6vw;
+  color: white;
+  padding: 0 0.5vw;
+  border-radius: 4px;
+}
+.description {
+  color: rgba(85, 85, 99, 1);
+  font-weight: 400;
+  font-size: 0.6vw;
+}
+.button-info-field, .button-info-field-mail {
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: flex-end;
+}
+button {
+  color: rgba(169, 63, 5, 1);
+  font-weight: 600;
+  font-size: 0.7vw;
+  background-color: transparent;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+button:hover {
+  color: rgb(221, 93, 19);
+}
+.customization-preferences {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.hidden {
+  display: none;
+}
+.description-value {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.save-btn {
+  background-color: rgba(7, 25, 95, 1);
+  font-weight: 600;
+  font-size: 19px;
+  border-radius: 4px;
+  color: white;
+  width: 100%;
+  padding: 0.2vw 0.7vw 0.2vw 0.7vw;
+}
+.input-edit {
+  width: 80%;
+}
+.input-edit:focus {
+  border: 2px solid rgb(221, 93, 19);
+  outline: none;
+}

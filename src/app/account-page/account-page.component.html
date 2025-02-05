@@ -1,0 +1,116 @@
+<div class="main-page">
+  <div class="main-page-banner">
+    <span>Main</span>
+  </div>
+  <div class="main-page-content">
+    <div class="account-pages-list">
+      <ul>
+        <li (click)="showContent('content1')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="15" fill="#E6EBF2"/>
+            <g clip-path="url(#clip0_874_3613)">
+              <path d="M17.1429 11.5C17.1429 10.9198 16.9171 10.3634 16.5152 9.9532C16.1134 9.54297 15.5683 9.3125 15 9.3125C14.4317 9.3125 13.8866 9.54297 13.4848 9.9532C13.0829 10.3634 12.8571 10.9198 12.8571 11.5C12.8571 12.0802 13.0829 12.6366 13.4848 13.0468C13.8866 13.457 14.4317 13.6875 15 13.6875C15.5683 13.6875 16.1134 13.457 16.5152 13.0468C16.9171 12.6366 17.1429 12.0802 17.1429 11.5ZM11.5714 11.5C11.5714 10.5717 11.9327 9.6815 12.5756 9.02513C13.2186 8.36875 14.0907 8 15 8C15.9093 8 16.7814 8.36875 17.4244 9.02513C18.0673 9.6815 18.4286 10.5717 18.4286 11.5C18.4286 12.4283 18.0673 13.3185 17.4244 13.9749C16.7814 14.6313 15.9093 15 15 15C14.0907 15 13.2186 14.6313 12.5756 13.9749C11.9327 13.3185 11.5714 12.4283 11.5714 11.5ZM10.3205 20.6875H19.6821C19.4437 18.9566 17.9866 17.625 16.2268 17.625H13.7786C12.0187 17.625 10.5616 18.9566 10.3232 20.6875H10.3205ZM9 21.1879C9 18.4945 11.1375 16.3125 13.7759 16.3125H16.2241C18.8625 16.3125 21 18.4945 21 21.1879C21 21.6363 20.6437 22 20.2045 22H9.79554C9.35625 22 9 21.6363 9 21.1879Z" fill="#07195F"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_874_3613">
+                <rect width="12" height="14" fill="white" transform="translate(9 8)"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <span class="account-list-item-text">Personal details</span>
+        </li>
+        <hr>
+        <li (click)="showContent('content2')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+            <circle cx="15" cy="15" r="15" fill="#E6EBF2"/>
+            <g clip-path="url(#clip0_874_3346)">
+              <path d="M8 19.375C8 19.859 8.39102 20.25 8.875 20.25H10.3707C10.707 21.0238 11.4781 21.5625 12.375 21.5625C13.2719 21.5625 14.043 21.0238 14.3793 20.25H21.125C21.609 20.25 22 19.859 22 19.375C22 18.891 21.609 18.5 21.125 18.5H14.3793C14.043 17.7262 13.2719 17.1875 12.375 17.1875C11.4781 17.1875 10.707 17.7262 10.3707 18.5H8.875C8.39102 18.5 8 18.891 8 19.375ZM11.5 19.375C11.5 19.1429 11.5922 18.9204 11.7563 18.7563C11.9204 18.5922 12.1429 18.5 12.375 18.5C12.6071 18.5 12.8296 18.5922 12.9937 18.7563C13.1578 18.9204 13.25 19.1429 13.25 19.375C13.25 19.6071 13.1578 19.8296 12.9937 19.9937C12.8296 20.1578 12.6071 20.25 12.375 20.25C12.1429 20.25 11.9204 20.1578 11.7563 19.9937C11.5922 19.8296 11.5 19.6071 11.5 19.375ZM16.75 15C16.75 14.7679 16.8422 14.5454 17.0063 14.3813C17.1704 14.2172 17.3929 14.125 17.625 14.125C17.8571 14.125 18.0796 14.2172 18.2437 14.3813C18.4078 14.5454 18.5 14.7679 18.5 15C18.5 15.2321 18.4078 15.4546 18.2437 15.6187C18.0796 15.7828 17.8571 15.875 17.625 15.875C17.3929 15.875 17.1704 15.7828 17.0063 15.6187C16.8422 15.4546 16.75 15.2321 16.75 15ZM17.625 12.8125C16.7281 12.8125 15.957 13.3512 15.6207 14.125H8.875C8.39102 14.125 8 14.516 8 15C8 15.484 8.39102 15.875 8.875 15.875H15.6207C15.957 16.6488 16.7281 17.1875 17.625 17.1875C18.5219 17.1875 19.293 16.6488 19.6293 15.875H21.125C21.609 15.875 22 15.484 22 15C22 14.516 21.609 14.125 21.125 14.125H19.6293C19.293 13.3512 18.5219 12.8125 17.625 12.8125ZM13.25 11.5C13.0179 11.5 12.7954 11.4078 12.6313 11.2437C12.4672 11.0796 12.375 10.8571 12.375 10.625C12.375 10.3929 12.4672 10.1704 12.6313 10.0063C12.7954 9.84219 13.0179 9.75 13.25 9.75C13.4821 9.75 13.7046 9.84219 13.8687 10.0063C14.0328 10.1704 14.125 10.3929 14.125 10.625C14.125 10.8571 14.0328 11.0796 13.8687 11.2437C13.7046 11.4078 13.4821 11.5 13.25 11.5ZM15.2543 9.75C14.918 8.97617 14.1469 8.4375 13.25 8.4375C12.3531 8.4375 11.582 8.97617 11.2457 9.75H8.875C8.39102 9.75 8 10.141 8 10.625C8 11.109 8.39102 11.5 8.875 11.5H11.2457C11.582 12.2738 12.3531 12.8125 13.25 12.8125C14.1469 12.8125 14.918 12.2738 15.2543 11.5H21.125C21.609 11.5 22 11.109 22 10.625C22 10.141 21.609 9.75 21.125 9.75H15.2543Z" fill="#07195F"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_874_3346">
+                <rect width="14" height="14" fill="white" transform="translate(8 8)"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <span class="account-list-item-text">Customization preferences</span>
+        </li>
+      </ul>
+    </div>
+    <div [ngClass]="{'hidden': activeContent !== 'content1'}" class="personal-details">
+      <div class="personal-header">
+        <div class="header-info">
+          <h1>Personal details</h1>
+          <span>Update your info and find out how it's used.</span>
+        </div>
+        <div class="photo-container">
+          <div (click)="openFileDialog()" class="half-circle">
+            <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M6.25 5L7.5 2.5H12.5L13.75 5H6.25Z" stroke="#F6FAF9" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M17.0827 5H2.91602C2.22566 5 1.66602 5.55964 1.66602 6.25V16.25C1.66602 16.9404 2.22566 17.5 2.91602 17.5H17.0827C17.773 17.5 18.3327 16.9404 18.3327 16.25V6.25C18.3327 5.55964 17.773 5 17.0827 5Z" stroke="#F6FAF9" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M9.99935 14.5837C11.8403 14.5837 13.3327 13.0913 13.3327 11.2503C13.3327 9.40937 11.8403 7.91699 9.99935 7.91699C8.15839 7.91699 6.66602 9.40937 6.66602 11.2503C6.66602 13.0913 8.15839 14.5837 9.99935 14.5837Z" stroke="#F6FAF9" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="photo-icon">{{this.firstLetter}}</span>
+        </div>
+      </div>
+      <hr>
+      <ng-container *ngFor="let field of userFields">
+        <div class="user-info-field" [ngClass]="{'mail-field': field.type === 'mail'}">
+          <div [ngClass]="{'header-field-mail': field.type === 'mail', 'header-field': field.type !== 'mail'}">
+            <span>{{field.label}}</span>
+          </div>
+          <div [ngClass]="{'display-info-field-mail': field.type === 'mail', 'display-info-field': field.type !== 'mail'}">
+            <div class="description-value" *ngIf="!field.editing">
+              <div style="display: flex; flex-direction: row; gap: 10px">
+                <span>{{field.value}}</span>
+                <span *ngIf="field.verified" class="verified-plank">Verified</span>
+              </div>
+              <span *ngIf="field.description" class="description">{{field.description}}</span>
+            </div>
+            <div *ngIf="field.editing">
+              <input class="input-edit" [(ngModel)]="field.value" type="text">
+            </div>
+          </div>
+          <div [ngClass]="{'button-info-field-mail': field.type === 'mail', 'button-info-field': field.type !== 'mail'}">
+            <button *ngIf="!field.editing" (click)="toggleEdit(field)">Edit</button>
+            <div style="display: flex; flex-direction: column; gap: 0.5vw;" *ngIf="field.editing">
+              <button (click)="cancelEdit(field)">Cancel</button>
+              <button class="save-btn" (click)="saveField()">Save</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </ng-container>
+    </div>
+    <div [ngClass]="{'hidden': activeContent !== 'content2'}" class="customization-preferences">
+      <div class="personal-header">
+        <div class="header-info">
+          <h1>Customization preferences</h1>
+          <span>Update your info and find out how it's used.</span>
+        </div>
+      </div>
+      <hr>
+      <div *ngFor="let preference of preferences; let last = last">
+        <div class="user-info-field">
+          <div class="header-field">
+            <span>{{preference.label}}</span>
+          </div>
+          <div class="display-info-field">
+            <span *ngIf="!preference.editing">{{preference.value}}</span>
+            <input class="input-edit" *ngIf="preference.editing" [(ngModel)]="preference.value" type="text">
+          </div>
+          <div class="button-info-field">
+            <button *ngIf="!preference.editing" (click)="preference.editing = true">Edit</button>
+            <div style="display: flex; flex-direction: column; gap: 0.5vw;" *ngIf="preference.editing">
+              <button (click)="preference.editing = false">Cancel</button>
+              <button class="save-btn" (click)="savePreference(preference)">Save</button>
+            </div>
+          </div>
+        </div>
+        <hr *ngIf="!last">
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>
