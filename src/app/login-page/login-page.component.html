@@ -1,8 +1,48 @@
-<div class="login-page">
-  <div class="login-form">
-    <h1>Login form</h1>
-    <input type="text" placeholder="Email" [(ngModel)]="email"/>
-    <input type="text" placeholder="Password" [(ngModel)]="password"/>
-    <input type="button" value="Sign in" (click)="loginUser()"/>
+<div class="body">
+  <hr style="margin-top: -1px">
+  <div class="login-page">
+    <div class="login-form">
+      <div class="login-header">
+        <h1>Sign in or create an account </h1>
+        <h2>You can sign in using your Orbistay.com account to access our services.</h2>
+      </div>
+      <div class="input-field">
+        <span>Email address</span>
+        <input type="text" placeholder="Email" [(ngModel)]="email"/>
+      </div>
+      <div class="input-field">
+        <span>Password</span>
+        <input type="password" placeholder="Password" [(ngModel)]="password"/>
+        <a>Forget your passport?</a>
+      </div>
+      <input type="button" value="Sign in" (click)="loginUser()"/>
+      <div class="create-acc-field">
+        <span>Don't have account?</span>
+        <a routerLink="/registration">Create new account.</a>
+      </div>
+      <div class="create-acc-field">
+        <hr>
+        <span>or use one of these options</span>
+        <hr>
+      </div>
+      <div class="options">
+        <div class="login-option" (click)="loginUserByGoogle()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="39" height="40" viewBox="0 0 39 40" fill="none">
+            <path d="M39 20.4677C39 31.879 31.2559 40 19.8197 40C8.85492 40 0 31.0645 0 20C0 8.93548 8.85492 0 19.8197 0C25.1582 0 29.6496 1.97581 33.11 5.23387L27.7156 10.4677C20.6588 3.59677 7.53627 8.75806 7.53627 20C7.53627 26.9758 13.0586 32.629 19.8197 32.629C27.6676 32.629 30.6086 26.9516 31.0721 24.0081H19.8197V17.129H38.6883C38.8721 18.1532 39 19.1371 39 20.4677Z" fill="#07195F"/>
+          </svg>
+        </div>
+        <div class="login-option">
+          <svg xmlns="http://www.w3.org/2000/svg" width="33" height="40" viewBox="0 0 33 40" fill="none">
+            <path d="M27.5906 21.1378C27.5731 17.8604 29.0284 15.3867 31.9742 13.565C30.326 11.1627 27.8361 9.84108 24.5484 9.5821C21.436 9.33205 18.0343 11.4307 16.7893 11.4307C15.4742 11.4307 12.4583 9.6714 10.0911 9.6714C5.19899 9.75177 0 13.6453 0 21.5664C0 23.9061 0.420829 26.3232 1.26249 28.8177C2.3847 32.0951 6.43518 40.1323 10.661 39.9983C12.8704 39.9448 14.4309 38.3998 17.3066 38.3998C20.0946 38.3998 21.5412 39.9983 24.0048 39.9983C28.2657 39.9358 31.9304 32.6309 33 29.3446C27.2837 26.6031 27.5906 21.3074 27.5906 21.1378ZM22.6283 6.47439C25.0218 3.58101 24.8026 0.946601 24.7325 0C22.6196 0.125023 20.1735 1.46455 18.7795 3.11664C17.2452 4.88482 16.3422 7.07272 16.5351 9.53745C18.8233 9.71605 20.9099 8.51941 22.6283 6.47439Z" fill="#07195F"/>
+          </svg>
+        </div>
+        <div class="login-option">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M40 20.0745C40 8.98647 31.0469 0 20 0C8.95313 0 0 8.98647 0 20.0745C0 29.4844 6.46094 37.3887 15.1719 39.5609V26.2066H11.0469V20.0745H15.1719V17.4319C15.1719 10.6018 18.25 7.43384 24.9375 7.43384C26.2031 7.43384 28.3906 7.68477 29.2891 7.9357V13.4876C28.8203 13.4405 28 13.4091 26.9766 13.4091C23.6953 13.4091 22.4297 14.6559 22.4297 17.8945V20.0745H28.9609L27.8359 26.2066H22.4219V40C32.3281 38.8002 40 30.3391 40 20.0745Z" fill="#07195F"/>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+

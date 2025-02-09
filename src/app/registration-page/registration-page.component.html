@@ -1,30 +1,26 @@
-<div class="login-page">
-  <div class="login-form">
-    <h1>Registration form</h1>
-    <div class="input-group">
-      <p [ngClass]="{ 'hidden': !isValidationActive || getEmailValid() }" class="text-fields-not-valid">
-        Email address is not valid
-      </p>
-      <input type="text" placeholder="Email" [(ngModel)]="email" />
+<div class="body">
+  <hr style="margin-top: -1px">
+  <div class="registration-page">
+    <div class="registration-form">
+      <div class="registration-header">
+        <h1>Create an account </h1>
+        <h2>You can sign up to access our services.</h2>
+      </div>
+      <div class="input-field">
+        <span>Email address</span>
+        <input type="text" placeholder="Email" [(ngModel)]="email"/>
+      </div>
+      <div class="input-field">
+        <span>Password</span>
+        <input type="password" placeholder="Password" [(ngModel)]="password"/>
+        <a>Forget your passport?</a>
+      </div>
+      <input type="button" value="Sign up" (click)="registerUser()"/>
+      <div class="create-acc-field">
+        <span>Do you have an account?</span>
+        <a routerLink="/login">Sign in.</a>
+      </div>
     </div>
-    <div class="input-group">
-      <p [ngClass]="{ 'hidden': !isValidationActive || getUsernameValid() }" class="text-fields-not-valid">
-        Username is not valid
-      </p>
-      <input type="text" placeholder="Username" [(ngModel)]="username" />
-    </div>
-    <div class="input-group">
-      <p [ngClass]="{ 'hidden': !isValidationActive || getPasswordValid() }" class="text-fields-not-valid">
-        Password is not valid
-      </p>
-      <input type="password" placeholder="Password" [(ngModel)]="password" />
-    </div>
-    <div class="input-group">
-      <p [ngClass]="{ 'hidden': !isValidationActive || getRepeatPasswordValid() }" class="text-fields-not-valid">
-        Passwords don't match
-      </p>
-      <input type="password" placeholder="Repeat password" [(ngModel)]="repeatPassword" />
-    </div>
-    <input type="button" value="Sign up" (click)="signUpClick()"/>
   </div>
 </div>
+

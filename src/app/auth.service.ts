@@ -34,6 +34,10 @@ export class AuthService {
     return this.http.post<any>(`${ApiUrls.SIGN_IN_URL}`, data);
   }
 
+  loginUserByGoogle() {
+    return this.http.get(`${ApiUrls.GET_OAUTH2_GOOGLE_URL}`);
+  }
+
   getUserInfo(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -44,7 +48,7 @@ export class AuthService {
     return this.http.get(`${ApiUrls.GET_USER_URL}`, { headers });
   }
 
-  private hasToken(): boolean {
+  hasToken(): boolean {
     return !!localStorage.getItem('token');
   }
 }

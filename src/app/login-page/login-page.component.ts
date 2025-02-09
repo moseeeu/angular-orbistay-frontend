@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
+import {ApiUrls} from '../api-urls';
 
 @Component({
   selector: 'app-login-page',
@@ -22,17 +23,42 @@ export class LoginPageComponent {
     this.authService.loginUser(this.email, this.password)
       .subscribe(
         (response) => {
-          this.token = response.accessToken ;
+          this.token = response.accessToken;
           console.log('Login successful! Token:', this.token);
           localStorage.setItem('token', this.token);
-          this.router.navigate(['']);
+
+          if (this.token != null) {
+            this.authService.getUserInfo().subscribe(
+              data => {
+                this.appComponent.updateUserData(data);
+                this.router.navigate(['']);
+              }
+            );
+          }
         },
         (error) => {
           if (error.status == 400) alert("Error, invalid data provided!")
           else if (error.status == 401) alert("Error, incorrect username or email or password!");
           else if (error.status == 404) alert("Error, can not find authenticated user by provided email!");
-
         }
       );
+  }
+  loginUserByGoogle() {
+    this.authService.loginUserByGoogle().subscribe(
+      (response: any) => {
+        this.token = response.accessToken;
+        console.log('Login successful! Token:', this.token);
+        localStorage.setItem('token', this.token);
+
+        if (this.token != null) {
+          this.authService.getUserInfo().subscribe(
+            data => {
+              this.appComponent.updateUserData(data);
+              this.router.navigate(['']);
+            }
+          );
+        }
+      }
+    )
   }
 }
