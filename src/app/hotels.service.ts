@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApiUrls} from './api-urls';
 
@@ -13,12 +13,14 @@ export class HotelsService {
   getHotelsByApi(hotelApiString: string): Observable<any> {
     return this.http.get(hotelApiString);
   }
-  getFilteredHotelsByApi(apiUrl: string, requestBody: any): Observable<any> {
+  getFilteredHotels(apiUrl: string, requestBody: any): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Request-Body': JSON.stringify(requestBody)
+      'Content-Type': 'application/json'
     });
 
-    return this.http.get(apiUrl, { headers });
+    return this.http.get(apiUrl, {
+      headers,
+      params: requestBody
+    });
   }
 }
