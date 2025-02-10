@@ -1,12 +1,12 @@
 FROM node:18
 
-WORKDIR /app
+WORKDIR /src/app
 
-COPY package*.json ./
-
-RUN npm install
+COPY . /src/app
 
 RUN npm install -g @angular/cli
+
+RUN npm install
 
 EXPOSE 4200
 
