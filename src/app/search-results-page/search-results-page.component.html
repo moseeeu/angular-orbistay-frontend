@@ -26,8 +26,7 @@
             <div
               class="city-dropdown-item"
               *ngFor="let city of filteredCities"
-              (click)="selectCity(city)"
-            >
+              (click)="selectCity(city)">
               <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#004080" stroke-width="2">
                 <path d="M12 21c-4.5-4.5-7-7.5-7-10a7 7 0 0 1 14 0c0 2.5-2.5 5.5-7 10z" />
                 <circle cx="12" cy="11" r="3" />
@@ -96,9 +95,12 @@
   </div>
   <div class="search">
     <nav class="breadcrumb">
-      <ng-container *ngFor="let item of breadcrumb; let last = last">
+      <ng-container class="breadcrumb" *ngFor="let item of breadcrumb; let last = last">
         <a class="breadcrumb-bar-item" *ngIf="!last" [routerLink]="item.url">{{ item.label }}</a>
-        <span *ngIf="!last" class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-arrow" *ngIf="!last"><svg xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 6 11" fill="none">
+                    <path d="M1 9.5L5 5.5L1 1.5" stroke="#0C0C20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+        </span>
         <span *ngIf="last" class="breadcrumb-item active">{{ item.label }}</span>
       </ng-container>
     </nav>
@@ -143,30 +145,10 @@
         </div>
         <hr>
         <p>Rating by stars</p>
-        <div class="filters-fields-display-row">
+        <div class="filters-fields-display-row" *ngFor="let star of filteredHotels.hotelsCountByStars">
           <input type="checkbox"/>
-          <p>1 star</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>2 star</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>3 star</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>4 star</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>5 star</p>
-          <p class="filter-result-count">385</p>
+          <p>{{ starsMapping[star.hotelStars] }} stars</p>
+          <p class="filter-result-count">{{ star.count }}</p>
         </div>
         <hr>
       </div>

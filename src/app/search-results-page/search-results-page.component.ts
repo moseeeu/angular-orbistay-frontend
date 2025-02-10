@@ -29,18 +29,27 @@ export class SearchResultsPageComponent {
   children = 0;
   //------------------------------------FILTER VARIABLES------------------------------------
   selectedCityForCrumbBar: any;
+  filteredHotels: any;
   breadcrumb: { label: string; url: string }[] = [];
   @ViewChild('slider') slider!: ElementRef;
   minValue = 99;
   maxValue = 99999;
+  starsMapping: { [key: string]: number } = {
+    'ONE_STAR': 1,
+    'TWO_STARS': 2,
+    'THREE_STARS': 3,
+    'FOUR_STARS': 4,
+    'FIVE_STARS': 5
+  };
 
 
   updateSlider() {
     if (this.minValue > this.maxValue) {
       [this.minValue, this.maxValue] = [this.maxValue, this.minValue];
     }
-    console.log(`Min: ${this.minValue}, Max: ${this.maxValue}`);
   }
+
+
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
     this.range = this.fb.group({
@@ -51,14 +60,33 @@ export class SearchResultsPageComponent {
 
   ngOnInit(): void {
     const selectedCityCrumb = localStorage.getItem('selectedCityForCrumbBar');
+    const filteredHotelsFromStorage = localStorage.getItem('filteredHotels');
     this.selectedCityForCrumbBar = selectedCityCrumb ? JSON.parse(selectedCityCrumb) : null;
+    this.filteredHotels = filteredHotelsFromStorage ? JSON.parse(filteredHotelsFromStorage) : null;
+
+    this.filteredHotels.hotelsCountByStars = this.filteredHotels.hotelsCountByStars.sort((a: { hotelStars: any; }, b: { hotelStars: any; }) => {
+      return this.extractNumber(a.hotelStars) - this.extractNumber(b.hotelStars);
+    });
+
+    console.log("Filtered hotels from storage:", this.filteredHotels)
 
     console.log('Search city', this.selectedCityForCrumbBar);
     this.updateBreadcrumb();
     this.router.events.subscribe(() => {
       this.updateBreadcrumb();
     });
+    console.log("Crumb", this.breadcrumb);
+  }
 
+  extractNumber(hotelStars: string): number {
+    const mapping: { [key: string]: number } = {
+      'ONE_STAR': 1,
+      'TWO_STARS': 2,
+      'THREE_STARS': 3,
+      'FOUR_STARS': 4,
+      'FIVE_STARS': 5
+    };
+    return mapping[hotelStars] || 0;
   }
 
   updateBreadcrumb(): void {
@@ -67,8 +95,10 @@ export class SearchResultsPageComponent {
 
     this.breadcrumb = [{ label: 'Home', url: '' }];
 
-    this.breadcrumb.push({label: this.selectedCityForCrumbBar.country.name, url: ''})
-    this.breadcrumb.push({label: this.selectedCityForCrumbBar.city, url: ''})
+    if (JSON.stringify(this.selectedCityForCrumbBar) !== '{}') {
+      this.breadcrumb.push({label: this.selectedCityForCrumbBar.country.name, url: ''})
+      this.breadcrumb.push({label: this.selectedCityForCrumbBar.city, url: ''})
+    }
 
     this.breadcrumb.push({ label: 'Search results', url: '' });
   }
