@@ -2,8 +2,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
 import {BehaviorSubject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-account-page',
@@ -18,17 +19,46 @@ export class AccountPageComponent {
   activeContent: string = 'content1';
   firstLetter: string = '';
   private currentUserSubject = new BehaviorSubject<any>(null);
-  constructor(public appComponent: AppComponent, public router: Router, public http: HttpClient) { }
+  constructor(public appComponent: AppComponent, public router: Router, public http: HttpClient, private auth: AuthService) { }
 
-  username: string | undefined = 'Alexandr Kalyan';
-  displayName: string | undefined = 'User123';
-  email: string | undefined  = 'user@example.com';
-  phone: string | undefined = '+380 50 123 4567';
+  username: string | undefined = '';
+  displayName: string | undefined = '';
+  email: string | undefined  = '';
+  phone: string | undefined = '';
   birthDate: string | undefined = 'Enter your date of birth';
   nationality: string | undefined = 'Select the country/region you are from';
   gender: string | undefined = 'Select your gender';
   address: string | undefined = 'Add your address';
   passportDetails: string | undefined = 'Not provided';
+
+  passportData = {
+    name: '',
+    surname: '',
+    country: '',
+    number: '',
+    validFrom: '',
+    validTo: '',
+    agree: false
+  };
+  name: string = "";
+  surname: string = "";
+  countries: any[] = [];
+  selectedCountry: string = 'Ukraine';
+  selectedMonth: string = '01';
+  month: any[] = [
+    { name: '01-Jan', code: '01' },
+    { name: '02-Feb', code: '02' },
+    { name: '03-Mar', code: '03' },
+    { name: '04-Apr', code: '04' },
+    { name: '05-May', code: '05' },
+    { name: '06-Jun', code: '06' },
+    { name: '07-Jul', code: '07' },
+    { name: '08-Aug', code: '08' },
+    { name: '09-Sep', code: '09' },
+    { name: '10-Oct', code: '10' },
+    { name: '11-Nov', code: '11' },
+    { name: '12-Dec', code: '12' },
+  ];
 
   userFields = [
     { label: 'Name', value: this.username, type: '', verified: false, description: '', editing: false },
@@ -46,47 +76,72 @@ export class AccountPageComponent {
     { label: 'Language', value: 'American English', editing: false }
   ];
 
-  saveField() {
-    this.username = this.userFields.find(f => f.label === 'Name')?.value;
-    this.displayName = this.userFields.find(f => f.label === 'Display name')?.value;
-    this.email = this.userFields.find(f => f.label === 'Email address')?.value;
-    this.phone = this.userFields.find(f => f.label === 'Phone number')?.value;
-    this.birthDate = this.userFields.find(f => f.label === 'Date of birth')?.value;
-    this.nationality = this.userFields.find(f => f.label === 'Nationality')?.value;
-    this.gender = this.userFields.find(f => f.label === 'Gender')?.value;
-    this.address = this.userFields.find(f => f.label === 'Address')?.value;
-    this.passportDetails = this.userFields.find(f => f.label === 'Passport details')?.value;
+  saveField(field: any) {
+    let updatedData;
+    const token = localStorage.getItem('token');
+    console.log("Token",token)
 
-    const updatedData = {
-      username: this.username,
-      displayName: this.displayName,
-      email: this.email,
-      phone: this.phone,
-      birthDate: this.birthDate,
-      nationality: this.nationality,
-      gender: this.gender,
-      address: this.address,
-      passportDetails: this.passportDetails
-    };
+    if (field.label === 'Passport details') {
+      updatedData = {
+        passportData: this.passportData
+      };
+    } else {
+      updatedData = {
+        [field.label]: field.value
+      };
+    }
 
-    this.http.put(ApiUrls.PUT_USER_URL, updatedData)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.http.put(ApiUrls.PUT_USER_URL, updatedData, { headers })
       .subscribe(
-        response => console.log('Data updated successfully:', response),
+        response => {
+          console.log('Data updated successfully:', response);
+          field.editing = false;
+        },
         error => console.error('Error updating data:', error)
       );
   }
-  cancelEdit(field: { editing: boolean; }) {
+  cancelEdit(field: any): void {
     field.editing = false;
-  }
 
-  toggleEdit(field: { editing: boolean; }) {
+    if (field.label === 'Passport details') {
+      this.passportData = {
+        name: '',
+        surname: '',
+        country: '',
+        number: '',
+        validFrom: '',
+        validTo: '',
+        agree: false
+      };
+    }
+  }
+  toggleEdit(field: any) {
     field.editing = !field.editing;
+
+    if (field.label === 'Passport details' && field.editing) {
+      this.passportData = {
+        name: '',
+        surname: '',
+        country: '',
+        number: '',
+        validFrom: '',
+        validTo: '',
+        agree: false
+      };
+    }
   }
   savePreference(preference: { editing: boolean; }) {
     preference.editing = false;
   }
 
   ngOnInit() {
+    this.getCountriesList()
+    if (!this.auth.hasToken()) { this.router.navigate(['/login']); }
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
@@ -97,6 +152,21 @@ export class AccountPageComponent {
     else {
       console.log('No user data found in localStorage');
     }
+  }
+
+  getCountriesList() {
+    this.http.get('https://restcountries.com/v3.1/all')
+      .subscribe((response: any) => {
+        this.countries = response
+          .map((country: any) => ({
+            name: country.name.common,
+            code: country.cca2,
+          }))
+          .sort((a: any, b: any) => a.name.localeCompare(b.name));
+
+        this.selectedCountry = this.countries.find(country => country.name === 'Ukraine');
+        console.log(this.selectedCountry);
+      });
   }
 
   showContent(contentId: string) {

@@ -189,7 +189,7 @@
 }
 .button-info-field, .button-info-field-mail {
   display: flex;
-  width: 15%;
+  width: 20%;
   align-items: center;
   justify-content: flex-end;
 }
@@ -232,4 +232,72 @@ button:hover {
 .input-edit:focus {
   border: 2px solid rgb(221, 93, 19);
   outline: none;
+}
+.passport-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+}
+.passport-name-surname {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+.input-div {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.input-edit {
+  width: 100%;
+  padding: 0.5vw;
+  color: rgba(12, 12, 32, 1);
+  border: 1px solid rgba(12, 12, 32, 1);
+  border-radius: 4px;
+  font-size: 0.7vw;
+}
+.input-valid-edit {
+  width: 30%;
+  padding: 0.5vw;
+  color: rgba(12, 12, 32, 1);
+  border: 1px solid rgba(12, 12, 32, 1);
+  border-radius: 4px;
+  font-size: 0.7vw;
+}
+.input-edit:focus {
+  border: 1px solid rgba(169, 63, 5, 1);
+  outline: none;
+}
+.input-valid-edit:focus {
+  border: 1px solid rgba(169, 63, 5, 1);
+  outline: none;
+}
+.name-surname-checkout {
+  width: 100%;
+  color: rgba(85, 85, 99, 1);
+  font-weight: 400;
+  font-size: 17px;
+}
+.passport_header {
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+}
+.valid-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+label {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+label input {
+  border: 1px solid rgba(7, 25, 95, 1);
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  accent-color: rgba(7, 25, 95, 1);
 }

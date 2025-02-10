@@ -58,30 +58,97 @@
       <ng-container *ngFor="let field of userFields">
         <div class="user-info-field" [ngClass]="{'mail-field': field.type === 'mail'}">
           <div [ngClass]="{'header-field-mail': field.type === 'mail', 'header-field': field.type !== 'mail'}">
-            <span>{{field.label}}</span>
+            <span [ngClass]="{'passport_header': field.label === 'Passport details'}">{{ field.label }}</span>
           </div>
           <div [ngClass]="{'display-info-field-mail': field.type === 'mail', 'display-info-field': field.type !== 'mail'}">
             <div class="description-value" *ngIf="!field.editing">
               <div style="display: flex; flex-direction: row; gap: 10px">
-                <span>{{field.value}}</span>
-                <span *ngIf="field.verified" class="verified-plank">Verified</span>
+                <span>{{ field.value }}</span>
               </div>
-              <span *ngIf="field.description" class="description">{{field.description}}</span>
+              <span *ngIf="field.description" class="description">{{ field.description }}</span>
             </div>
             <div *ngIf="field.editing">
-              <input class="input-edit" [(ngModel)]="field.value" type="text">
+              <div *ngIf="field.label === 'Passport details'; else defaultEdit">
+                <div class="passport-edit-container">
+                  <div class="passport-name-surname">
+                    <div class="input-div">
+                      <div>
+                        <span>Name</span>
+                        <span style="color: rgba(169, 63, 5, 1);">*</span>
+                      </div>
+                      <input class="input-edit" [(ngModel)]="passportData.name" placeholder="Input your name" />
+                    </div>
+                    <div class="input-div">
+                      <div>
+                        <span>Surname</span>
+                        <span style="color: rgba(169, 63, 5, 1);">*</span>
+                      </div>
+                      <input class="input-edit" [(ngModel)]="passportData.surname" placeholder="Input your surname" />
+                    </div>
+                  </div>
+                  <div *ngIf="!passportData.name || !passportData.surname" class="name-surname-checkout">
+                    <span>Please enter your name exactly as it appears on your passport or the other official travel document.</span>
+                  </div>
+                  <div class="input-div">
+                    <div>
+                      <span>Country of issue</span>
+                      <span style="color: rgba(169, 63, 5, 1);">*</span>
+                    </div>
+                    <select class="input-edit" [(ngModel)]="selectedCountry">
+                      <option *ngFor="let country of countries" [value]="country">
+                        {{ country.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="input-div">
+                    <div>
+                      <span>Passport number</span>
+                      <span style="color: rgba(169, 63, 5, 1);">*</span>
+                    </div>
+                    <input class="input-edit" [(ngModel)]="passportData.number" placeholder="Enter document number" />
+                  </div>
+                  <div class="input-div">
+                    <div>
+                      <span>Validity number</span>
+                      <span style="color: rgba(169, 63, 5, 1);">*</span>
+                    </div>
+                    <div class="valid-row">
+                      <input class="input-valid-edit" value="01"/>
+                      <select class="input-valid-edit" [(ngModel)]="selectedMonth">
+                        <option *ngFor="let m of month" [value]="m.code">
+                          {{ m.name }}
+                        </option>
+                      </select>
+                      <input class="input-valid-edit" value="2003"/>
+                    </div>
+                  </div>
+                  <label style="color: rgba(85, 85, 99, 1); font-size: 17px;">
+                    We will keep this data secure and delete it after two years of inactivity.
+                  </label>
+                  <label>
+                    <input type="checkbox" [(ngModel)]="passportData.agree" />
+                    I agree that Orbistay.com will store my passport data in accordance with the Privacy Policy.
+                  </label>
+                </div>
+              </div>
+              <ng-template #defaultEdit>
+                <input class="input-edit" [(ngModel)]="field.value" type="text" />
+              </ng-template>
             </div>
           </div>
           <div [ngClass]="{'button-info-field-mail': field.type === 'mail', 'button-info-field': field.type !== 'mail'}">
-            <button *ngIf="!field.editing" (click)="toggleEdit(field)">Edit</button>
+            <button *ngIf="!field.editing" (click)="toggleEdit(field)">
+              {{ field.label === 'Passport details' ? 'Add passport' : 'Edit' }}
+            </button>
             <div style="display: flex; flex-direction: column; gap: 0.5vw;" *ngIf="field.editing">
               <button (click)="cancelEdit(field)">Cancel</button>
-              <button class="save-btn" (click)="saveField()">Save</button>
+              <button class="save-btn" (click)="saveField(field)">Save</button>
             </div>
           </div>
         </div>
         <hr>
       </ng-container>
+
     </div>
     <div [ngClass]="{'hidden': activeContent !== 'content2'}" class="customization-preferences">
       <div class="personal-header">
