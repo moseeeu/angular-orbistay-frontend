@@ -9,6 +9,19 @@ import { RegistrationPageComponent } from './registration-page/registration-page
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountPageComponent } from './account-page/account-page.component';
+import { SearchResultsPageComponent } from './search-results-page/search-results-page.component';
+import {MatFormField} from '@angular/material/form-field';
+import {MatDatepickerToggle, MatDateRangeInput, MatDateRangePicker} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HotelViewCardComponent } from './hotel-view-card/hotel-view-card.component';
+import { HorizontalHotelSearchCardComponent } from './horizontal-hotel-search-card/horizontal-hotel-search-card.component';
+import {MatSlider, MatSliderRangeThumb} from "@angular/material/slider";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -16,16 +29,35 @@ import { AccountPageComponent } from './account-page/account-page.component';
     MainPageComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    AccountPageComponent
+    AccountPageComponent,
+    SearchResultsPageComponent,
+    HotelViewCardComponent,
+    HorizontalHotelSearchCardComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatDateRangeInput,
+        MatDatepickerToggle,
+        MatDateRangePicker,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatSlider,
+        MatSliderRangeThumb,
+        NgOptimizedImage
+    ],
+  providers: [
+
+
+    provideAnimationsAsync()
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
