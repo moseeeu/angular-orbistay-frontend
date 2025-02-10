@@ -9,6 +9,5 @@ services:
       - "4200:4200"
     volumes:
       - .:/app
-      - /app/node_modules
     command: ng serve --host 0.0.0.0
     container_name: angular-container
