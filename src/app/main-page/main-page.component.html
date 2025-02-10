@@ -1,73 +1,139 @@
-<div class="main-page">
-  <div class="main-page-banner">
-    <div class="main-page-banner-content">
-      <div class="banner-text">
-        <p class="main-text">Feel at home wherever you are</p>
-        <p class="sub-text">Book accommodation quickly and conveniently around the world.</p>
-      </div>
+  <div class="main-page">
+    <div class="main-page-banner">
+      <div class="main-page-banner-content">
+        <div class="banner-text">
+          <p class="main-text">Feel at home wherever you are</p>
+          <p class="sub-text">Book accommodation quickly and conveniently around the world.</p>
+        </div>
 
       <div class="search-bar">
         <!-- LOCATION -->
-        <div class="search-field">
-          <label for="location" class="field-title">LOCATION</label>
-          <select id="location" class="dropdown">
-            <option selected>New York</option>
-            <option>Los Angeles</option>
-            <option>Chicago</option>
-            <option>Miami</option>
-          </select>
+        <div class="city-selector-field" (click)="toggleCityDropdown()">
+          <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M5.40039 7.875C5.40039 6.83944 6.20628 6 7.20039 6H22.8004C23.7945 6 24.6004 6.83944 24.6004 7.875V14.75H5.40039V7.875Z" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.19922 22.25V24.75" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25.8008 22.25V24.75" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.25 10H8.75C7.78347 10 7 11.3431 7 13V15H14V13C14 11.3431 13.2165 10 12.25 10Z" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21.25 10H17.75C16.7835 10 16 11.3431 16 13V15H23V13C23 11.3431 22.2165 10 21.25 10Z" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 16.625C3 15.5894 3.80589 14.75 4.8 14.75H25.2C26.1941 14.75 27 15.5894 27 16.625V22.25H3V16.625Z" fill="#9E9EA6" stroke="#9E9EA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <input
+            type="text"
+            class="city-selector-input"
+            placeholder="Where do you want to go?"
+            [(ngModel)]="selectedCity"
+            (input)="filterCities($event)"
+            (click)="$event.stopPropagation()"/>
+
+          <div class="city-dropdown-content" [class.show]="isCityDropdownOpen" (click)="$event.stopPropagation()">
+            <h3 class="dropdown-header">Popular destinations nearby</h3>
+            <div
+              class="city-dropdown-item"
+              *ngFor="let city of popularDestinations"
+              (click)="selectCity(city)">
+              <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#004080" stroke-width="2">
+                <path d="M12 21c-4.5-4.5-7-7.5-7-10a7 7 0 0 1 14 0c0 2.5-2.5 5.5-7 10z" />
+                <circle cx="12" cy="11" r="3" />
+              </svg>
+              <div class="city-details">
+                <strong>{{ city.city }}</strong>
+                <small>{{ city.country.name }}</small>
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1vw" height="1vw" viewBox="0 0 16 10" fill="none">
+            <path d="M2 2L8 8L14 2" stroke="#0C0C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
+
         <!-- CHECK IN -->
-        <div class="search-field">
-          <label for="check-in" class="field-title">CHECK IN</label>
-          <input type="date" id="check-in" class="dropdown" value="2024-12-20">
-        </div>
-        <!-- CHECK OUT -->
-        <div class="search-field">
-          <label for="check-out" class="field-title">CHECK OUT</label>
-          <input type="date" id="check-out" class="dropdown" value="2024-01-03">
+        <div class="search-field" (click)="picker.open()">
+          <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M9.85714 3C10.8054 3 11.5714 3.67031 11.5714 4.5V6H18.4286V4.5C18.4286 3.67031 19.1946 3 20.1429 3C21.0911 3 21.8571 3.67031 21.8571 4.5V6H24.4286C25.8482 6 27 7.00781 27 8.25V10.5H3V8.25C3 7.00781 4.15179 6 5.57143 6H8.14286V4.5C8.14286 3.67031 8.90893 3 9.85714 3ZM3 12H27V24.75C27 25.9922 25.8482 27 24.4286 27H5.57143C4.15179 27 3 25.9922 3 24.75V12ZM6.42857 15.75V17.25C6.42857 17.6625 6.81429 18 7.28571 18H9C9.47143 18 9.85714 17.6625 9.85714 17.25V15.75C9.85714 15.3375 9.47143 15 9 15H7.28571C6.81429 15 6.42857 15.3375 6.42857 15.75ZM13.2857 15.75V17.25C13.2857 17.6625 13.6714 18 14.1429 18H15.8571C16.3286 18 16.7143 17.6625 16.7143 17.25V15.75C16.7143 15.3375 16.3286 15 15.8571 15H14.1429C13.6714 15 13.2857 15.3375 13.2857 15.75ZM21 15C20.5286 15 20.1429 15.3375 20.1429 15.75V17.25C20.1429 17.6625 20.5286 18 21 18H22.7143C23.1857 18 23.5714 17.6625 23.5714 17.25V15.75C23.5714 15.3375 23.1857 15 22.7143 15H21ZM6.42857 21.75V23.25C6.42857 23.6625 6.81429 24 7.28571 24H9C9.47143 24 9.85714 23.6625 9.85714 23.25V21.75C9.85714 21.3375 9.47143 21 9 21H7.28571C6.81429 21 6.42857 21.3375 6.42857 21.75ZM14.1429 21C13.6714 21 13.2857 21.3375 13.2857 21.75V23.25C13.2857 23.6625 13.6714 24 14.1429 24H15.8571C16.3286 24 16.7143 23.6625 16.7143 23.25V21.75C16.7143 21.3375 16.3286 21 15.8571 21H14.1429ZM20.1429 21.75V23.25C20.1429 23.6625 20.5286 24 21 24H22.7143C23.1857 24 23.5714 23.6625 23.5714 23.25V21.75C23.5714 21.3375 23.1857 21 22.7143 21H21C20.5286 21 20.1429 21.3375 20.1429 21.75Z" fill="#9E9EA6"/>
+          </svg>
+          <div class="calendar">
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1vw" height="1vw" viewBox="0 0 16 10" fill="none">
+            <path d="M2 2L8 8L14 2" stroke="#0C0C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
         <!-- GUEST -->
-        <div class="search-field">
-          <label for="guests" class="field-title">GUEST</label>
-          <select id="guests" class="dropdown">
-            <option selected>2 adults · 0 children</option>
-            <option>1 adult</option>
-            <option>2 adults · 1 child</option>
-            <option>2 adults · 2 children</option>
-          </select>
+        <div class="search-field" (click)="togglePeopleDropdown()">
+          <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M14.5 15C16.0913 15 17.6174 14.3679 18.7426 13.2426C19.8679 12.1174 20.5 10.5913 20.5 9C20.5 7.4087 19.8679 5.88258 18.7426 4.75736C17.6174 3.63214 16.0913 3 14.5 3C12.9087 3 11.3826 3.63214 10.2574 4.75736C9.13214 5.88258 8.5 7.4087 8.5 9C8.5 10.5913 9.13214 12.1174 10.2574 13.2426C11.3826 14.3679 12.9087 15 14.5 15ZM12.3578 17.25C7.74063 17.25 4 20.9906 4 25.6078C4 26.3766 4.62344 27 5.39219 27H23.6078C24.3766 27 25 26.3766 25 25.6078C25 20.9906 21.2594 17.25 16.6422 17.25H12.3578Z" fill="#9E9EA6"/>
+          </svg>
+          <div class="dropdown" id="selectedGuests">{{ adults }} adults · {{ children }} children</div>
+          <div class="dropdown-content" [class.show]="isPeopleDropdownOpen" (click)="$event.stopPropagation()">
+            <div class="dropdown-item">
+              <span>Adults</span>
+              <div class="counter">
+                <button (click)="changeCount('adults', -1); $event.stopPropagation()">−</button>
+                <span>{{ adults }}</span>
+                <button (click)="changeCount('adults', 1); $event.stopPropagation()">+</button>
+              </div>
+            </div>
+
+            <div class="dropdown-item">
+              <span>Children</span>
+              <div class="counter">
+                <button (click)="changeCount('children', -1); $event.stopPropagation()">−</button>
+                <span>{{ children }}</span>
+                <button (click)="changeCount('children', 1); $event.stopPropagation()">+</button>
+              </div>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="1vw" height="1vw" viewBox="0 0 16 10" fill="none">
+            <path d="M2 2L8 8L14 2" stroke="#0C0C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </div>
+
         <!-- SEARCH BUTTON -->
-        <button class="search-button">Search</button>
+        <button (click)="searchButtonClick()" routerLink="search" class="search-button">Search</button>
       </div>
     </div>
   </div>
-
-  <div class="main-page-search-results">
-    <div class="filters">
-      <div class="filter-section">
-        <h3 class="filter-title">Удобства</h3>
-        <div class="filter-options">
-          <label>
-            <input type="checkbox" />
-            Парковка <span class="filter-count">54</span>
-          </label>
-          <label>
-            <input type="checkbox" />
-            Ресторан <span class="filter-count">20</span>
-          </label>
-          <label>
-            <input type="checkbox" />
-            Можно с питомцами <span class="filter-count">8</span>
-          </label>
-          <label>
-            <input type="checkbox" />
-            Доставка еды и напитков в номер <span class="filter-count">16</span>
-          </label>
-          <label>
-            <input type="checkbox" />
-            Круглосуточная стойка регистрации <span class="filter-count">20</span>
-          </label>
+  <div class="main-page-cards-content">
+    <div class="main-page-cards-content-part">
+      <span class="main-page-cards-content-part-name">Popular variants:</span>
+      <div class="cards-container">
+        <app-hotel-view-card [style.z-index]="isCityDropdownOpen ? -1 : 1" (click)="test()" class="hotel-card" *ngFor="let hotel of popularHotels"
+                             [title]="hotel.name"
+                             [location]="hotel.shortDesc"
+                             [rating]="hotel.avgRate"
+                             [reviews]="hotel.reviewsCount"
+                             [image]="hotel.mainImageUrl">
+        </app-hotel-view-card>
+      </div>
+    </div>
+    <div *ngIf="isLogin">
+      <div class="main-page-cards-content-part">
+        <span class="main-page-cards-content-part-name">Recently viewed:</span>
+        <div class="cards-container">
+          <app-hotel-view-card *ngFor="let hotel of hotels"
+                               [title]="hotel.title"
+                               [location]="hotel.location"
+                               [rating]="hotel.rating"
+                               [reviews]="hotel.reviews"
+                               [image]="hotel.image">
+          </app-hotel-view-card>
+        </div>
+      </div>
+      <div class="main-page-cards-content-part">
+        <span class="main-page-cards-content-part-name">Your preferences:</span>
+        <div class="cards-container">
+          <app-hotel-view-card *ngFor="let hotel of hotels"
+                               [title]="hotel.title"
+                               [location]="hotel.location"
+                               [rating]="hotel.rating"
+                               [reviews]="hotel.reviews"
+                               [image]="hotel.image">
+          </app-hotel-view-card>
         </div>
       </div>
     </div>
