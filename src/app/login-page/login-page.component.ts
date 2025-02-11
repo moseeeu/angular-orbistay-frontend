@@ -44,21 +44,6 @@ export class LoginPageComponent {
       );
   }
   loginUserByGoogle() {
-    this.authService.loginUserByGoogle().subscribe(
-      (response: any) => {
-        this.token = response.accessToken;
-        console.log('Login successful! Token:', this.token);
-        localStorage.setItem('token', this.token);
-
-        if (this.token != null) {
-          this.authService.getUserInfo().subscribe(
-            data => {
-              this.appComponent.updateUserData(data);
-              this.router.navigate(['']);
-            }
-          );
-        }
-      }
-    )
+    this.authService.loginUserByGoogle()
   }
 }
