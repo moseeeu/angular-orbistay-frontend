@@ -6,7 +6,7 @@ import {ApiUrls} from './api-urls';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
   private userSubject = new BehaviorSubject<any>(null)
 
   constructor(private http: HttpClient) {
@@ -35,11 +35,11 @@ export class UserService {
   }
 
   loginUserByGoogle() {
-    return this.http.get(`${ApiUrls.GET_OAUTH2_GOOGLE_URL}`);
+    window.location.href = `${ApiUrls.GET_OAUTH2_GOOGLE_URL}`;
   }
 
   getUserInfo(): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = this.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -50,6 +50,21 @@ export class UserService {
 
   hasToken(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  getToken(): string {
+    return <string>localStorage.getItem('token');
+  }
+
+  updateUserAvatar(avatar: any) {
+    const token = this.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    let formData: FormData = new FormData();
+    formData.append('avatar', avatar);
+    return this.http.post<any>(`${ApiUrls.POST_USER_AVATAR_URL}`, formData, {headers});
   }
 }
 
