@@ -6,7 +6,7 @@ import {ApiUrls} from './api-urls';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UserService {
   private userSubject = new BehaviorSubject<any>(null)
 
   constructor(private http: HttpClient) {
@@ -19,9 +19,9 @@ export class AuthService {
 
   registerUser(username: string, email: string, password: string): Observable<any> {
     const data = {
-      username: username,
-      email: email,
-      password: password
+      "username": username,
+      "email": email,
+      "password": password
     };
     return this.http.post<any>(`${ApiUrls.SIGN_UP_URL}`, data);
   }
