@@ -145,6 +145,9 @@
   color: #07195F;
   font-weight: bold;
   font-size: 1.5vw;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .user-info-field {
   display: flex;
@@ -201,9 +204,6 @@ button {
   border: none;
   transition: 0.2s ease-in-out;
 }
-button:hover {
-  color: rgb(221, 93, 19);
-}
 .customization-preferences {
   display: flex;
   flex-direction: column;
@@ -225,6 +225,9 @@ button:hover {
   color: white;
   width: 100%;
   padding: 0.2vw 0.7vw 0.2vw 0.7vw;
+}
+.save-btn:hover {
+  background-color: rgb(62, 77, 147);
 }
 .input-edit {
   width: 80%;
@@ -258,11 +261,12 @@ button:hover {
 }
 .input-valid-edit {
   width: 30%;
-  padding: 0.5vw;
+  padding: 0.5vw 0;
   color: rgba(12, 12, 32, 1);
   border: 1px solid rgba(12, 12, 32, 1);
   border-radius: 4px;
   font-size: 0.7vw;
+  text-align: -webkit-center;
 }
 .input-edit:focus {
   border: 1px solid rgba(169, 63, 5, 1);
@@ -281,7 +285,6 @@ button:hover {
 .passport_header {
   display: flex;
   flex-direction: column;
-  align-self: start;
 }
 .valid-row {
   display: flex;

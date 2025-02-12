@@ -51,7 +51,7 @@
               <path d="M9.99935 14.5837C11.8403 14.5837 13.3327 13.0913 13.3327 11.2503C13.3327 9.40937 11.8403 7.91699 9.99935 7.91699C8.15839 7.91699 6.66602 9.40937 6.66602 11.2503C6.66602 13.0913 8.15839 14.5837 9.99935 14.5837Z" stroke="#F6FAF9" stroke-width="2" stroke-linejoin="round"/>
             </svg>
           </div>
-          <span class="photo-icon">{{this.firstLetter}}</span>
+          <img class="photo-icon" src="{{avatar}}"/>
         </div>
       </div>
       <hr>
@@ -113,13 +113,13 @@
                       <span style="color: rgba(169, 63, 5, 1);">*</span>
                     </div>
                     <div class="valid-row">
-                      <input class="input-valid-edit" value="01"/>
+                      <input style="width: 2vw;" class="input-valid-edit" value="01"/>
                       <select class="input-valid-edit" [(ngModel)]="selectedMonth">
                         <option *ngFor="let m of month" [value]="m.code">
                           {{ m.name }}
                         </option>
                       </select>
-                      <input class="input-valid-edit" value="2003"/>
+                      <input style="width: 3vw;" class="input-valid-edit" value="2003"/>
                     </div>
                   </div>
                   <label style="color: rgba(85, 85, 99, 1); font-size: 17px;">
