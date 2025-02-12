@@ -1,6 +1,15 @@
 <div class="main-page">
   <div class="main-page-banner">
-    <span>Main</span>
+    <div class="breadcrumb-bar">
+      <span>Main</span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 6 11" fill="none">
+          <path d="M1 9.5L5 5.5L1 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span *ngIf="activeContent == 'content1'">Personal details</span>
+      <span *ngIf="activeContent == 'content2'">Customization preferences</span>
+    </div>
   </div>
   <div class="main-page-content">
     <div class="account-pages-list">
@@ -126,7 +135,7 @@
                     We will keep this data secure and delete it after two years of inactivity.
                   </label>
                   <label>
-                    <input type="checkbox" [(ngModel)]="passportData.agree" />
+                    <input type="checkbox"/>
                     I agree that Orbistay.com will store my passport data in accordance with the Privacy Policy.
                   </label>
                 </div>
@@ -148,7 +157,6 @@
         </div>
         <hr>
       </ng-container>
-
     </div>
     <div [ngClass]="{'hidden': activeContent !== 'content2'}" class="customization-preferences">
       <div class="personal-header">

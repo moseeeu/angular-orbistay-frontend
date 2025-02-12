@@ -11,9 +11,14 @@
   font-family: OpenSans, sans-serif;
   align-content: center;
 }
+.breadcrumb-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
 .main-page-banner span {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.65vw;
   color: #F6FAF9;
 }
 .main-page-content {
