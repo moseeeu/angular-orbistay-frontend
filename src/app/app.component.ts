@@ -1,6 +1,8 @@
-import { Component, HostListener } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import {AuthService} from './auth.service';
+import {TokenService} from './token.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,19 @@ import { Router } from '@angular/router';
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private intervalId: any;
+  private tokenSubscription: Subscription | undefined;
+  private currentUserSubject = new BehaviorSubject<any>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
   currentUser: any = null;
   isPopupVisible: boolean = false;
   firstLetter$ = new BehaviorSubject<string>('');
-  constructor(public router: Router) {}
+  avatar: any;
+
+  constructor(public router: Router,
+              private authService: AuthService,
+              private tokenService: TokenService) {}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -39,16 +49,16 @@ export class AppComponent {
     this.updateUserData(this.currentUser);
     this.isPopupVisible = !this.isPopupVisible;
     window.location.reload();
+    this.authService.logOutUser();
   }
 
-  private currentUserSubject = new BehaviorSubject<any>(null);
-  public currentUser$ = this.currentUserSubject.asObservable();
-
   ngOnInit(): void {
+    this.startTokenRefresh();
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
       this.currentUserSubject.next(this.currentUser);
+      this.avatar = this.currentUser.avatarUrl;
       this.firstLetter$.next(this.getFirstLetter());
     } else {
       console.log('No user data found in localStorage');
@@ -58,6 +68,26 @@ export class AppComponent {
       this.currentUser = user;
       this.firstLetter$.next(this.getFirstLetter());
     });
+  }
+
+  startTokenRefresh() {
+    this.intervalId = setInterval(() => {
+      this.tokenSubscription = this.tokenService.refreshOldToken().subscribe({
+        next: (response) => {
+          localStorage.setItem('token', response.token);
+        },
+      });
+    }, 420000);
+  }
+
+  ngOnDestroy() {
+    // Очистка таймера и подписок
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+    if (this.tokenSubscription) {
+      this.tokenSubscription.unsubscribe();
+    }
   }
 
   updateUserData(userData: any) {

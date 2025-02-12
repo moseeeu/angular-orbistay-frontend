@@ -23,9 +23,8 @@ export class LoginPageComponent {
     this.authService.loginUser(this.email, this.password)
       .subscribe(
         (response) => {
-          this.token = response.accessToken;
-          console.log('Login successful! Token:', this.token);
-          localStorage.setItem('token', this.token);
+          localStorage.setItem('token', response.accessToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
 
           if (this.token != null) {
             this.authService.getUserInfo().subscribe(
