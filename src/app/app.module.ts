@@ -23,6 +23,7 @@ import {MatSlider, MatSliderRangeThumb} from "@angular/material/slider";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {NgOptimizedImage} from "@angular/common";
 import {NgxSpinnerComponent} from "ngx-spinner";
+import { RedirectAuthenticationPageComponent } from './redirect-authentication-page/redirect-authentication-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {NgxSpinnerComponent} from "ngx-spinner";
     SearchResultsPageComponent,
     HotelViewCardComponent,
     HorizontalHotelSearchCardComponent,
+    RedirectAuthenticationPageComponent,
   ],
     imports: [
         BrowserModule,
