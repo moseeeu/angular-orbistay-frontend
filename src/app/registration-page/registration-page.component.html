@@ -7,6 +7,10 @@
         <h2>You can sign up to access our services.</h2>
       </div>
       <div class="input-field">
+        <span>Username</span>
+        <input type="text" placeholder="Username" [(ngModel)]="username"/>
+      </div>
+      <div class="input-field">
         <span>Email address</span>
         <input type="text" placeholder="Email" [(ngModel)]="email"/>
       </div>
@@ -15,7 +19,7 @@
         <input type="password" placeholder="Password" [(ngModel)]="password"/>
         <a>Forget your passport?</a>
       </div>
-      <input type="button" value="Sign up" (click)="registerUser()"/>
+      <input type="button" value="Sign up" (click)="signUpClick()"/>
       <div class="create-acc-field">
         <span>Do you have an account?</span>
         <a routerLink="/login">Sign in.</a>
