@@ -59,5 +59,11 @@ export class AuthService {
     formData.append('avatar', avatar);
     return this.http.post<any>(`${ApiUrls.POST_USER_AVATAR_URL}`, formData, {headers});
   }
+  logOutUser() {
+    const refreshToken = this.tokenService.getRefreshToken();
+    return this.http.post<any>(`${ApiUrls.LOG_OUT_URL}`, {
+      "refreshToken": refreshToken}
+    );
+  }
 }
 
