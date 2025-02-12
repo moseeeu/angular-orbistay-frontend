@@ -63,4 +63,5 @@ jobs:
         with:
           app-name: 'orbistay-frontend'
           slot-name: 'Production'
-          package: .
+          package: dist/angular-orbistay-frontend/browser
+
