@@ -23,10 +23,10 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install and ng build
+      - name: npm install and build
         run: |
           npm install
-          npm build
+          npm run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
