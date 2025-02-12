@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class ApiUrls {
-  static readonly BASE_URL = '*****************************************************';
+  static readonly BASE_URL = 'https://orbistay-backend-czfkfnfwhnheaaa3.northeurope-01.azurewebsites.net';
   //=================================USER API URLS=================================
   static readonly GET_USER_URL:string = `${ApiUrls.BASE_URL}/appUsers/me`;
   static readonly PUT_USER_URL:string = `${ApiUrls.BASE_URL}/appUsers/me`;
