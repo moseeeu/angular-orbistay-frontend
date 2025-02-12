@@ -22,6 +22,7 @@ import { HorizontalHotelSearchCardComponent } from './horizontal-hotel-search-ca
 import {MatSlider, MatSliderRangeThumb} from "@angular/material/slider";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {NgOptimizedImage} from "@angular/common";
+import {NgxSpinnerComponent} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {NgOptimizedImage} from "@angular/common";
         MatDatepickerModule,
         MatSlider,
         MatSliderRangeThumb,
-        NgOptimizedImage
+        NgOptimizedImage,
+        NgxSpinnerComponent
     ],
   providers: [
 
