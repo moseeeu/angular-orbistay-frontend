@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {AuthService} from '../auth.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {TokenService} from '../token.service';
 
 @Component({
   selector: 'app-account-page',
@@ -21,7 +22,11 @@ export class AccountPageComponent {
   activeContent: string = 'content1';
   firstLetter: string = '';
   private currentUserSubject = new BehaviorSubject<any>(null);
-  constructor(public router: Router, public http: HttpClient, private auth: AuthService,private spinner: NgxSpinnerService) { }
+  constructor(public router: Router,
+              public http: HttpClient,
+              private auth: AuthService,
+              private spinner: NgxSpinnerService,
+              private tokenService: TokenService) { }
   avatar: string | undefined = '';
 
   passportData = {
@@ -69,7 +74,7 @@ export class AccountPageComponent {
       'Passport details': 'passport'
     };
 
-    const token = localStorage.getItem('token');
+    const token = this.tokenService.getToken();
     console.log("Token", token);
 
     const userFieldKey = fieldMap[field.label];
@@ -158,7 +163,7 @@ export class AccountPageComponent {
 
   ngOnInit() {
     this.getCountriesList();
-    if (!this.auth.hasToken()) {
+    if (!this.tokenService.hasToken()) {
       this.router.navigate(['/login']);
       return;
     }

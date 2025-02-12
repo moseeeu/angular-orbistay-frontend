@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {HotelsService} from '../hotels.service';
 import {AuthService} from '../auth.service';
+import {TokenService} from '../token.service';
 
 
 @Component({
@@ -68,7 +69,11 @@ export class MainPageComponent {
   selectedCityForCrumbBar: any;
   requestBody: any;
   //------------------------------------MAIN PAGE LOGIC------------------------------------
-  constructor(private fb: FormBuilder, private http: HttpClient, private hotelsService: HotelsService, private auth: AuthService) {
+  constructor(private fb: FormBuilder,
+              private http: HttpClient,
+              private hotelsService: HotelsService,
+              private auth: AuthService,
+              private tokenService: TokenService,) {
     this.range = this.fb.group({
       start: [null, Validators.required],
       end: [null, Validators.required],
@@ -85,7 +90,7 @@ export class MainPageComponent {
     console.log(storedUser);
     this.loadPopularHotels();
     this.getPopularDestinations();
-    this.isLogin = this.auth.hasToken();
+    this.isLogin = this.tokenService.hasToken();
   }
   loadPopularHotels() {
     this.hotelsService.getHotelsByApi(ApiUrls.GET_POPULAR_HOTELS_URL).subscribe(

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from './api-urls';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {ApiUrls} from './api-urls';
 export class AuthService {
   private userSubject = new BehaviorSubject<any>(null)
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
     const userJson = localStorage.getItem('currentUser');
     if (userJson) {
       this.userSubject.next(JSON.parse(userJson));
@@ -39,7 +40,7 @@ export class AuthService {
   }
 
   getUserInfo(): Observable<any> {
-    const token = this.getToken();
+    const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -48,16 +49,8 @@ export class AuthService {
     return this.http.get(`${ApiUrls.GET_USER_URL}`, { headers });
   }
 
-  hasToken(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  getToken(): string {
-    return <string>localStorage.getItem('token');
-  }
-
   updateUserAvatar(avatar: any) {
-    const token = this.getToken();
+    const token = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
