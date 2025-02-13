@@ -46,7 +46,6 @@ export class AppComponent implements OnInit, OnDestroy {
     localStorage.removeItem('userData');
     localStorage.removeItem('token');
     this.currentUserSubject.next(this.currentUser);
-    this.updateUserData(this.currentUser);
     this.isPopupVisible = !this.isPopupVisible;
     window.location.reload();
     this.authService.logOutUser();
@@ -54,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startTokenRefresh();
+    this.authService.getUserInfo();
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
@@ -74,28 +74,20 @@ export class AppComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.tokenSubscription = this.tokenService.refreshOldToken().subscribe({
         next: (response) => {
+          console.log("update token", response);
           localStorage.setItem('token', response.token);
         },
       });
-    }, 420000);
+    },180000);
   }
 
   ngOnDestroy() {
-    // Очистка таймера и подписок
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
     if (this.tokenSubscription) {
       this.tokenSubscription.unsubscribe();
     }
-  }
-
-  updateUserData(userData: any) {
-    this.currentUser = userData;
-    this.currentUserSubject.next(this.currentUser);
-    localStorage.setItem('userData', JSON.stringify(userData));
-
-    this.firstLetter$.next(this.getFirstLetter());
   }
 
   getLoginStatus() {

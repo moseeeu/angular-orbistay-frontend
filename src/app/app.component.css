@@ -191,4 +191,7 @@ ul li:hover a {
   color: #07195F;
   font-weight: bold;
   font-size: 1.5vw;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
