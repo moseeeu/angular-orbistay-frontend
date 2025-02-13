@@ -36,7 +36,8 @@
                 "glob": "**/*",
                 "input": "public",
                 "output": "/assets/"
-              }
+              },
+              "src/web.config"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
@@ -94,11 +95,9 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets",
-                "output": "assets"
+                "input": "public"
               }
             ],
-
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
