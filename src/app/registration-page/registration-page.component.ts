@@ -69,14 +69,6 @@ export class RegistrationPageComponent {
       return passwordPattern.test(this.password);
     }
   }
-  getRepeatPasswordValid() {
-    if (this.repeatPassword == "") {
-      return false;
-    }
-    else {
-      return this.repeatPassword == this.password;
-    }
-  }
   getUsernameValid() {
     if (this.username == "") {
       return false;
@@ -87,13 +79,14 @@ export class RegistrationPageComponent {
     }
   }
   getSignUpButtonDisabled() {
-    return (this.email != "" && this.password != "" && this.repeatPassword != "" && this.username != "");
+    return (this.email != "" && this.password != "" && this.username != "");
   }
 
   signUpClick(): void {
     this.isValidationActive = true;
-    if ((this.getEmailValid() || this.getPasswordValid() || this.getRepeatPasswordValid() || this.getUsernameValid()) &&
-      this.email != "" && this.password != "" && this.repeatPassword != "" && this.username != "") {
+    if ((this.getEmailValid() || this.getPasswordValid() || this.getUsernameValid()) &&
+      this.email != "" && this.password != "" && this.username != "") {
+      console.log("validation ok")
       this.registerUser()
     }
   }
