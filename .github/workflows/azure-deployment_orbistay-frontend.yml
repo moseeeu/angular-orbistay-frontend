@@ -23,11 +23,12 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install and build
+      - name: npm install, build, and test
         run: |
           npm install
-          npm run build
-
+          npm run build --if-present
+          npm run test --if-present
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -49,13 +50,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5EB2A02A2153482B9E194641DABA9459 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_335B0EA4ECC642C09B7207983FF41C0C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5FDAB31A4B684D6585FF1802A33C9C20 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EE470C3F93F94B809D9CD6B748725D3C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_7AFB04009E734443BABF79F58714B276 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A5744B7E0A9742C38297A0B5CC2E8419 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -63,5 +64,5 @@ jobs:
         with:
           app-name: 'orbistay-frontend'
           slot-name: 'Production'
-          package: dist/angular-orbistay-frontend/browser
-
+          package: .
+          
