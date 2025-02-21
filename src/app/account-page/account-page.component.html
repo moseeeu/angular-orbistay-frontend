@@ -122,7 +122,7 @@
                       <span style="color: rgba(169, 63, 5, 1);">*</span>
                     </div>
                     <div class="valid-row">
-                      <input style="width: 2vw;" class="input-valid-edit" value="01"/>
+                      <input style="width: 2vw;" class="input-valid-edit" type="number" min="0" max="31" value="01"/>
                       <select class="input-valid-edit" [(ngModel)]="selectedMonth">
                         <option *ngFor="let m of month" [value]="m.code">
                           {{ m.name }}
@@ -141,7 +141,7 @@
                 </div>
               </div>
               <ng-template #defaultEdit>
-                <input class="input-edit" [(ngModel)]="field.value" type="text" />
+                <input class="input-edit" placeholder="{{field.placeholder}}" [(ngModel)]="field.value" type="text" />
               </ng-template>
             </div>
           </div>
