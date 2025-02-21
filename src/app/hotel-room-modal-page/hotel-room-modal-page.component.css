@@ -1,0 +1,219 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2vh 2vw 2vh 2vw;
+  border-radius: 8px;
+  z-index: 1001;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  width: 60%;
+  height: 90%;
+  gap: 1vw;
+}
+
+.photo-container {
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-photo-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.thumbnail-container {
+  margin-top: 1vh;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.thumbnail {
+  width: 25%;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease, border 0.2s ease;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+/* Ховер и активная миниатюра */
+.thumbnail:hover,
+.thumbnail.active {
+  transform: scale(1.05);
+  border: 2px solid #007BFF;
+}
+
+.room-description {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vh;
+}
+.room-description-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.room-description-header-name {
+  width: 70%;
+  color: rgba(12, 12, 32, 1);
+  font-weight: 600;
+  font-size: calc(8px + 0.9vw);
+}
+.room-description-close-btn {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  justify-content: flex-end;
+}
+.close-btn {
+  cursor: pointer;
+}
+.room-facilities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8vw;
+  justify-content: flex-start;
+  width: 100%;
+}
+.facility {
+  display: flex;
+  align-items: center;
+  width: auto;
+  gap: 0.2vw;
+  padding: 0.2vw;
+  border-radius: 4px;
+}
+.facility img {
+  width: 24px;
+  height: 24px;
+}
+.facility span {
+  font-size: calc(4px + 0.5vw);
+  font-weight: 400;
+  color: rgba(12, 12, 32, 1);
+}
+.room-detailed-description {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vh;
+}
+.room-detailed-description-header {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 700;
+  font-size: calc(7px + 0.5vw);
+}
+.room-detailed-description-text {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 400;
+  font-size: calc(7px + 0.5vw);
+}
+.room-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+}
+
+.details-section h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0C0C20;
+}
+
+.details-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.details-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #0C0C20;
+}
+
+.details-list li::before {
+  content: '✔';
+  color: #07195F;
+  font-size: 1.2rem;
+  display: inline-block;
+}
+
+.smoking-details {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+  margin-top: -1vh;
+}
+.smoking-details span {
+  color: rgba(12, 12, 32, 1);
+  font-size: calc(7px + 0.5vw);
+  font-weight: 400;
+}
