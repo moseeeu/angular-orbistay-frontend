@@ -72,7 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   startTokenRefresh() {
     this.intervalId = setInterval(() => {
-      this.tokenSubscription = this.tokenService.refreshOldToken().subscribe({
+      this.tokenSubscription = this.tokenService.refreshAccessToken().subscribe({
         next: (response) => {
           console.log("update token", response);
           localStorage.setItem('token', response.token);

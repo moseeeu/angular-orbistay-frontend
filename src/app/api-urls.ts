@@ -15,7 +15,7 @@ export class ApiUrls {
   static readonly SIGN_IN_URL:string = `${ApiUrls.BASE_URL}/auth/signIn`;
   static readonly SIGN_UP_URL:string = `${ApiUrls.BASE_URL}/auth/signUp`;
   static readonly LOG_OUT_URL:string = `${ApiUrls.BASE_URL}/auth/logOut`;
-  static readonly POST_UPDATE_ACCESS_TOKEN:string = `${ApiUrls.BASE_URL}/auth/refresh/tokens/access`;
+  static readonly POST_UPDATE_ACCESS_TOKEN:string = `${ApiUrls.BASE_URL}/auth/refreshAccessToken`;
   static readonly GET_OAUTH2_GOOGLE_URL:string = `${ApiUrls.BASE_URL}/oauth2/google/login`;
 
   //=================================HOTELS API URLS=================================

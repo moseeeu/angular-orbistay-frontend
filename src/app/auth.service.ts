@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from './api-urls';
 import {TokenService} from './token.service';
@@ -9,6 +9,11 @@ import {TokenService} from './token.service';
 })
 export class AuthService {
   private userSubject = new BehaviorSubject<any>(null)
+  appUser: any;
+  jwtResponceDTO: any;
+  private currentUserSubject = new BehaviorSubject<any>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
+  currentUser: any = null;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     const userJson = localStorage.getItem('currentUser');
@@ -24,7 +29,7 @@ export class AuthService {
       "email": email,
       "password": password
     };
-    return this.http.post<any>(`${ApiUrls.SIGN_UP_URL}`, data);
+    return this.http.post<any>(`${ApiUrls.SIGN_UP_URL}`, data, {withCredentials: true});
   }
 
   loginUser(email: string, password: string): Observable<any> {
@@ -32,7 +37,8 @@ export class AuthService {
       email: email,
       password: password
     }
-    return this.http.post<any>(`${ApiUrls.SIGN_IN_URL}`, data);
+
+    return this.http.post<any>(`${ApiUrls.SIGN_IN_URL}`, data, {withCredentials: true});
   }
 
   loginUserByGoogle() {
@@ -41,6 +47,7 @@ export class AuthService {
 
   getUserInfo(): Observable<any> {
     const token = this.tokenService.getToken();
+    console.log(token);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
@@ -59,10 +66,47 @@ export class AuthService {
     formData.append('avatar', avatar);
     return this.http.post<any>(`${ApiUrls.POST_USER_AVATAR_URL}`, formData, {headers});
   }
+
+  updateUserInfo(userData: any): Subscription {
+    const token: string = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.put(ApiUrls.PUT_USER_URL, userData, { headers })
+      .subscribe({
+        next: (response: any) => {
+          console.log('Data uploaded successfully:', response);
+
+          localStorage.removeItem('userData');
+          localStorage.removeItem('token');
+          localStorage.removeItem('refreshToken');
+
+          localStorage.setItem('userData', JSON.stringify(response.appUser));
+          localStorage.setItem('token', response.jwtResponseDTO.accessToken);
+          localStorage.setItem('refreshToken', response.jwtResponseDTO.refreshToken);
+
+          const user = JSON.parse(localStorage.getItem('userData') || '{}');
+          console.log('User:', user);
+
+          this.updateUserData(user);
+          window.location.reload();
+        },
+        error: (error: any) => {
+          console.log('Error updating user info:', error);
+        }
+      });
+
+  }
+
+  updateUserData(userData: any) {
+    this.currentUser = userData;
+    this.currentUserSubject.next(this.currentUser);
+    localStorage.setItem('userData', JSON.stringify(userData));
+  }
+
   logOutUser() {
-    const refreshToken = this.tokenService.getRefreshToken();
-    return this.http.post<any>(`${ApiUrls.LOG_OUT_URL}`, {
-      "refreshToken": refreshToken}
+    return this.http.post<any>(`${ApiUrls.LOG_OUT_URL}`, {withCredentials: true}
     );
   }
 }
