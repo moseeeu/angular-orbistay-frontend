@@ -24,4 +24,6 @@ export class ApiUrls {
 
   //=================================DESTINATIONS API URLS=================================
   static readonly GET_POPULAR_DESTINATIONS_URL:string = `${ApiUrls.BASE_URL}/destinations/popular`;
+  static readonly GET_SIMILAR_DESTINATIONS_URL:string = `${ApiUrls.BASE_URL}/destinations/similar`;
+  static readonly GET_ALL_COUNTRIES_URL:string = `${ApiUrls.BASE_URL}/countries`;
 }

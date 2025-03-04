@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-horizontal-hotel-search-card',
@@ -8,10 +9,14 @@ import {Component, Input} from '@angular/core';
   styleUrl: './horizontal-hotel-search-card.component.css'
 })
 export class HorizontalHotelSearchCardComponent {
-  @Input() avgRate: string = '';
-  @Input() name: string = '';
-  @Input() stars: number = 0;
-  @Input() reviews: number = 0;
-  @Input() description: string = '';
-  @Input() shortDescription: string = '';
+  @Input() hotel!: any;
+
+  constructor(public router: Router) {}
+
+  redirectToHotelPage() {
+    const navigationExtras: NavigationExtras = {
+      state: { hotel: this.hotel }
+    };
+    this.router.navigate(['/hotel'], navigationExtras);
+  }
 }

@@ -24,6 +24,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {NgOptimizedImage} from "@angular/common";
 import {NgxSpinnerComponent} from "ngx-spinner";
 import { RedirectAuthenticationPageComponent } from './redirect-authentication-page/redirect-authentication-page.component';
+import { HotelPageComponent } from './hotel-page/hotel-page.component';
+import { HotelRoomModalPageComponent } from './hotel-room-modal-page/hotel-room-modal-page.component';
+import { BookingPageComponent } from './booking-page/booking-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { RedirectAuthenticationPageComponent } from './redirect-authentication-p
     HotelViewCardComponent,
     HorizontalHotelSearchCardComponent,
     RedirectAuthenticationPageComponent,
+    HotelPageComponent,
+    HotelRoomModalPageComponent,
+    BookingPageComponent,
   ],
     imports: [
         BrowserModule,

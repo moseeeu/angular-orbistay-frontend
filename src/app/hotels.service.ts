@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiUrls} from './api-urls';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HotelsService {
+  private hotelsSubject = new BehaviorSubject<any[]>([]);
+  hotels$ = this.hotelsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -22,5 +24,8 @@ export class HotelsService {
       headers,
       params: requestBody
     });
+  }
+  setFilteredHotels(hotels: any[]) {
+    this.hotelsSubject.next(hotels);
   }
 }
