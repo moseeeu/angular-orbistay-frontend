@@ -25,15 +25,15 @@
             <h3 class="dropdown-header">Popular destinations nearby</h3>
             <div
               class="city-dropdown-item"
-              *ngFor="let city of filteredCities"
+              *ngFor="let city of popularDestinations"
               (click)="selectCity(city)">
               <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#004080" stroke-width="2">
                 <path d="M12 21c-4.5-4.5-7-7.5-7-10a7 7 0 0 1 14 0c0 2.5-2.5 5.5-7 10z" />
                 <circle cx="12" cy="11" r="3" />
               </svg>
               <div class="city-details">
-                <strong>{{ city.name }}</strong>
-                <small>{{ city.country }}</small>
+                <strong>{{ city.city }}</strong>
+                <small>{{ city.country.name }}</small>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
         </div>
 
         <!-- SEARCH BUTTON -->
-        <button routerLink="search" class="search-button">Search</button>
+        <button (click)="searchButtonClick()" class="search-button">Search</button>
       </div>
     </div>
   </div>
@@ -105,10 +105,15 @@
       </ng-container>
     </nav>
     <div class="search-results">
-      <h1>New York: 468 variants found</h1>
-      <select class="filter-option-select" id="filter-option-select" name="filter-options">
-        <option value="The most expensive">The most expensive</option>
-        <option value="The most cheap">The most cheap</option>
+      <h1>{{cityName.city}}: {{filteredHotels.hotels.length}} variants found</h1>
+      <select [(ngModel)]="selectedSorting"
+              class="filter-option-select"
+              id="filter-option-select"
+              name="filter-options"
+              (change)="applySorting()">
+        <option value="rating">By rating</option>
+        <option value="expensive">The most expensive</option>
+        <option value="cheap">The most cheap</option>
       </select>
     </div>
     <div class="search-results-container">
@@ -120,40 +125,33 @@
           <input [(ngModel)]="minValue" type="text" placeholder="From"/>
           <p> - </p>
           <input [(ngModel)]="maxValue" type="text" placeholder="To"/>
-          <input type="button" value="OK"/>
+          <input type="button" value="OK" (click)="applyFilters()"/>
         </div>
-        <mat-slider class="custom-slider" min="0" max="99999" [step]="1">
+        <mat-slider class="custom-slider" min="0" max="500" [step]="1">
           <input style="background: #8a8a8a" matSliderStartThumb [(ngModel)]="minValue" (input)="updateSlider()" />
           <input matSliderEndThumb [(ngModel)]="maxValue" (input)="updateSlider()" />
         </mat-slider>
         <hr>
         <p>Object valuation</p>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>Excellent</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>Very good</p>
-          <p class="filter-result-count">385</p>
-        </div>
-        <div class="filters-fields-display-row">
-          <input type="checkbox"/>
-          <p>Good</p>
-          <p class="filter-result-count">385</p>
+        <div class="filters-fields-display-row" *ngFor="let valuation of filteredHotels.hotelsCountByValuations">
+          <input type="checkbox" [value]="valuation.objectValuation" (change)="toggleValuationFilter($event)"/>
+          <p>{{ valuation.objectValuation ? (valuation.objectValuation | titlecase) : 'No rating' }}</p>
+          <p class="filter-result-count">{{ valuation.count }}</p>
         </div>
         <hr>
         <p>Rating by stars</p>
         <div class="filters-fields-display-row" *ngFor="let star of filteredHotels.hotelsCountByStars">
-          <input type="checkbox"/>
+          <input type="checkbox" [value]="star.hotelStars" (change)="toggleStarFilter($event)"/>
           <p>{{ starsMapping[star.hotelStars] }} stars</p>
           <p class="filter-result-count">{{ star.count }}</p>
         </div>
         <hr>
       </div>
       <div class="hotels-search-cards">
-        <app-horizontal-hotel-search-card></app-horizontal-hotel-search-card>
+        <app-horizontal-hotel-search-card
+          *ngFor="let hotel of filteredHotelsList"
+          [hotel]="hotel">
+        </app-horizontal-hotel-search-card>
       </div>
     </div>
   </div>

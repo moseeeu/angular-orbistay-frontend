@@ -523,6 +523,11 @@ mat-calendar{
   height: 100%;
   margin-left: 12.5vw;
 }
+.search-results h1 {
+  color: rgba(7, 25, 95, 1);
+  font-weight: 700;
+  font-size: calc(4px + 1vw);
+}
 .filters-fields-display-row {
   display: flex;
   flex-direction: row;
@@ -548,8 +553,10 @@ mat-calendar{
   flex-direction: column;
   width: 80%;
   height: 100vh;
+  gap: 1vh;
   border-radius: 4px;
   padding: 20px;
+  overflow-y: auto;
 }
 .filter-chevron {
   margin-left: 10px;
