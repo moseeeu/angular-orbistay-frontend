@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, count} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {AuthService} from '../auth.service';
@@ -20,8 +20,6 @@ export class AccountPageComponent {
   currentUser: any;
   userFields: any[] = [];
   activeContent: string = 'content1';
-  firstLetter: string = '';
-  private currentUserSubject = new BehaviorSubject<any>(null);
   constructor(public router: Router,
               public http: HttpClient,
               private auth: AuthService,
@@ -30,18 +28,19 @@ export class AccountPageComponent {
   avatar: string | undefined = '';
 
   passportData = {
-    name: '',
-    surname: '',
+    issuingCountryId: 1,
+    firstName: '',
+    lastName: '',
     country: '',
-    number: '',
-    validFrom: '',
-    validTo: '',
+    passportNumber: '',
+    validDay: '',
+    validMonth: '',
+    validYear: '',
     agree: false
   };
   name: string = "";
   countries: any[] = [];
-  selectedCountry: string = 'Ukraine';
-  selectedMonth: string = '01';
+  selectedCountry: any = 'Ukraine';
   month: any[] = [
     { name: '01-Jan', code: '01' },
     { name: '02-Feb', code: '02' },
@@ -70,7 +69,7 @@ export class AccountPageComponent {
       'Date of birth': 'birthDate',
       'Nationality': 'citizenship',
       'Gender': 'gender',
-      'Address': 'residency.street',
+      'Address': 'address',
       'Passport details': 'passport'
     };
 
@@ -85,77 +84,95 @@ export class AccountPageComponent {
     }
 
     const updatedData: any = {
-      username: this.currentUser.username,
-      email: this.currentUser.email,
-      phone: this.currentUser.phone,
-      birthDate: this.currentUser.birthDate,
-      citizenship: this.currentUser.citizenship,
-      gender: this.currentUser.gender,
-      residency: {
-        street: this.currentUser.residency?.street || '',
-        city: this.currentUser.residency?.city || ''
-      },
-      passport: {
-        firstName: this.currentUser.passport?.firstName || '',
-        lastName: this.currentUser.passport?.lastName || '',
-        passportNumber: this.currentUser.passport?.passportNumber || '',
-        countryIssuedCode: this.currentUser.passport?.countryIssuedCode || '',
-        expirationDate: this.currentUser.passport?.expirationDate || ''
-      }
+      "username": this.currentUser.username == '' ? null : this.currentUser.username,
+      "email": this.currentUser.email == '' ? null : this.currentUser.email,
+      "phone": this.currentUser.phone == '' ? null : this.currentUser.phone,
+      "birthDate": this.currentUser.birthDate == '' ? null : this.currentUser.birthDate,
+      "citizenship": this.currentUser.citizenship == '' ? null : this.currentUser.citizenship,
+      "gender": this.currentUser.gender == '' ? null : this.currentUser.gender,
+      "residency": this.currentUser.residency == '' ? null : this.currentUser.residency,
+      "passport": this.currentUser.passport == '' ? null : this.currentUser.passport
     };
+    let countryId = 0;
 
-    if (userFieldKey.startsWith('residency.')) {
-      const key = userFieldKey.split('.')[1];
-      updatedData.residency[key] = field.value;
-    } else if (userFieldKey === 'passport') {
-      updatedData.passport = field.value;
+    if (userFieldKey === 'gender') {
+      const inputValue = field.value.toLowerCase();
+
+      if (inputValue.includes('male')) {
+        field.value = 'MALE';
+      } else if (inputValue.includes('female')) {
+        field.value = 'FEMALE';
+      } else {
+        console.error('Invalid gender input:', field.value);
+        return;
+      }
+    }
+
+    else if (userFieldKey === 'phone') {
+      const cleanedPhone = field.value.replace(/\D/g, '');
+
+      if (cleanedPhone.length !== 10) {
+        alert('Phone number must be exactly 10 digits');
+        return;
+      }
+
+      updatedData.phone = cleanedPhone;
+    }
+
+    else if (userFieldKey === 'birthDate') {
+      const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+      if (!datePattern.test(field.value)) {
+        alert("Invalid date format. Please use YYYY-MM-DD.");
+        return;
+      }
+
+      updatedData.birthDate = field.value;
+    }
+
+    else if (userFieldKey === 'address') {
+      if (this.currentUser.passport == null) {
+        alert("Enter your passport data as first");
+        return;
+      }
+      const addressPattern = /^(.+?)\s\d+,\s(.+)$/;
+      console.log("Address",field.value);
+      const match = field.value.match(addressPattern);
+
+      if (!match) {
+        alert("Address must be in format: 'Street Name №Building, City'");
+        return;
+      }
+
+      const street = match[1].trim();
+      const city = match[2].trim();
+      updatedData.address = {
+        "countryId": this.currentUser.passport.issuingCountry.id,
+        "street": street,
+        "city": city
+      }
+    }
+
+    else if (userFieldKey === 'passport') {
+      console.log("Selected country", this.currentUser.passport);
+      updatedData.passport = {
+        "firstName": this.passportData.firstName,
+        "lastName": this.passportData.lastName,
+        "passportNumber": this.passportData.passportNumber,
+        "countryOfIssuanceId": this.selectedCountry.id,
+        "expirationDate": `${this.passportData.validYear}-${this.passportData.validMonth}-${this.passportData.validDay}`
+      };
     } else {
       updatedData[userFieldKey] = field.value;
     }
+    updatedData.citizenshipCountryId = this.selectedCountry.id
+    updatedData.passport.countryOfIssuanceId = this.selectedCountry.id
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-
-    this.http.put(ApiUrls.PUT_USER_URL, updatedData, { headers })
-      .subscribe(
-        response => {
-          console.log('Data updated successfully:', response);
-          field.editing = false;
-        },
-        error => console.error('Error updating data:', error)
-      );
+    console.log("request here ->", updatedData);
+    this.auth.updateUserInfo(updatedData);
   }
-  cancelEdit(field: any): void {
-    field.editing = false;
 
-    if (field.label === 'Passport details') {
-      this.passportData = {
-        name: '',
-        surname: '',
-        country: '',
-        number: '',
-        validFrom: '',
-        validTo: '',
-        agree: false
-      };
-    }
-  }
   toggleEdit(field: any) {
     field.editing = !field.editing;
-
-    if (field.label === 'Passport details' && field.editing) {
-      this.passportData = {
-        name: '',
-        surname: '',
-        country: '',
-        number: '',
-        validFrom: '',
-        validTo: '',
-        agree: false
-      };
-    }
   }
   savePreference(preference: { editing: boolean; }) {
     preference.editing = false;
@@ -163,15 +180,30 @@ export class AccountPageComponent {
 
   ngOnInit() {
     this.getCountriesList();
+    this.tokenService.refreshAccessToken();
+
     if (!this.tokenService.hasToken()) {
       this.router.navigate(['/login']);
       return;
     }
+
     const storedUser = localStorage.getItem('userData');
+    console.log("Stored user", storedUser);
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
+
       this.userFields = this.generateUserFields(this.currentUser);
-      this.avatar = this.currentUser.avatarUrl;
+      console.log('First name', this.currentUser.passport.firstName)
+      this.passportData.firstName = this.currentUser.passport.firstName;
+      this.passportData.lastName = this.currentUser.passport.lastName;
+      this.passportData.passportNumber = this.currentUser.passport.passportNumber;
+      if (this.currentUser.passport?.expirationDate) {
+        const [year, month, day] = this.currentUser.passport.expirationDate.split('-');
+        this.passportData.validDay = day;
+        this.passportData.validMonth = month;
+        this.passportData.validYear = year;
+      }
+      this.avatar = `${this.currentUser.avatarUrl}?t=${new Date().getTime()}`;
       console.log("User info", this.currentUser);
     } else {
       console.log('No user data found in localStorage');
@@ -186,7 +218,8 @@ export class AccountPageComponent {
         type: '',
         verified: false,
         description: '',
-        editing: false
+        editing: false,
+        placeholder: 'Enter your display name'
       },
       {
         label: 'Email address',
@@ -194,7 +227,8 @@ export class AccountPageComponent {
         type: 'mail',
         verified: true,
         description: 'This is the email address you use to sign in. It’s also where we send your booking confirmation.',
-        editing: false
+        editing: false,
+        placeholder: 'Enter your email address'
       },
       {
         label: 'Phone number',
@@ -202,7 +236,8 @@ export class AccountPageComponent {
         type: 'phone',
         verified: false,
         description: 'Properties or attractions you book will use this number if they need to contact you.',
-        editing: false
+        editing: false,
+        placeholder: 'Not provided'
       },
       {
         label: 'Date of birth',
@@ -210,15 +245,17 @@ export class AccountPageComponent {
         type: 'date',
         verified: false,
         description: '',
-        editing: false
+        editing: false,
+        placeholder: 'Enter your date of birth'
       },
       {
         label: 'Nationality',
-        value: user.citizenship || 'Select the country/region you are from',
+        value: user.citizenship.name || 'Select the country/region you are from',
         type: '',
         verified: false,
         description: '',
-        editing: false
+        editing: false,
+        placeholder: 'Select the country/region you are from'
       },
       {
         label: 'Gender',
@@ -226,41 +263,53 @@ export class AccountPageComponent {
         type: '',
         verified: false,
         description: '',
-        editing: false
+        editing: false,
+        placeholder: 'Select your gender'
       },
       {
         label: 'Address',
-        value: user.address || 'Add your address',
+        value: user.residency.street + ' ' + user.residency.id + ', ' + user.residency.city || 'Add your address',
+        type: '',
+        verified: false,
+        description: '',
+        editing: false,
+        placeholder: 'Add your address'
+      },
+      {
+        label: 'Passport details',
+        value: user.passport ? 'Provided' : 'Not provided',
         type: '',
         verified: false,
         description: '',
         editing: false
       },
-      {
-        label: 'Passport details',
-        value: user.passportDetails || 'Not provided',
-        type: '',
-        verified: false,
-        description: '',
-        editing: false
-      }
     ];
   }
 
   getCountriesList() {
-    this.http.get('https://restcountries.com/v3.1/all')
-      .subscribe((response: any) => {
-        this.countries = response
-          .map((country: any) => ({
-            name: country.name.common,
-            code: country.cca2,
-          }))
-          .sort((a: any, b: any) => a.name.localeCompare(b.name));
+    this.http.get<any[]>(ApiUrls.GET_ALL_COUNTRIES_URL)
+      .subscribe({
+        next: (response) => {
+          this.countries = response
+            .map((country: any) => ({
+              id: country.id,
+              name: country.name,
+              code: country.code
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
 
-        this.selectedCountry = this.countries.find(country => country.name === 'Ukraine');
-        console.log(this.selectedCountry);
+          if (this.currentUser?.passport?.issuingCountry?.name) {
+            this.selectedCountry = this.countries.find(
+              (c) => c.name === this.currentUser.passport.issuingCountry.name
+            ) || null;
+          }
+        },
+        error: (err) => {
+          console.error("Failed to load countries:", err);
+        }
       });
   }
+
 
   showContent(contentId: string) {
     this.activeContent = contentId;
@@ -269,15 +318,17 @@ export class AccountPageComponent {
   openFileDialog() {
     this.fileInput.nativeElement.click();
   }
-  showLoadingScreen() {
-  }
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
       const selectedFile = target.files[0];
       console.log("ava", selectedFile);
       this.auth.updateUserAvatar(selectedFile).subscribe((response) => {
-        console.log(response);
+        console.log("After switch icon response",response);
+
+        localStorage.removeItem('userData');
+
+        localStorage.setItem('userData', JSON.stringify(response));
       });
       this.spinner.show();
       setTimeout(() => {
