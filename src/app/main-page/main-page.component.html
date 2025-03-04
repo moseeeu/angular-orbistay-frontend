@@ -94,21 +94,24 @@
         </div>
 
         <!-- SEARCH BUTTON -->
-        <button (click)="searchButtonClick()" routerLink="search" class="search-button">Search</button>
+        <button (click)="searchButtonClick()" class="search-button">Search</button>
       </div>
     </div>
   </div>
   <div class="main-page-cards-content">
     <div class="main-page-cards-content-part">
       <span class="main-page-cards-content-part-name">Popular variants:</span>
-      <div class="cards-container">
-        <app-hotel-view-card [style.z-index]="isCityDropdownOpen ? -1 : 1" (click)="test()" class="hotel-card" *ngFor="let hotel of popularHotels"
+      <div *ngIf="popularHotels.length != 0" class="cards-container">
+        <app-hotel-view-card [style.z-index]="isCityDropdownOpen ? -1 : 1" class="hotel-card" *ngFor="let hotel of popularHotels"
                              [title]="hotel.name"
                              [location]="hotel.shortDesc"
                              [rating]="hotel.avgRate"
                              [reviews]="hotel.reviewsCount"
                              [image]="hotel.mainImageUrl">
         </app-hotel-view-card>
+      </div>
+      <div *ngIf="popularHotels.length == 0" class="no-provided-data">
+        <span>No popular hotels found</span>
       </div>
     </div>
     <div *ngIf="isLogin">
@@ -123,6 +126,9 @@
                                [image]="hotel.image">
           </app-hotel-view-card>
         </div>
+        <div *ngIf="hotels.length == 0" class="no-provided-data">
+          <span>No recently viewed hotels found</span>
+        </div>
       </div>
       <div class="main-page-cards-content-part">
         <span class="main-page-cards-content-part-name">Your preferences:</span>
@@ -134,6 +140,9 @@
                                [reviews]="hotel.reviews"
                                [image]="hotel.image">
           </app-hotel-view-card>
+        </div>
+        <div *ngIf="hotels.length == 0" class="no-provided-data">
+          <span>No preferences hotels found</span>
         </div>
       </div>
     </div>

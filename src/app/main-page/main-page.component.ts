@@ -6,6 +6,8 @@ import {ApiUrls} from '../api-urls';
 import {HotelsService} from '../hotels.service';
 import {AuthService} from '../auth.service';
 import {TokenService} from '../token.service';
+import {tap} from 'rxjs';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class MainPageComponent {
   @ViewChild('picker') picker!: MatDateRangePicker<Date>;
   protected range: FormGroup;
   isCityDropdownOpen = false;
+  countryId: any;
   cities = [
     { name: 'New York', country: 'USA' },
     { name: 'Zurich', country: 'Switzerland' },
@@ -66,26 +69,23 @@ export class MainPageComponent {
   ];
   popularHotels: any;
   popularDestinations: any;
+  similarDestinations: any;
   selectedCityForCrumbBar: any;
   requestBody: any;
   //------------------------------------MAIN PAGE LOGIC------------------------------------
   constructor(private fb: FormBuilder,
               private http: HttpClient,
               private hotelsService: HotelsService,
-              private auth: AuthService,
+              private router: Router,
               private tokenService: TokenService,) {
     this.range = this.fb.group({
       start: [null, Validators.required],
       end: [null, Validators.required],
     });
   }
-   test() {
-    console.log("Testing click")
-   }
   ngOnInit(): void {
     const storedUser = localStorage.getItem('userData');
-    if (storedUser != null) this.isLogin = true
-    else this.isLogin = false;
+    this.isLogin = storedUser != null;
     console.log(this.isLogin);
     console.log(storedUser);
     this.loadPopularHotels();
@@ -111,6 +111,25 @@ export class MainPageComponent {
       }
     )
   }
+  getSimilarDestinations(destination: string) {
+    const params = { text: destination };
+
+    this.http.get<any[]>(ApiUrls.GET_SIMILAR_DESTINATIONS_URL, { params }).subscribe({
+      next: (response) => {
+        this.similarDestinations = response;
+        if (this.similarDestinations.length != 0) {
+          this.countryId = this.similarDestinations[0].country.id;
+        }
+        this.selectedCityForCrumbBar = this.similarDestinations[0];
+        console.log('Similar destinations:', this.similarDestinations);
+      },
+      error: (err) => {
+        console.error("Error fetching similar destinations:", err);
+      }
+    });
+  }
+
+
   //------------------------------------SEARCH BAR LOGIC------------------------------------
   toggleCityDropdown() {
     this.isCityDropdownOpen = !this.isCityDropdownOpen;
@@ -121,11 +140,15 @@ export class MainPageComponent {
     this.filteredCities = this.cities.filter(city =>
       city.name.toLowerCase().includes(query)
     );
+    if (this.selectedCity.length < 2) {
+      this.similarDestinations = [];
+      return;
+    }
+    this.getSimilarDestinations(this.selectedCity);
   }
 
   selectCity(pickedCity: { city: string, country: {id: string, name: string, code: string} }) {
     this.selectedCity = pickedCity.city;
-    this.selectedCityForCrumbBar = pickedCity;
     this.isCityDropdownOpen = false;
   }
 
@@ -161,60 +184,53 @@ export class MainPageComponent {
     return date.toISOString().split('T')[0];
   }
 
-  searchButtonClick() {
-    if (this.selectedCityForCrumbBar) {
-      const countryId = this.selectedCityForCrumbBar.country?.id || "";
-      const peopleCount = this.adults + this.children || "";
-      const isChildrenFriendly = this.children > 0 ? "true" : "false";
-      const startDate = this.range?.value?.start ? this.formatDate(this.range.value.start) : "";
-      const endDate = this.range?.value?.end ? this.formatDate(this.range.value.end) : "";
 
-      this.requestBody = {
-        name: "",
-        city: this.selectedCityForCrumbBar.city || "",
-        countryId: countryId || "",
-        peopleCount: peopleCount || "",
-        isChildrenFriendly: isChildrenFriendly || "",
-        checkIn: startDate || "",
-        checkOut: endDate || "",
-        filters: {
-          minPrice: "0",
-          maxPrice: "99999",
-          valuations: [
-            "EXCELLENT"
-          ],
-          stars: [
-            "ONE_STAR"
-          ]
-        }
-      };
-    } else {
-      this.selectedCityForCrumbBar = {};
-      this.requestBody = {
-        name: "",
-        city: "",
-        countryId: "",
-        peopleCount: "",
-        isChildrenFriendly: "",
-        checkIn: "",
-        checkOut: "",
-        filters: {
-          minPrice: "0",
-          maxPrice: "99999",
-          valuations: [
-            "EXCELLENT"
-          ],
-          stars: [
-            "ONE_STAR"
-          ]
-        }
-      };
+
+  searchButtonClick() {
+    const countryId = this.countryId || "";
+    const peopleCount = this.adults + this.children || "";
+    const isChildrenFriendly = this.children > 0 ? "true" : "false";
+    const startDate = this.range?.value?.start ? this.formatDate(this.range.value.start) : "";
+    const endDate = this.range?.value?.end ? this.formatDate(this.range.value.end) : "";
+
+    if (this.selectedCity.length < 2 || startDate == "" || endDate == "" || peopleCount == 0) {
+      alert("Please enter valid data in search bar");
+      return;
     }
+
+    this.requestBody = {
+      name: "",
+      city: this.selectedCity || "",
+      countryId: countryId || "",
+      peopleCount: peopleCount || "",
+      isChildrenFriendly: isChildrenFriendly || "",
+      checkIn: startDate,
+      checkOut: endDate,
+      filters: {
+        minPrice: "0",
+        maxPrice: "99999",
+        valuations: [
+          "EXCELLENT"
+        ],
+        stars: [
+          "ONE_STAR"
+        ]
+      }
+    };
+
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
+
+    localStorage.removeItem('filteredHotels');
+
     this.hotelsService.getFilteredHotels(ApiUrls.GET_FILTER_HOTELS_URL, this.requestBody).subscribe(
       (hotels) => {
-        console.log("Filtered from main page", hotels)
+        console.log("Hotels received:", hotels);
+
+        this.hotelsService.setFilteredHotels(hotels);
+
         localStorage.setItem('filteredHotels', JSON.stringify(hotels));
+
+        this.router.navigate(['/search']);
       },
       (error) => {
         console.error('Error fetching filtered hotels:', error);
