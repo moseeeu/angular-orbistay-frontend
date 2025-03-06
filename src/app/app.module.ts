@@ -27,6 +27,7 @@ import { RedirectAuthenticationPageComponent } from './redirect-authentication-p
 import { HotelPageComponent } from './hotel-page/hotel-page.component';
 import { HotelRoomModalPageComponent } from './hotel-room-modal-page/hotel-room-modal-page.component';
 import { BookingPageComponent } from './booking-page/booking-page.component';
+import { GuestReviewModalWindowComponent } from './guest-review-modal-window/guest-review-modal-window.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { BookingPageComponent } from './booking-page/booking-page.component';
     HotelPageComponent,
     HotelRoomModalPageComponent,
     BookingPageComponent,
+    GuestReviewModalWindowComponent,
   ],
     imports: [
         BrowserModule,

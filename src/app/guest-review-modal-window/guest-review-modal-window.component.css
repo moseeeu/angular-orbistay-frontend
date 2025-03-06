@@ -1,0 +1,131 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  width: 35%;
+  gap: 1vw;
+  height: auto;
+  text-align: left;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.room-description-close-btn {
+  display: flex;
+  flex-direction: row;
+  width: 98.7%;
+  justify-content: flex-end;
+}
+.main-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 2vw;
+}
+.review-photo-container {
+  position: relative;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  border: 2px solid #07195F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E6EBF2;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: auto;
+}
+.review-owner {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+
+.review-photo-icon {
+  position: relative;
+  z-index: 1;
+  color: #07195F;
+  font-weight: bold;
+  font-size: 1.5vw;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+}
+.user-info-container p {
+  margin: 0;
+  font-size: calc(5px + 0.4vw);
+  font-weight: 600;
+  color: rgba(12, 12, 32, 1);
+}
+.review-message-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1vw;
+}
+.review-date {
+  color: rgba(85, 85, 99, 1);
+  font-size: calc(5px + 0.4vw);
+}
+.review-message {
+  width: 100%;
+  color: rgba(12, 12, 32, 1);
+  font-size: calc(5px + 0.5vw);
+  max-height: 5vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  position: relative;
+}
+.review-tags {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5vh;
+}
+.review-tag {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+}
+.review-tag span {
+  color: rgba(12, 12, 32, 1);
+  font-size: calc(4px + 0.5vw);
+}
+.review-rate {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+.quest-rating-score {
+  width: 2vw;
+  height: 4vh;
+  font-size: calc(5px + 0.6vw);
+  font-weight: 700;
+  background-color: #07195F;
+  color: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
