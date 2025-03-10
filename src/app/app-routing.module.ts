@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'account', component: AccountPageComponent},
   {path: 'search', component: SearchResultsPageComponent},
   {path: 'authRedirect', component: RedirectAuthenticationPageComponent},
-  {path: 'hotel', component: HotelPageComponent},
+  { path: 'hotel/:id', component: HotelPageComponent },
   {path: 'booking', component: BookingPageComponent},
 ];
 

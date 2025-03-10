@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
 import {BehaviorSubject, count} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {AuthService} from '../auth.service';
 import {NgxSpinnerService} from 'ngx-spinner';
