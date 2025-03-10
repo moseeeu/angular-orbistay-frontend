@@ -118,18 +118,19 @@
       <div class="main-page-cards-content-part">
         <span class="main-page-cards-content-part-name">Recently viewed:</span>
         <div class="cards-container">
-          <app-hotel-view-card *ngFor="let hotel of hotels"
-                               [title]="hotel.title"
-                               [location]="hotel.location"
-                               [rating]="hotel.rating"
-                               [reviews]="hotel.reviews"
-                               [image]="hotel.image">
+          <app-hotel-view-card *ngFor="let hotel of recentlyViewedHotels"
+                               [title]="hotel.name"
+                               [location]="hotel.shortDesc"
+                               [rating]="hotel.avgRate"
+                               [reviews]="hotel.reviewsCount"
+                               [image]="hotel.mainImageUrl">
           </app-hotel-view-card>
         </div>
-        <div *ngIf="hotels.length == 0" class="no-provided-data">
+        <div *ngIf="recentlyViewedHotels.length == 0" class="no-provided-data">
           <span>No recently viewed hotels found</span>
         </div>
       </div>
+      <!--
       <div class="main-page-cards-content-part">
         <span class="main-page-cards-content-part-name">Your preferences:</span>
         <div class="cards-container">
@@ -144,7 +145,7 @@
         <div *ngIf="hotels.length == 0" class="no-provided-data">
           <span>No preferences hotels found</span>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>

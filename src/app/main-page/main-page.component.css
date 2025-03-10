@@ -91,21 +91,22 @@
 .city-dropdown-content {
   display: none;
   position: absolute;
-  top: 60px;
+  top: 61px;
   left: 0;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 0 0 4px 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 20%;
+  width: 28%;
   max-height: 300px;
+  margin-top: 1.5vh;
   overflow-y: auto;
 }
 
 .city-dropdown-content.show {
   display: block;
-  width: 20%;
+  width: 27%;
+  margin-left: 0.2vw;
   height: 300px;
   z-index: 10000;
 }
@@ -191,20 +192,19 @@ input[matStartDate], input[matEndDate] {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10000;
   padding: 10px;
   width: 100%;
   transition: all 0.3s ease-in-out;
-  margin-top: 5px;
 }
 
 .dropdown-content.show {
   display: block;
+  border: none;
+  width: 28.5%;
+  border-radius: 0 0 4px 4px;
   animation: dropdownFade 0.3s ease-in-out;
 }
 
@@ -375,10 +375,36 @@ input[matStartDate], input[matEndDate] {
   color: #002f5b;
 }
 ::ng-deep .mat-calendar {
-  margin-top: 30px;
+  width: 16.9vw !important;
   background-color: white !important;
-  border-radius: 4px;
-  box-shadow: 0 6px 8px 0 rgba(7, 25, 85, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  font-size: 16px !important;
+  color: #333 !important;
+  border-radius: 8px;
+}
+::ng-deep .mat-datepicker-content-container{
+  background: white;
+  border-radius: 8px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  height: auto !important;
+}
+::ng-deep .mat-calendar-header {
+  background-color: white !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #002f5b !important;
+  color: white !important;
+}
+::ng-deep .cdk-overlay-pane {
+  margin-top: 27px;
+  margin-left: -76px;
 }
 
 mat-calendar{
@@ -441,8 +467,15 @@ mat-calendar{
 }
 .cards-container {
   display: flex;
-  justify-content: space-between;
+  gap: 6.5%;
 }
+
+.hotel-card {
+  width: calc(25% - 20px); /* 25% ширины контейнера с учетом отступов */
+  min-width: 250px; /* Минимальный размер карточки */
+}
+
+
 .no-provided-data {
   display: flex;
   width: 100%;
@@ -462,4 +495,11 @@ app-hotel-view-card {
 app-hotel-view-card:hover {
   cursor: pointer;
   transform: scale(1.01);
+}
+mat-datepicker-content .mat-calendar {
+  width: 20vw;
+  height: auto;
+}
+mat-datepicker-content-container {
+  width: 20vw;
 }

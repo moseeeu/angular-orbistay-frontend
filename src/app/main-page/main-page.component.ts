@@ -68,6 +68,7 @@ export class MainPageComponent {
     },
   ];
   popularHotels: any;
+  recentlyViewedHotels: any;
   popularDestinations: any;
   similarDestinations: any;
   selectedCityForCrumbBar: any;
@@ -91,6 +92,17 @@ export class MainPageComponent {
     this.loadPopularHotels();
     this.getPopularDestinations();
     this.isLogin = this.tokenService.hasToken();
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.getToken()}`
+    });
+
+    this.http.get<any>(ApiUrls.GET_RECENTLY_VIEWED_HOTELS, { headers, withCredentials: true }).subscribe(
+      (response) => {
+        console.log("RECENTLY", response);
+        this.recentlyViewedHotels = response.length > 4 ? response.slice(0, 4) : response;
+      }
+    );
   }
   loadPopularHotels() {
     this.hotelsService.getHotelsByApi(ApiUrls.GET_POPULAR_HOTELS_URL).subscribe(
