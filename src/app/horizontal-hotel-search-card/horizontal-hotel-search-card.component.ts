@@ -13,10 +13,7 @@ export class HorizontalHotelSearchCardComponent {
 
   constructor(public router: Router) {}
 
-  redirectToHotelPage() {
-    const navigationExtras: NavigationExtras = {
-      state: { hotel: this.hotel }
-    };
-    this.router.navigate(['/hotel'], navigationExtras);
+  redirectToHotelPage(hotelId: number) {
+    this.router.navigate(['/hotel', hotelId]);
   }
 }

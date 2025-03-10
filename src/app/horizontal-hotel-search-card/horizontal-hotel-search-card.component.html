@@ -36,7 +36,7 @@
     </div>
     <div class="hotel-price-container">
       <span id="new-price">USD {{hotel.hotelRoom.costPerNight}}</span>
-      <input type="button" value="View" (click)="redirectToHotelPage()"/>
+      <input type="button" value="View" (click)="redirectToHotelPage(hotel.id)"/>
     </div>
   </div>
 </div>
