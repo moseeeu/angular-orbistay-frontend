@@ -1,0 +1,36 @@
+<div class="favourite-page">
+  <div class="favourite-page-banner">
+    <div class="breadcrumb-bar">
+      <span>Main</span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 6 11" fill="none">
+          <path d="M1 9.5L5 5.5L1 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Favourites</span>
+    </div>
+  </div>
+  <div class="favourite-page-content">
+    <div class="favourite-page-content-header">
+      <span class="favourite-main-header">Favourites</span>
+      <div class="favourite-page-content-header-count">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+          <path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
+        </svg>
+        <span>{{ favouriteHotelsList.length }} saved properties</span>
+      </div>
+    </div>
+      <div *ngIf="favouriteHotelsList.length != 0" class="cards-container">
+      <app-hotel-view-card class="hotel-card" *ngFor="let hotel of favouriteHotelsList" (click)="redirectToHotelPage(hotel.id)"
+                           [title]="hotel.name"
+                           [location]="hotel.shortDesc"
+                           [rating]="hotel.avgRate"
+                           [reviews]="hotel.reviewsCount"
+                           [image]="hotel.mainImageUrl">
+      </app-hotel-view-card>
+    </div>
+    <div *ngIf="favouriteHotelsList.length == 0" class="no-provided-data">
+      <span>No popular hotels found</span>
+    </div>
+  </div>
+</div>

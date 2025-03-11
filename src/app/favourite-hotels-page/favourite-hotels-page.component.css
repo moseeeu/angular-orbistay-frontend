@@ -1,0 +1,76 @@
+.favourite-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.favourite-page-banner {
+  background-color: #A93F05;
+  padding: 0 20vw 0 20vw;
+  height: 8vh;
+  color: white;
+  font-family: OpenSans, sans-serif;
+  align-content: center;
+}
+.breadcrumb-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+.favourite-page-banner span {
+  font-weight: 400;
+  font-size: 0.65vw;
+  color: #F6FAF9;
+}
+.favourite-page-content {
+  display: flex;
+  flex-direction: column;
+  padding: 2vh 20vw 2vh 20vw;
+  width: 100%;
+  height: 100%;
+  gap: 1.5vw;
+}
+.favourite-page-content-header {
+  display: flex;
+  flex-direction: column;
+}
+.favourite-page-content-header-count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5vw;
+}
+.favourite-main-header {
+  color: rgba(7, 25, 95, 1);
+  font-weight: 700;
+  font-size: calc(5px + 1.5vw);
+}
+.favourite-page-content-header-count span {
+  font-weight: 400;
+  font-size: calc(2px + 0.8vw);
+  color: rgba(85, 85, 99, 1);
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 6.4%;
+  row-gap: 4vh;
+}
+.no-provided-data {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.no-provided-data span {
+  color: #B5BACF;
+  font-size: 1.7vw;
+  font-weight: 700;
+  padding: 5vw;
+}
+app-hotel-view-card {
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+app-hotel-view-card:hover {
+  cursor: pointer;
+}
