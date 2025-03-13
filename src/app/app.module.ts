@@ -28,7 +28,9 @@ import { HotelPageComponent } from './hotel-page/hotel-page.component';
 import { HotelRoomModalPageComponent } from './hotel-room-modal-page/hotel-room-modal-page.component';
 import { BookingPageComponent } from './booking-page/booking-page.component';
 import { GuestReviewModalWindowComponent } from './guest-review-modal-window/guest-review-modal-window.component';
+import { FavouriteHotelsPageComponent } from './favourite-hotels-page/favourite-hotels-page.component';
 import { SuccessfulBookingPageComponent } from './successful-booking-page/successful-booking-page.component';
+import { MyBookingsPageComponent } from './my-bookings-page/my-bookings-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { SuccessfulBookingPageComponent } from './successful-booking-page/succes
     HotelRoomModalPageComponent,
     BookingPageComponent,
     GuestReviewModalWindowComponent,
+    FavouriteHotelsPageComponent,
     SuccessfulBookingPageComponent,
+    MyBookingsPageComponent,
   ],
     imports: [
         BrowserModule,

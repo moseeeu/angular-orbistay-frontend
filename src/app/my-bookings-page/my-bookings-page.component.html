@@ -1,0 +1,74 @@
+<div class="my-bookings-page">
+  <div class="my-bookings-page-banner">
+    <div class="breadcrumb-bar">
+      <span>Main</span>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="13" viewBox="0 0 6 11" fill="none">
+          <path d="M1 9.5L5 5.5L1 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>My bookings</span>
+    </div>
+  </div>
+  <div class="my-bookings-page-content">
+    <div class="my-bookings-page-content-header">
+      <span class="my-bookings-main-header">My Bookings</span>
+    </div>
+    <div class="body">
+      <div class="image-container">
+        <img src="{{hotel.mainImageUrl}}"/>
+        <button class="like-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <path d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55ZM16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
+          </svg>
+        </button>
+      </div>
+      <div class="hotel-info">
+        <div class="hotel-info-stars-container">
+          <span>{{ hotel.stars }}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 12 12" fill="none">
+            <path d="M8.64312 10.545C8.07979 10.5453 7.19845 10.1095 5.99912 9.2375C4.80045 10.1098 3.91912 10.5458 3.35512 10.5455C2.44645 10.5455 2.36395 9.41217 3.10762 7.1455C-0.0220466 4.88717 0.333787 3.758 4.17512 3.758H4.21312C4.80812 1.91933 5.40379 1 6.00012 1C6.59512 1 7.19079 1.91933 7.78712 3.758H7.82512C11.6668 3.758 12.0223 4.887 8.89162 7.145C9.63495 9.41233 9.55212 10.5457 8.64312 10.545Z" fill="#07195F"/>
+          </svg>
+        </div>
+        <span id="hotel-name">{{hotel.name}}</span>
+        <a id="hotel-location">{{ hotel.address.city + ', ' + hotel.address.country.name }}</a>
+        <div class="hotel-room-info">
+          <span id="room-info">{{ hotel.shortDesc }}</span>
+          <span id="beds-info">{{hotel.hotelRoom.roomBedLinks.length}} large {{hotel.hotelRoom.roomBedLinks[0].bedType | lowercase}} bed</span>
+        </div>
+        <div class="booking-details">
+          <span class="booking-details-header">Your booking details</span>
+          <div class="booking-dates">
+            <div class="booking-date">
+              <span class="booking-date-header">Check-in</span>
+              <span class="booking-check-date">Thu 23 Jan 2025</span>
+              <span class="booking-check-date-time">15:00 - 00:00</span>
+            </div>
+            <div class="booking-date">
+              <span class="booking-date-header">Check-out</span>
+              <span class="booking-check-date">Thu 23 Jan 2025</span>
+              <span class="booking-check-date-time">Until 12:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-detail-info">
+        <div class="hotel-review-container">
+          <div class="hotel-review">
+            <span id="hotel-grade">Excellent</span>
+            <span id="reviews-count">{{hotel.reviewsCount + ' reviews'}}</span>
+          </div>
+          <div class="hotel-rate-number">
+            <span>{{ hotel.avgRate }}</span>
+          </div>
+        </div>
+        <div class="hotel-price-container">
+          <span id="new-price">USD {{hotel.hotelRoom.costPerNight}}</span>
+          <input type="button" value="View" (click)="redirectToHotelPage(hotel.id)"/>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+  </div>
+</div>

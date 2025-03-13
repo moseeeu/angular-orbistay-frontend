@@ -8,7 +8,9 @@ import {SearchResultsPageComponent} from './search-results-page/search-results-p
 import {RedirectAuthenticationPageComponent} from './redirect-authentication-page/redirect-authentication-page.component';
 import {HotelPageComponent} from './hotel-page/hotel-page.component';
 import {BookingPageComponent} from './booking-page/booking-page.component';
+import {FavouriteHotelsPageComponent} from './favourite-hotels-page/favourite-hotels-page.component';
 import {SuccessfulBookingPageComponent} from './successful-booking-page/successful-booking-page.component';
+import {MyBookingsPageComponent} from './my-bookings-page/my-bookings-page.component';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path: 'authRedirect', component: RedirectAuthenticationPageComponent},
   {path: 'hotel/:id', component: HotelPageComponent },
   {path: 'booking', component: BookingPageComponent},
+  {path: 'favourite', component: FavouriteHotelsPageComponent},
   {path: 'successfulBooking', component: SuccessfulBookingPageComponent},
+  {path: 'myBookings', component: MyBookingsPageComponent},
 ];
 
 @NgModule({
