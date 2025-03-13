@@ -1,0 +1,72 @@
+.body {
+  padding: 0 15vw;
+}
+.up-hr {
+  border: 2px solid rgb(169, 63, 5);
+  opacity: 1;
+  width: 100%;
+  border-radius: 4px;
+}
+.booking-page {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  width: 100%;
+  margin-top: 3vw;
+}
+.booking-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1vh;
+  text-align: center;
+}
+.main-header {
+  color: rgba(7, 25, 95, 1);
+  font-weight: 700;
+  font-size: 1.5vw;
+}
+.description {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 600;
+  font-size: 0.7vw;
+}
+.info-book-btn {
+  display: flex;
+  flex-direction: row;
+  background-color: #07195F;
+  color: white;
+  font-weight: 700;
+  border-radius: 4px;
+  font-size: calc(4px + 0.8vw);
+  transition: ease-in-out 0.2s;
+  width: 30%;
+  padding: 0.5vw;
+  align-self: center;
+  justify-content: center;
+  border: none;
+  margin-top: 2vh;
+  margin-bottom: 4vh;
+}
+.info-book-btn:hover {
+  background-color: #3750a1;
+}
+.down-hr {
+  background: rgba(217, 217, 217, 1);
+  opacity: 10;
+  margin-top: -1vw;
+  width: 30%;
+  align-self: center;
+}
+.down-hr:not([size]) {
+  height: 3px;
+}
+.copyright {
+  color: rgba(85, 85, 99, 1);
+  font-weight: 400;
+  font-size: 0.65vw;
+  margin-top: 1vh;
+}
+.success-icon {
+  align-self: center;
+}
