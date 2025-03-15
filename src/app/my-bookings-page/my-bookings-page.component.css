@@ -27,7 +27,7 @@
   padding: 2vh 20vw 2vh 20vw;
   width: 100%;
   height: 100%;
-  gap: 1.5vw;
+  gap: 2vw;
 }
 .my-bookings-page-content-header {
   display: flex;
@@ -45,7 +45,11 @@
   font-size: calc(5px + 1.5vw);
 }
 
-
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
 .body {
   display: flex;
   flex-direction: row;
