@@ -1,120 +1,335 @@
 <div class="body">
   <hr style="margin-top: -1px">
-  <div class="booking-page">
-    <div class="booking-details-container">
-      <div class="booking-hotel-details">
-        <span class="hotel-details-name">Test hotel name</span>
-        <span class="hotel-details-address">Test address</span>
-        <div class="quest-rating">
-          <div class="quest-rating-score">8.6</div>
-          <div class="quest-rating-score-text-container">
-            <div class="quest-rating-text">Very good</div>
-            <div>&bull;</div>
-            <span class="quest-reviews">89 reviews</span>
+  <div class="padded-body">
+    <div class="progress-bar">
+      <div class="progress-status-container">
+        <svg style="cursor: pointer" (click)="showContent('your-details')" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="15" fill="#A93F05"/>
+          <path d="M16.6094 21H14.1953V14.3906C14.1953 14.2083 14.1979 13.9844 14.2031 13.7188C14.2083 13.4479 14.2161 13.1719 14.2266 12.8906C14.237 12.6042 14.2474 12.3464 14.2578 12.1172C14.2005 12.1849 14.0833 12.3021 13.9062 12.4688C13.7344 12.6302 13.5729 12.776 13.4219 12.9062L12.1094 13.9609L10.9453 12.5078L14.625 9.57812H16.6094V21Z" fill="#F6FAF9"/>
+        </svg>
+        <span>Your details</span>
+      </div>
+      <hr>
+      <div class="progress-status-container">
+        <svg style="cursor: pointer" (click)="showContent('payment-details')" *ngIf="activeContent == 'your-details'" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="14" stroke="#A93F05" stroke-width="2"/>
+          <path d="M18.625 21H10.6406V19.3203L13.5078 16.4219C14.0859 15.8281 14.5495 15.3333 14.8984 14.9375C15.2526 14.5365 15.5078 14.1719 15.6641 13.8438C15.8255 13.5156 15.9062 13.1641 15.9062 12.7891C15.9062 12.3359 15.7786 11.9974 15.5234 11.7734C15.2734 11.5443 14.9375 11.4297 14.5156 11.4297C14.0729 11.4297 13.6432 11.5312 13.2266 11.7344C12.8099 11.9375 12.375 12.2266 11.9219 12.6016L10.6094 11.0469C10.9375 10.7656 11.2839 10.5 11.6484 10.25C12.0182 10 12.4453 9.79948 12.9297 9.64844C13.4193 9.49219 14.0052 9.41406 14.6875 9.41406C15.4375 9.41406 16.0807 9.54948 16.6172 9.82031C17.1589 10.0911 17.5755 10.4609 17.8672 10.9297C18.1589 11.3932 18.3047 11.9193 18.3047 12.5078C18.3047 13.138 18.1797 13.7135 17.9297 14.2344C17.6797 14.7552 17.3151 15.2708 16.8359 15.7812C16.362 16.2917 15.7891 16.8568 15.1172 17.4766L13.6484 18.8594V18.9688H18.625V21Z" fill="#A93F05"/>
+        </svg>
+        <svg *ngIf="activeContent != 'your-details'" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="15" fill="#A93F05"/>
+          <path d="M18.625 21H10.6406V19.3203L13.5078 16.4219C14.0859 15.8281 14.5495 15.3333 14.8984 14.9375C15.2526 14.5365 15.5078 14.1719 15.6641 13.8438C15.8255 13.5156 15.9062 13.1641 15.9062 12.7891C15.9062 12.3359 15.7786 11.9974 15.5234 11.7734C15.2734 11.5443 14.9375 11.4297 14.5156 11.4297C14.0729 11.4297 13.6432 11.5312 13.2266 11.7344C12.8099 11.9375 12.375 12.2266 11.9219 12.6016L10.6094 11.0469C10.9375 10.7656 11.2839 10.5 11.6484 10.25C12.0182 10 12.4453 9.79948 12.9297 9.64844C13.4193 9.49219 14.0052 9.41406 14.6875 9.41406C15.4375 9.41406 16.0807 9.54948 16.6172 9.82031C17.1589 10.0911 17.5755 10.4609 17.8672 10.9297C18.1589 11.3932 18.3047 11.9193 18.3047 12.5078C18.3047 13.138 18.1797 13.7135 17.9297 14.2344C17.6797 14.7552 17.3151 15.2708 16.8359 15.7812C16.362 16.2917 15.7891 16.8568 15.1172 17.4766L13.6484 18.8594V18.9688H18.625V21Z" fill="#F6FAF9"/>
+        </svg>
+        <span>Payment details</span>
+      </div>
+      <hr>
+      <div class="progress-status-container">
+        <svg *ngIf="activeContent != 'confirmation-details'" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="14" stroke="#A93F05" stroke-width="2"/>
+          <path d="M18.1797 12.1328C18.1797 12.6589 18.0703 13.1146 17.8516 13.5C17.6328 13.8854 17.3359 14.2005 16.9609 14.4453C16.5911 14.6901 16.1745 14.8698 15.7109 14.9844V15.0312C16.6276 15.1458 17.3229 15.4271 17.7969 15.875C18.276 16.3229 18.5156 16.9219 18.5156 17.6719C18.5156 18.3385 18.3516 18.9349 18.0234 19.4609C17.7005 19.987 17.2005 20.401 16.5234 20.7031C15.8464 21.0052 14.974 21.1562 13.9062 21.1562C13.276 21.1562 12.6875 21.1042 12.1406 21C11.599 20.901 11.0885 20.7474 10.6094 20.5391V18.4844C11.099 18.7344 11.612 18.9245 12.1484 19.0547C12.6849 19.1797 13.1849 19.2422 13.6484 19.2422C14.513 19.2422 15.1172 19.0938 15.4609 18.7969C15.8099 18.4948 15.9844 18.0729 15.9844 17.5312C15.9844 17.2135 15.9036 16.9453 15.7422 16.7266C15.5807 16.5078 15.2995 16.3411 14.8984 16.2266C14.5026 16.112 13.9479 16.0547 13.2344 16.0547H12.3672V14.2031H13.25C13.9531 14.2031 14.487 14.138 14.8516 14.0078C15.2214 13.8724 15.4714 13.6901 15.6016 13.4609C15.737 13.2266 15.8047 12.9609 15.8047 12.6641C15.8047 12.2578 15.6797 11.9401 15.4297 11.7109C15.1797 11.4818 14.763 11.3672 14.1797 11.3672C13.8151 11.3672 13.4818 11.4141 13.1797 11.5078C12.8828 11.5964 12.6146 11.7057 12.375 11.8359C12.1354 11.9609 11.9245 12.0833 11.7422 12.2031L10.625 10.5391C11.0729 10.2161 11.5964 9.94792 12.1953 9.73438C12.7995 9.52083 13.5182 9.41406 14.3516 9.41406C15.5286 9.41406 16.4609 9.65104 17.1484 10.125C17.8359 10.599 18.1797 11.2682 18.1797 12.1328Z" fill="#A93F05"/>
+        </svg>
+        <svg *ngIf="activeContent == 'confirmation-details'" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+          <circle cx="15" cy="15" r="15" fill="#A93F05"/>
+          <path d="M18.1797 12.1328C18.1797 12.6589 18.0703 13.1146 17.8516 13.5C17.6328 13.8854 17.3359 14.2005 16.9609 14.4453C16.5911 14.6901 16.1745 14.8698 15.7109 14.9844V15.0312C16.6276 15.1458 17.3229 15.4271 17.7969 15.875C18.276 16.3229 18.5156 16.9219 18.5156 17.6719C18.5156 18.3385 18.3516 18.9349 18.0234 19.4609C17.7005 19.987 17.2005 20.401 16.5234 20.7031C15.8464 21.0052 14.974 21.1562 13.9062 21.1562C13.276 21.1562 12.6875 21.1042 12.1406 21C11.599 20.901 11.0885 20.7474 10.6094 20.5391V18.4844C11.099 18.7344 11.612 18.9245 12.1484 19.0547C12.6849 19.1797 13.1849 19.2422 13.6484 19.2422C14.513 19.2422 15.1172 19.0938 15.4609 18.7969C15.8099 18.4948 15.9844 18.0729 15.9844 17.5312C15.9844 17.2135 15.9036 16.9453 15.7422 16.7266C15.5807 16.5078 15.2995 16.3411 14.8984 16.2266C14.5026 16.112 13.9479 16.0547 13.2344 16.0547H12.3672V14.2031H13.25C13.9531 14.2031 14.487 14.138 14.8516 14.0078C15.2214 13.8724 15.4714 13.6901 15.6016 13.4609C15.737 13.2266 15.8047 12.9609 15.8047 12.6641C15.8047 12.2578 15.6797 11.9401 15.4297 11.7109C15.1797 11.4818 14.763 11.3672 14.1797 11.3672C13.8151 11.3672 13.4818 11.4141 13.1797 11.5078C12.8828 11.5964 12.6146 11.7057 12.375 11.8359C12.1354 11.9609 11.9245 12.0833 11.7422 12.2031L10.625 10.5391C11.0729 10.2161 11.5964 9.94792 12.1953 9.73438C12.7995 9.52083 13.5182 9.41406 14.3516 9.41406C15.5286 9.41406 16.4609 9.65104 17.1484 10.125C17.8359 10.599 18.1797 11.2682 18.1797 12.1328Z" fill="#F6FAF9"/>
+        </svg>
+        <span>Confirmation</span>
+      </div>
+
+    </div>
+
+    <div class="booking-page" *ngIf="activeContent != 'confirmation-details'">
+      <div class="booking-details-container">
+        <div class="booking-hotel-details">
+          <span class="hotel-details-name">{{ hotel.name }}</span>
+          <span class="hotel-details-address">{{ hotel.address }}</span>
+          <div class="quest-rating">
+            <div class="quest-rating-score">{{ hotel.avgRate | number:'1.1-1' }}</div>
+            <div class="quest-rating-score-text-container">
+              <div class="quest-rating-text">{{ hotelGrade }}</div>
+              <div>&bull;</div>
+              <span class="quest-reviews">{{ hotel.reviewsCount }} reviews</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="your-booking-details">
+          <span class="your-booking-header">Your booking details</span>
+          <div class="check-in-out">
+            <div class="check-in">
+              <p>Check-in</p>
+              <strong>{{ checkInTime }}</strong>
+              <p>{{ hotel.checkInTime | slice:0:-3 }} - 00:00</p>
+            </div>
+            <div class="divider"></div>
+            <div class="check-out">
+              <p>Check-out</p>
+              <strong>{{ checkOutTime }}</strong>
+              <p>Until {{ hotel.checkOutTime | slice:0:-3 }}</p>
+            </div>
+          </div>
+          <div class="stay-length">
+            <p>Total length of stay:</p>
+            <strong>{{ nights }} night</strong>
+          </div>
+
+          <hr class="separator">
+
+          <div class="room-selection">
+            <p>You selected</p>
+            <strong>1 room for {{ room.capacity }} adults</strong>
+          </div>
+
+          <a href="/hotel/{{ hotel.id }}" class="change-selection">Change your selection</a>
+        </div>
+
+        <div class="price-container">
+          <div class="price-label">Price</div>
+          <div class="price-details">
+            <div class="new-price">USD {{ room.costPerNight * nights }}</div>
+          </div>
+        </div>
+
+        <div class="cancellation-container">
+          <h3 class="cancellation-title">How much will it cost to cancel?</h3>
+          <p class="free-cancellation" style="margin-top: 1vw">
+            <ng-container *ngIf="hotel.bookingCancelRule == null; else cancellationInfo">
+              Free cancellation
+            </ng-container>
+            <ng-template #cancellationInfo>
+              Free cancellation before {{ hotel.checkInTime | slice:0:-3 }} on {{ freeCancellationDate }}
+            </ng-template>
+          </p>
+
+          <div class="cancellation-fee" *ngIf="hotel.bookingCancelRule != null">
+            <span>After {{ hotel.checkInTime | slice:0:-3  }} on {{ freeCancellationDate }}</span>
+            <span class="cancellation-price">USD {{ hotel.bookingCancelRule.cancelFee | number:'1.1-1'}}</span>
           </div>
         </div>
       </div>
 
-      <div class="your-booking-details">
-        <span class="your-booking-header">Your booking details</span>
-        <div class="check-in-out">
-          <div class="check-in">
-            <p>Check-in</p>
-            <strong>Thu 23 Jan 2025</strong>
-            <p>15:00 - 00:00</p>
+      <div class="booking-user-info-container">
+        <div class="booking-user-account">
+          <div class="account-photo-container">
+            <img routerLink="/account" class="account-photo-icon" src="{{ currentUser.avatarUrl}}"/>
           </div>
-          <div class="divider"></div>
-          <div class="check-out">
-            <p>Check-out</p>
-            <strong>Fri 24 Jan 2025</strong>
-            <p>Until 12:00</p>
+          <div class="user-account-mail">
+            <span class="mail-header">You are signed in</span>
+            <span class="mail-text">{{ currentUser.email }}</span>
           </div>
         </div>
-        <div class="stay-length">
-          <p>Total length of stay:</p>
-          <strong>1 night</strong>
+
+        <div class="details-container" *ngIf="activeContent == 'your-details'">
+          <div class="enter-details-container" >
+            <span class="details-header">Enter your details</span>
+            <div class="details-account-name">
+              <div class="input-field">
+                <div class="input-field-header">
+                  <span class="input-field-header-text">Name</span>
+                  <span class="input-field-header-star">*</span>
+                </div>
+                <input type="text" placeholder="Enter your name" [(ngModel)]="bookingName"/>
+              </div>
+              <div class="input-field">
+                <div class="input-field-header">
+                  <span class="input-field-header-text">Surname</span>
+                  <span class="input-field-header-star">*</span>
+                </div>
+                <input type="text" placeholder="Enter your surname" [(ngModel)]="bookingSurname"/>
+              </div>
+            </div>
+            <div class="input-field">
+              <div class="input-field-header">
+                <span class="input-field-header-text">Email address</span>
+                <span class="input-field-header-star">*</span>
+              </div>
+              <input type="text" placeholder="Enter your email address" [(ngModel)]="bookingMail"/>
+              <span class="input-field-footer">Confirmation email goes to this address</span>
+            </div>
+            <div class="input-field">
+              <div class="input-field-header">
+                <span class="input-field-header-text">Country/region</span>
+                <span class="input-field-header-star">*</span>
+              </div>
+              <select class="input-edit" [(ngModel)]="selectedCountry">
+                <option *ngFor="let country of countries" [ngValue]="country">
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
+            <div class="input-field">
+              <div class="input-field-header">
+                <span class="input-field-header-text">Phone number</span>
+                <span class="input-field-header-star">*</span>
+              </div>
+              <input type="text" placeholder="Enter your phone number" [(ngModel)]="bookingPhone"/>
+              <span class="input-field-footer">Needed by the property to validate your booking</span>
+            </div>
+          </div>
+
+          <div class="good-to-know-container">
+            <span class="details-header">Good to know:</span>
+            <span class="good-to-know-desc">
+          <ng-container *ngIf="hotel.bookingCancelRule == null; else cancellationInfo">
+            Stay flexible: You can cancel for free any time, so lock in this great price today.
+          </ng-container>
+          <ng-template #cancellationInfo>
+            Stay flexible: You can cancel for free before {{ hotel.checkInTime | slice:0:-3  }} on {{ freeCancellationDate }}, so lock in this great price today.
+          </ng-template>
+        </span>
+          </div>
+
+          <div class="room-details-container">
+            <span class="details-header">The Room:</span>
+            <span *ngIf="hotel.bookingCancelRule != null" class="free-cancellation">Free cancellation before {{ hotel.checkInTime | slice:0:-3  }} on {{ freeCancellationDate }}</span>
+            <div class="room-count-info">
+              <span style="margin-bottom: 1vh"><span style="font-weight: 600">Guests:</span> 2 adults</span>
+              <span><span style="font-weight: 600">Bed:</span> 1 double bed</span>
+            </div>
+            <span class="gust-count-header">Full Guest Name</span>
+            <div class="full-guest-name-field" *ngFor="let name of guestNames; let index = index; trackBy: trackByIndex">
+              <input class="input-edit"
+                     placeholder="Enter guest name"
+                     [(ngModel)]="guestNames[index]"
+                     (input)="checkAllNamesFilled()"/>
+              <span class="guest-count">Guest {{ index + 1 }}</span>
+            </div>
+          </div>
+
+          <div class="requests-container">
+            <span class="details-header">Special requests</span>
+            <span class="requests-desc">Special requests can’t be guaranteed, but the property will do its best to meet your needs. You can always make a special request after your booking is complete.</span>
+            <span class="gust-count-header">Please write your requests in English or Ukrainian.  <span class="optional">( optional )</span></span>
+            <textarea class="input-request"></textarea>
+          </div>
+
+          <button class="info-book-btn" (click)="showContent('payment-details')">Next step</button>
         </div>
 
-        <hr class="separator">
+        <div class="details-container" *ngIf="activeContent == 'payment-details'">
+          <div class="enter-details-container">
+            <div class="choose-cards">
+              <span class="details-header">Choose your card</span>
+              <svg style="cursor: pointer" (click)="cardsToggleClick()" *ngIf="!isCardToggleDown" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+                <rect x="1" y="1" width="28" height="28" rx="3" stroke="#9E9EA6" stroke-width="2"/>
+                <path d="M9 12L15 18L21 12" stroke="#07195F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg style="cursor: pointer" (click)="cardsToggleClick()" *ngIf="isCardToggleDown" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+                <rect x="1" y="1" width="28" height="28" rx="3" stroke="#9E9EA6" stroke-width="2"/>
+                <path d="M21 18L15 12L9 18" stroke="#07195F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="popup" *ngIf="isCardToggleDown">
+                <div class="popup-card" *ngFor="let card of bankCards; let last = last">
+                  <div class="popup-item" (click)="chooseCard(card)">
+                    <svg *ngIf="card.cardNumber[0] == 4" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+                      <path d="M25.8612 11.0876L27.5 18.9114H25.6225C25.5475 18.5839 25.4887 18.2414 25.4137 17.9139C25.3387 17.5864 25.4138 17.7501 25.22 17.7501H22.9413C22.9167 17.7459 22.8915 17.7468 22.8674 17.7528C22.8432 17.7589 22.8206 17.7699 22.8009 17.7852C22.7813 17.8005 22.765 17.8197 22.7533 17.8417C22.7415 17.8636 22.7344 17.8878 22.7325 17.9126C22.6275 18.2126 22.5237 18.5101 22.405 18.7926C22.285 19.0751 22.3 18.9264 22.255 18.9264H20.245V18.7476C21.2383 16.3934 22.2313 14.0347 23.2238 11.6714C23.2823 11.5108 23.3872 11.3713 23.5252 11.2705C23.6632 11.1697 23.828 11.1121 23.9987 11.1051C24.6537 11.0751 25.25 11.0901 25.8612 11.0901M24.4613 13.2814L23.4025 16.1276H25.0712L24.4613 13.2814ZM7.64 16.4076V16.2289C8.23625 14.5751 8.84625 12.9214 9.4275 11.2676C9.4275 11.1339 9.5475 11.0739 9.69625 11.0739H11.6775V11.2676L8.59375 18.7176C8.5791 18.7794 8.54184 18.8334 8.48931 18.869C8.43678 18.9047 8.3728 18.9193 8.31 18.9101H6.5825C6.4325 18.9101 6.37375 18.9101 6.32875 18.7164C5.77875 16.5714 5.21125 14.4264 4.66 12.2664C4.63315 12.1548 4.56357 12.0583 4.46625 11.9976C3.89135 11.6768 3.28208 11.4218 2.65 11.2376C2.65 11.2376 2.545 11.1626 2.5 11.1339C2.56347 11.1169 2.63028 11.1169 2.69375 11.1339H5.67375C5.79822 11.1149 5.92528 11.1225 6.04661 11.1561C6.16795 11.1897 6.28081 11.2485 6.37782 11.3288C6.47483 11.409 6.55379 11.5089 6.60952 11.6218C6.66526 11.7347 6.69652 11.858 6.70125 11.9839L7.55125 16.3476C7.54633 16.3824 7.54633 16.4178 7.55125 16.4526L7.64 16.4076ZM14.5825 18.6126L14.8812 16.8689L15.09 16.9889C15.8509 17.382 16.7234 17.5029 17.5625 17.3314C17.7229 17.3176 17.8751 17.2543 17.9978 17.1501C18.1206 17.0459 18.2078 16.9061 18.2475 16.7501C18.2635 16.5944 18.2287 16.4377 18.1483 16.3034C18.0678 16.1691 17.9461 16.0645 17.8013 16.0051C17.5025 15.8114 17.1762 15.6626 16.8925 15.4689C16.525 15.2641 16.1848 15.0138 15.88 14.7239C15.5708 14.354 15.4014 13.8872 15.4014 13.4051C15.4014 12.923 15.5708 12.4562 15.88 12.0864C16.3287 11.5964 16.9153 11.2538 17.5625 11.1039C18.5486 10.8568 19.5859 10.9086 20.5425 11.2526H20.6175L20.3338 12.8614C19.9577 12.7465 19.5743 12.6571 19.1862 12.5939C18.7993 12.5638 18.4107 12.5638 18.0237 12.5939C17.8841 12.6219 17.7553 12.6891 17.6525 12.7876C17.6029 12.8299 17.5631 12.8824 17.5358 12.9415C17.5085 13.0006 17.4944 13.065 17.4944 13.1301C17.4944 13.1952 17.5085 13.2596 17.5358 13.3187C17.5631 13.3779 17.6029 13.4304 17.6525 13.4726C17.8308 13.6368 18.0242 13.7809 18.2325 13.9051C18.62 14.1426 19.0225 14.3364 19.395 14.5901C19.7031 14.7785 19.9587 15.0417 20.1379 15.3552C20.3172 15.6688 20.4143 16.0225 20.4203 16.3836C20.4263 16.7447 20.3409 17.1015 20.1722 17.4208C20.0034 17.7401 19.7567 18.0116 19.455 18.2101C18.8611 18.6703 18.1472 18.9498 17.3987 19.0151C16.4411 19.119 15.4727 18.9806 14.5825 18.6126ZM11.275 18.9101L12.5563 11.0889H14.5975L13.3162 18.9101H11.275Z" fill="#555563"/>
+                    </svg>
+                    <svg *ngIf="card.cardNumber[0] == 5" xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
+                      <path d="M13.8128 15.0177H14.7391C14.7866 14.7502 14.7016 14.5215 14.4053 14.5215C14.1091 14.5215 13.8991 14.674 13.8128 15.0177ZM8.59156 15.514L8.54531 15.5065C8.40781 15.4815 8.16531 15.4365 7.95281 15.5815C7.71406 15.744 7.64656 16.029 7.89531 16.1252C8.13406 16.2165 8.48656 16.059 8.53531 15.8102L8.59156 15.514ZM25.5916 15.4277C25.6691 15.1802 25.6266 14.8702 25.5441 14.7602C25.3153 14.4552 24.7891 14.6965 24.6278 15.2952C24.5228 15.6865 24.7528 15.9827 25.0103 15.9827C25.2866 15.9827 25.4578 15.7627 25.5916 15.4277ZM21.1916 15.514L21.1453 15.5065C21.0078 15.4815 20.7641 15.4365 20.5528 15.5815C20.3141 15.744 20.2466 16.029 20.4953 16.1252C20.7341 16.2165 21.0866 16.059 21.1341 15.8102L21.1916 15.514Z" fill="#555563"/>
+                      <path d="M20.102 7.59963C22.0646 7.59963 23.9468 8.37927 25.3345 9.76704C26.7223 11.1548 27.502 13.037 27.502 14.9996C27.502 16.9622 26.7223 18.8444 25.3345 20.2322C23.9468 21.62 22.0646 22.3996 20.102 22.3996C18.4025 22.4034 16.7547 21.8161 15.4407 20.7384C16.4277 19.7905 17.1551 18.6052 17.5532 17.2959H16.9382C16.5553 18.4616 15.8877 19.5133 14.9957 20.3559C14.1093 19.5129 13.4464 18.4626 13.067 17.2996H12.452C12.845 18.6034 13.5644 19.7853 14.542 20.7334C13.2332 21.8064 11.5943 22.395 9.90195 22.3996C7.93935 22.3996 6.05713 21.62 4.66936 20.2322C3.28159 18.8444 2.50195 16.9622 2.50195 14.9996C2.50195 13.037 3.28159 11.1548 4.66936 9.76704C6.05713 8.37927 7.93935 7.59963 9.90195 7.59963C11.6645 7.59963 13.2707 8.23713 14.542 9.26588C13.5644 10.2139 12.845 11.3958 12.452 12.6996H13.067C13.4464 11.5367 14.1093 10.4864 14.9957 9.64338C15.8877 10.4859 16.5553 11.5377 16.9382 12.7034H17.5532C17.1551 11.3941 16.4277 10.2088 15.4407 9.26088C16.755 8.18291 18.4034 7.59561 20.1032 7.59963M22.5757 13.9946L22.0645 16.7321H22.817L23.0482 15.4796C23.2582 14.7021 23.582 14.7046 23.772 14.7084H23.8007L24.0032 13.9959C23.627 13.9959 23.4045 14.1296 23.2895 14.2646L23.222 13.9946H22.5757ZM12.9082 13.2996H12.1632L11.6482 15.8959C11.5045 16.6396 12.0682 16.7459 12.2395 16.7459C12.4329 16.7522 12.6244 16.7055 12.7932 16.6109L12.8407 16.0584C12.412 16.1246 12.392 15.9334 12.4307 15.7234L12.6407 14.6159H13.022L13.1557 14.0246H12.7557L12.9082 13.2996ZM14.3682 13.9871C13.202 13.9871 13.0232 15.1084 12.9882 15.3334L12.9845 15.3509C12.9557 15.5234 12.937 16.7359 14.2257 16.7359C14.5407 16.7446 14.9982 16.7071 15.1807 16.6109L15.2945 16.0484C15.0168 16.0941 14.7358 16.1162 14.4545 16.1146H14.4295C14.132 16.1146 13.6845 16.1159 13.767 15.5146H15.3895C15.477 15.0746 15.677 13.9871 14.3682 13.9871ZM11.6295 14.0809C11.3207 13.9634 11.0707 13.9709 10.942 13.9746H10.8882C10.762 13.9746 9.89195 13.9746 9.75695 14.6246C9.65195 15.1309 9.83695 15.3396 10.0145 15.4171C10.202 15.4984 10.3357 15.5746 10.4495 15.6396C10.5078 15.6746 10.5636 15.7055 10.617 15.7321C10.8045 15.8259 10.7707 16.1421 10.5207 16.1421L10.4307 16.1459C10.2382 16.1571 9.8457 16.1784 9.5382 16.0759L9.4332 16.6384C9.77695 16.7346 10.0532 16.7346 10.3107 16.7346H10.3395C10.5707 16.7371 11.3857 16.7446 11.5032 15.9609C11.5645 15.5609 11.3895 15.3784 11.2457 15.2934C11.0751 15.182 10.8967 15.083 10.712 14.9971C10.5595 14.9296 10.4445 14.6721 10.7207 14.5971C10.8932 14.5771 11.2457 14.5771 11.4557 14.6346L11.6295 14.0809ZM7.2482 13.4309H6.0257L5.11945 15.4359L4.9757 13.4309H3.7832L3.1432 16.7346H3.8882L4.3457 14.3471L4.5457 16.7346H5.2532L6.2932 14.4046L5.85445 16.7346H6.6257L7.2482 13.4309ZM7.3332 14.6634L7.5132 14.6409C7.7382 14.6121 8.06445 14.5696 8.25945 14.5771L8.33445 14.5784C8.5682 14.5834 8.7957 14.5884 8.7182 14.9584C8.69237 14.96 8.6507 14.96 8.5932 14.9584C8.20195 14.9459 7.1632 14.9146 6.9807 15.9134C6.89445 16.4759 7.3807 16.7634 7.7632 16.7434C8.14445 16.7246 8.2507 16.6771 8.3832 16.5809L8.47945 16.7346H9.1757L9.47195 15.2446C9.5482 14.8734 9.67195 13.9759 8.42195 13.9759L8.30195 13.9796C8.09945 13.9846 7.85195 13.9921 7.4482 14.0709L7.3332 14.6634ZM18.9407 14.0621C19.1895 14.0621 19.322 14.0809 19.5132 14.1946L20.0007 13.7084C19.8095 13.4984 19.5895 13.2921 18.9795 13.2696C18.4632 13.2496 17.5795 13.6259 17.2995 14.6534C16.917 16.0471 17.757 16.7346 18.5307 16.7346C18.9407 16.7346 19.1895 16.6771 19.437 16.5621L19.217 15.8946C18.4545 16.1521 17.9095 15.7609 18.0345 14.9684C18.1382 14.2984 18.692 14.0609 18.9407 14.0609M25.7557 14.2096C25.6557 14.1046 25.5407 13.9846 25.2782 13.9846H25.2107C24.8007 13.9796 24.2095 13.9734 23.8657 15.1484C23.6232 15.9771 24.1145 16.7334 24.6482 16.7334C24.897 16.7234 25.1445 16.6184 25.2982 16.5134L25.3932 16.7334H26.1945L26.8445 13.2584H26.0607L25.8607 14.3084C25.8238 14.2771 25.7887 14.2437 25.7557 14.2084M19.9332 14.6609L20.1132 14.6384C20.3382 14.6096 20.6632 14.5671 20.8595 14.5746L20.9345 14.5759C21.1682 14.5809 21.3957 14.5859 21.317 14.9559C21.292 14.9575 21.2503 14.9575 21.192 14.9559C20.802 14.9434 19.7632 14.9121 19.5795 15.9109C19.4945 16.4734 19.9807 16.7609 20.3632 16.7409C20.7445 16.7221 20.8495 16.6746 20.9832 16.5784L21.0795 16.7321H21.7757L22.072 15.2421C22.147 14.8709 22.272 13.9734 21.022 13.9734L20.902 13.9771C20.6995 13.9821 20.452 13.9896 20.0482 14.0684L19.9332 14.6609ZM15.917 14.0209L15.4107 16.7321H16.1557L16.3845 15.4909C16.5907 14.7284 16.917 14.7334 17.1045 14.7359H17.1382L17.3295 14.0209C16.9582 14.0209 16.7382 14.1546 16.6232 14.2884L16.557 14.0209H15.917Z" fill="#555563"/>
+                    </svg>
+                    <span>{{ maskCardNumber(card.cardNumber) }}</span>
+                    <svg *ngIf="card.cardNumber == bookingCardNumber" xmlns="http://www.w3.org/2000/svg" width="0.7vw" height="0.7vw" viewBox="0 0 15 11" fill="none">
+                      <path d="M14.6861 0.322215C15.1046 0.751836 15.1046 1.44954 14.6861 1.87916L6.11567 10.6778C5.69719 11.1074 5.01758 11.1074 4.5991 10.6778L0.31386 6.27847C-0.10462 5.84885 -0.10462 5.15115 0.31386 4.72153C0.73234 4.29191 1.41195 4.29191 1.83043 4.72153L5.35906 8.34065L13.1729 0.322215C13.5914 -0.107405 14.271 -0.107405 14.6895 0.322215H14.6861Z" fill="#A93F05"/>
+                    </svg>
+                  </div>
+                  <hr>
+                </div>
+                <div class="add-card" (click)="addBankCard()">
+                  <div class="add-card-btn">+</div>
+                  <span>Add bank card</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-fields-main" *ngIf="hotel.bookingPaymentOptions[0].option == 'CARD'">
+              <div class="card-fields">
+                <div class="input-div">
+                  <div>
+                    <span>Cardholder's name</span>
+                    <span style="color: rgba(169, 63, 5, 1);">*</span>
+                  </div>
+                  <input class="input-edit" placeholder="Input your name" [(ngModel)]="bookingCardName" [disabled]="!isAddBankCard"/>
+                </div>
+                <div class="input-div">
+                  <div>
+                    <span>Card number</span>
+                    <span style="color: rgba(169, 63, 5, 1);">*</span>
+                  </div>
+                  <input class="input-edit"
+                         placeholder="Input card number"
+                         [(ngModel)]="bookingCardNumber"
+                         [disabled]="!isAddBankCard"/>
+                </div>
+                <div class="cards-expire-fields">
+                  <div class="input-div">
+                    <div>
+                      <span>Expiry date</span>
+                      <span style="color: rgba(169, 63, 5, 1);">*</span>
+                    </div>
+                    <input class="input-edit" placeholder="Input expiry date" [(ngModel)]="bookingDate" [disabled]="!isAddBankCard"/>
+                  </div>
+                  <div class="input-div">
+                    <div>
+                      <span>CVV</span>
+                      <span style="color: rgba(169, 63, 5, 1);">*</span>
+                    </div>
+                    <input type="password" class="input-edit" placeholder="Input CVV code" [(ngModel)]="bookingCVV" [disabled]="!isAddBankCard"/>
+                  </div>
+                </div>
+                <div class="save-card" *ngIf="isAddBankCard">
+                  <input type="checkbox" [(ngModel)]="saveCardDetails"/>
+                  <span>Save card’s details for next bookings</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="room-selection">
-          <p>You selected</p>
-          <strong>1 room for 2 adults</strong>
-        </div>
+          <div class="details-container">
+            <div class="enter-details-container">
+              <span class="details-header">Choose your payment method:</span>
+              <div class="payment-radio-container">
 
-        <a href="#" class="change-selection">Change your selection</a>
-      </div>
+                <label class="payment-method">
+                  <span>Pay the full price now by card</span>
+                  <input type="radio" name="payment" value="card" [(ngModel)]="selectedPayment" (change)="onPaymentChange('card')">
+                  <span class="custom-radio"></span>
+                </label>
 
-      <div class="price-container">
-        <div class="price-label">Price</div>
-        <div class="price-details">
-          <div class="old-price">UAH 30 176</div>
-          <div class="new-price">UAH 15,084</div>
-        </div>
-      </div>
+                <label class="payment-method">
+                  <span>Pay later at the hotel</span>
+                  <input type="radio" name="payment" value="hotel" [(ngModel)]="selectedPayment" (change)="onPaymentChange('hotel')">
+                  <span class="custom-radio"></span>
+                </label>
 
-      <div class="cancellation-container">
-        <h3 class="cancellation-title">How much will it cost to cancel?</h3>
-        <p class="free-cancellation">Free cancellation before <strong>2:00 PM on Feb 23</strong></p>
+              </div>
+            </div>
+          </div>
 
-        <div class="cancellation-fee">
-          <span>After 2:00 PM on Feb 23</span>
-          <span class="cancellation-price">UAH 1,313.25</span>
+          <div class="prev-next-buttons">
+            <button class="previous-button" (click)="showContent('your-details')"> <svg xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="1vw" viewBox="0 0 31 17" fill="none">
+              <path d="M0.719642 6.8269C0.262946 7.25903 -3.9947e-07 7.86118 -3.71601e-07 8.49875C-3.43732e-07 9.13632 0.262946 9.73847 0.719643 10.1706L7.3625 16.4046C8.26205 17.2476 9.66674 17.191 10.4902 16.2629C11.3136 15.3349 11.2583 13.9039 10.3518 13.0609L7.90915 10.7657L28.7857 10.7657C30.0105 10.7657 31 9.75264 31 8.49875C31 7.24486 30.0105 6.23184 28.7857 6.23184L7.90915 6.23184L10.3587 3.93658C11.2583 3.09358 11.3205 1.6555 10.4971 0.734565C9.67366 -0.18637 8.26897 -0.250127 7.36942 0.592883L0.726562 6.8269L0.719642 6.8269Z" fill="#07195F"/>
+            </svg>
+              Previous step</button>
+            <button class="info-book-btn" (click)="showContent('confirmation-details')">Book now</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="booking-user-info-container">
-      <div class="booking-user-account">
-        <div class="account-photo-container">
-          <img class="account-photo-icon" src="assets/hotel-test-room.jpg"/>
-        </div>
-        <div class="user-account-mail">
-          <span class="mail-header">You are signed in</span>
-          <span class="mail-text">mail#gmail.com</span>
-        </div>
-      </div>
+    <div class="confirmation-page" *ngIf="activeContent == 'confirmation-details'">
+      <div class="overlay" *ngIf="isProcessing"></div>
 
-      <div class="enter-details-container">
-        <span class="details-header">Enter your details</span>
-        <div class="details-account-name">
-          <div class="input-field">
-            <div class="input-field-header">
-              <span class="input-field-header-text">Name</span>
-              <span class="input-field-header-star">*</span>
-            </div>
-            <input type="text" placeholder="Enter your name"/>
-          </div>
-          <div class="input-field">
-            <div class="input-field-header">
-              <span class="input-field-header-text">Surname</span>
-              <span class="input-field-header-star">*</span>
-            </div>
-            <input type="text" placeholder="Enter your surname"/>
-          </div>
-        </div>
-        <div class="input-field">
-          <div class="input-field-header">
-            <span class="input-field-header-text">Email address</span>
-            <span class="input-field-header-star">*</span>
-          </div>
-          <input type="text" placeholder="Enter your email address"/>
-          <span class="input-field-footer">Confirmation email goes to this address</span>
-        </div>
-        <div class="input-field">
-          <div class="input-field-header">
-            <span class="input-field-header-text">Country/region</span>
-            <span class="input-field-header-star">*</span>
-          </div>
-          <select></select>
-        </div>
-        <div class="input-field">
-          <div class="input-field-header">
-            <span class="input-field-header-text">Phone number</span>
-            <span class="input-field-header-star">*</span>
-          </div>
-          <input type="text" placeholder="Enter your phone number"/>
-          <span class="input-field-footer">Needed by the property to validate your booking</span>
+      <div class="processing-modal" *ngIf="isProcessing">
+        <div class="processing-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vw" viewBox="0 0 80 80" fill="none">
+            <g clip-path="url(#clip0_1722_6598)">
+              <path d="M11.7188 11.7188L6.40625 6.40625C4.04688 4.04688 0 5.71875 0 9.04688V26.25C0 28.3281 1.67188 30 3.75 30H20.9531C24.2969 30 25.9688 25.9531 23.6094 23.5938L18.7969 18.7812C24.2188 13.3594 31.7188 10 40 10C56.5625 10 70 23.4375 70 40C70 56.5625 56.5625 70 40 70C33.625 70 27.7188 68.0156 22.8594 64.625C20.5938 63.0469 17.4844 63.5938 15.8906 65.8594C14.2969 68.125 14.8594 71.2344 17.125 72.8281C23.625 77.3438 31.5156 80 40 80C62.0938 80 80 62.0938 80 40C80 17.9062 62.0938 0 40 0C28.9531 0 18.9531 4.48438 11.7188 11.7188ZM40 20C37.9219 20 36.25 21.6719 36.25 23.75V40C36.25 41 36.6406 41.9531 37.3438 42.6562L48.5938 53.9062C50.0625 55.375 52.4375 55.375 53.8906 53.9062C55.3438 52.4375 55.3594 50.0625 53.8906 48.6094L43.7344 38.4531V23.75C43.7344 21.6719 42.0625 20 39.9844 20H40Z" fill="#9E9EA6"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_1722_6598">
+                <rect width="80" height="80" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+          <p>Processing...</p>
         </div>
       </div>
     </div>
