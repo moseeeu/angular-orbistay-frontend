@@ -11,6 +11,7 @@ import {BookingPageComponent} from './booking-page/booking-page.component';
 import {FavouriteHotelsPageComponent} from './favourite-hotels-page/favourite-hotels-page.component';
 import {SuccessfulBookingPageComponent} from './successful-booking-page/successful-booking-page.component';
 import {MyBookingsPageComponent} from './my-bookings-page/my-bookings-page.component';
+import {ResetPasswordPageComponent} from './reset-password-page/reset-password-page.component';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'favourite', component: FavouriteHotelsPageComponent},
   {path: 'successfulBooking', component: SuccessfulBookingPageComponent},
   {path: 'myBookings', component: MyBookingsPageComponent},
+  {path: 'reset-password', component: ResetPasswordPageComponent},
 ];
 
 @NgModule({

@@ -31,6 +31,7 @@ import { GuestReviewModalWindowComponent } from './guest-review-modal-window/gue
 import { FavouriteHotelsPageComponent } from './favourite-hotels-page/favourite-hotels-page.component';
 import { SuccessfulBookingPageComponent } from './successful-booking-page/successful-booking-page.component';
 import { MyBookingsPageComponent } from './my-bookings-page/my-bookings-page.component';
+import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MyBookingsPageComponent } from './my-bookings-page/my-bookings-page.com
     FavouriteHotelsPageComponent,
     SuccessfulBookingPageComponent,
     MyBookingsPageComponent,
+    ResetPasswordPageComponent,
   ],
     imports: [
         BrowserModule,
