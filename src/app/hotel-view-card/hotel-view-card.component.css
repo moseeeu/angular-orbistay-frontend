@@ -30,8 +30,8 @@
   background: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 2vw;
+  height: 2vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@
 }
 
 .favorite-button span {
-  font-size: 18px;
+  font-size: 1vw;
   color: #000;
 }
 
@@ -64,9 +64,9 @@
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  overflow-wrap: break-word; /* Додаємо перенос слів */
-  display: -webkit-box;       /* Використовуємо для багаторядкового обмеження */
-  -webkit-line-clamp: 2;      /* Обмежуємо до 2 рядків */
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 

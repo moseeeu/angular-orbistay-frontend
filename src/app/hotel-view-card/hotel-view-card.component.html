@@ -12,8 +12,8 @@
     </div>
     <div class="card-footer">
       <div class="rating">
-        <div class="rating-score">{{ rating }}</div>
-        <div class="rating-text">Good</div>
+        <div class="rating-score">{{ rating | number:'1.1-1' }}</div>
+        <div class="rating-text">{{ hotelGrade }}</div>
         <div>&bull;</div>
         <p class="reviews">{{ reviews }} reviews</p>
       </div>
