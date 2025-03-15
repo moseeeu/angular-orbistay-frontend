@@ -102,7 +102,8 @@
     <div class="main-page-cards-content-part">
       <span class="main-page-cards-content-part-name">Popular variants:</span>
       <div *ngIf="popularHotels.length != 0" class="cards-container">
-        <app-hotel-view-card [style.z-index]="isCityDropdownOpen ? -1 : 1" class="hotel-card" *ngFor="let hotel of popularHotels"
+        <app-hotel-view-card [style.z-index]="(isCityDropdownOpen || isPeopleDropdownOpen) ? -1 : 1"  *ngFor="let hotel of popularHotels"
+                             (click)="redirectToHotelPage(hotel.id)"
                              [title]="hotel.name"
                              [location]="hotel.shortDesc"
                              [rating]="hotel.avgRate"
@@ -118,7 +119,7 @@
       <div class="main-page-cards-content-part">
         <span class="main-page-cards-content-part-name">Recently viewed:</span>
         <div class="cards-container">
-          <app-hotel-view-card *ngFor="let hotel of recentlyViewedHotels"
+          <app-hotel-view-card *ngFor="let hotel of recentlyViewedHotels" (click)="redirectToHotelPage(hotel.id)"
                                [title]="hotel.name"
                                [location]="hotel.shortDesc"
                                [rating]="hotel.avgRate"
@@ -130,22 +131,6 @@
           <span>No recently viewed hotels found</span>
         </div>
       </div>
-      <!--
-      <div class="main-page-cards-content-part">
-        <span class="main-page-cards-content-part-name">Your preferences:</span>
-        <div class="cards-container">
-          <app-hotel-view-card *ngFor="let hotel of hotels"
-                               [title]="hotel.title"
-                               [location]="hotel.location"
-                               [rating]="hotel.rating"
-                               [reviews]="hotel.reviews"
-                               [image]="hotel.image">
-          </app-hotel-view-card>
-        </div>
-        <div *ngIf="hotels.length == 0" class="no-provided-data">
-          <span>No preferences hotels found</span>
-        </div>
-      </div>-->
     </div>
   </div>
 </div>

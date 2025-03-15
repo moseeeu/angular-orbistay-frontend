@@ -106,8 +106,8 @@ export class MainPageComponent {
   }
   loadPopularHotels() {
     this.hotelsService.getHotelsByApi(ApiUrls.GET_POPULAR_HOTELS_URL).subscribe(
-      (hotels) => {
-        this.popularHotels = hotels;
+      (response) => {
+        this.popularHotels = response.length > 4 ? response.slice(0, 4) : response;
         console.log('Popular Hotels:', this.popularHotels);
       },
       (error) => {
@@ -196,7 +196,9 @@ export class MainPageComponent {
     return date.toISOString().split('T')[0];
   }
 
-
+  redirectToHotelPage(hotelId: number) {
+    this.router.navigate(['/hotel', hotelId]);
+  }
 
   searchButtonClick() {
     const countryId = this.countryId || "";
@@ -230,6 +232,8 @@ export class MainPageComponent {
       }
     };
 
+    localStorage.setItem('checkInTime', startDate);
+    localStorage.setItem('checkOutTime', endDate);
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
 
     localStorage.removeItem('filteredHotels');
