@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
-import {ApiUrls} from '../api-urls';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login-page',
@@ -17,20 +17,31 @@ export class LoginPageComponent {
   token: string = '';
   status: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private appComponent: AppComponent) {}
+  constructor(private authService: AuthService,
+              private router: Router,
+              private appComponent: AppComponent,
+              private spinner: NgxSpinnerService) {}
 
   loginUser() {
     this.authService.loginUser(this.email, this.password)
       .subscribe(
         (response) => {
+          console.log("Login response", response);
           localStorage.setItem('token', response.accessToken);
           localStorage.setItem('refreshToken', response.refreshToken);
 
           if (this.token != null) {
             this.authService.getUserInfo().subscribe(
               data => {
-                this.appComponent.updateUserData(data);
-                this.router.navigate(['']);
+                this.authService.updateUserData(data);
+                this.spinner.show();
+                setTimeout(() => {
+                  this.spinner.hide();
+                  window.location.reload();
+                }, 1000);
+                setTimeout(() => {
+                  this.router.navigate(['']);
+                }, 950);
               }
             );
           }

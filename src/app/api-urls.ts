@@ -19,6 +19,8 @@ export class ApiUrls {
   static readonly LOG_OUT_URL:string = `${ApiUrls.BASE_URL}/auth/logOut`;
   static readonly POST_UPDATE_ACCESS_TOKEN:string = `${ApiUrls.BASE_URL}/auth/refreshAccessToken`;
   static readonly GET_OAUTH2_GOOGLE_URL:string = `${ApiUrls.BASE_URL}/oauth2/google/login`;
+  static readonly POST_VERIFY_EMAIL_URL:string = `${ApiUrls.BASE_URL}/auth/email/verify`;
+  static readonly POST_RESEND_VERIFY_EMAIL_URL:string = `${ApiUrls.BASE_URL}/auth/email/resendVerification`;
 
   //=================================HOTELS API URLS=================================
   static readonly GET_POPULAR_HOTELS_URL:string = `${ApiUrls.BASE_URL}/hotels/popular`;
@@ -26,9 +28,6 @@ export class ApiUrls {
   static readonly GET_HOTEL_BY_ID_URL:string = `${ApiUrls.BASE_URL}/hotels`;
   static readonly GET_HOTEL_ROOMS:string = `${ApiUrls.BASE_URL}/hotels/rooms`;
   static readonly GET_FILTERED_HOTEL_ROOMS:string = `${ApiUrls.BASE_URL}/hotels/rooms/filter`;
-  static readonly POST_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites`;
-  static readonly DELETE_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites`;
-  static readonly GET_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites/me`;
 
   //=================================DESTINATIONS API URLS=================================
   static readonly GET_POPULAR_DESTINATIONS_URL:string = `${ApiUrls.BASE_URL}/destinations/popular`;
@@ -38,4 +37,17 @@ export class ApiUrls {
   //=================================RECENTLY VIEWED HOTELS API URLS=================================
   static readonly POST_RECENTLY_VIEWED_HOTEL:string = `${ApiUrls.BASE_URL}/recentlyViewedHotels/me`;
   static readonly GET_RECENTLY_VIEWED_HOTELS:string = `${ApiUrls.BASE_URL}/recentlyViewedHotels/me`;
+
+  //=================================BOOKINGS API URLS=================================
+  static readonly POST_BOOKING_HOTEL_URL:string = `${ApiUrls.BASE_URL}/bookings`;
+  static readonly GET_MY_BOOKINGS_URL:string = `${ApiUrls.BASE_URL}/bookings/me`;
+  static readonly DELETE_BOOKING_HOTEL_URL:string = `${ApiUrls.BASE_URL}/bookings`;
+
+  //=================================PAYMENT API URLS=================================
+  static readonly POST_PAYMENT_URL:string = `${ApiUrls.BASE_URL}/payments/bookings`;
+
+  //=================================FAVOURITES API URLS=================================
+  static readonly POST_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites`;
+  static readonly DELETE_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites`;
+  static readonly GET_HOTEL_TO_FAVOURITES:string = `${ApiUrls.BASE_URL}/favorites/me`;
 }

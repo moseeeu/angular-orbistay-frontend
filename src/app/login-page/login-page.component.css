@@ -40,10 +40,11 @@ hr {
   gap: 8px;
 }
 .input-field a {
-  color: rgba(85, 85, 99, 1);
+  color: rgba(169, 63, 5, 1);
   font-weight: 400;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
 }
 .input-field span {
   font-weight: 600;
