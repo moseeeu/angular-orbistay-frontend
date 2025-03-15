@@ -32,6 +32,7 @@ import { FavouriteHotelsPageComponent } from './favourite-hotels-page/favourite-
 import { SuccessfulBookingPageComponent } from './successful-booking-page/successful-booking-page.component';
 import { MyBookingsPageComponent } from './my-bookings-page/my-bookings-page.component';
 import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { VerifyMailPageComponent } from './verify-mail-page/verify-mail-page.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
     SuccessfulBookingPageComponent,
     MyBookingsPageComponent,
     ResetPasswordPageComponent,
+    VerifyMailPageComponent,
   ],
     imports: [
         BrowserModule,

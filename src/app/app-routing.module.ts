@@ -12,6 +12,7 @@ import {FavouriteHotelsPageComponent} from './favourite-hotels-page/favourite-ho
 import {SuccessfulBookingPageComponent} from './successful-booking-page/successful-booking-page.component';
 import {MyBookingsPageComponent} from './my-bookings-page/my-bookings-page.component';
 import {ResetPasswordPageComponent} from './reset-password-page/reset-password-page.component';
+import {VerifyMailPageComponent} from './verify-mail-page/verify-mail-page.component';
 
 const routes: Routes = [
   {path: '', component: MainPageComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'successfulBooking', component: SuccessfulBookingPageComponent},
   {path: 'myBookings', component: MyBookingsPageComponent},
   {path: 'reset-password', component: ResetPasswordPageComponent},
+  {path: 'verify-email', component: VerifyMailPageComponent},
 ];
 
 @NgModule({

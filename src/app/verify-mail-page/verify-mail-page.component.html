@@ -1,0 +1,20 @@
+<div class="body">
+  <hr class="up-hr" style="margin-top: -1px">
+  <div class="booking-page">
+    <div class="booking-details-container">
+      <span class="main-header">Please verify your email</span>
+      <span *ngIf="isCodeSend" class="description">We send you a code to <strong>{{ currentUser.email }}</strong> Please enter the code to continue.</span>
+      <div class="code-inputs" *ngIf="isCodeSend">
+        <input class="code-input" (input)="moveToNext($event, 0)" maxlength="1">
+        <input class="code-input" (input)="moveToNext($event, 1)" maxlength="1">
+        <input class="code-input" (input)="moveToNext($event, 2)" maxlength="1">
+        <input class="code-input" (input)="moveToNext($event, 3)" maxlength="1">
+        <input class="code-input" (input)="moveToNext($event, 4)" maxlength="1">
+        <input class="code-input" (input)="moveToNext($event, 5)" maxlength="1">
+      </div>
+      <button (click)="sendCodeToMail()" class="info-book-btn">Send code</button>
+      <hr class="down-hr">
+      <span class="copyright">Copyright © 2024–2025 Orbistay.com™. All rights reserved.</span>
+    </div>
+  </div>
+</div>
