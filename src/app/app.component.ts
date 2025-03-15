@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
       this.currentUserSubject.next(this.currentUser);
-      this.avatar = this.currentUser.avatarUrl;
+      this.avatar = `${this.currentUser.avatarUrl}?t=${new Date().getTime()}`;
       this.firstLetter$.next(this.getFirstLetter());
     } else {
       console.log('No user data found in localStorage');
@@ -74,8 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.intervalId = setInterval(() => {
       this.tokenSubscription = this.tokenService.refreshAccessToken().subscribe({
         next: (response) => {
-          console.log("update token", response);
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('token', response.accessToken);
         },
       });
     },180000);

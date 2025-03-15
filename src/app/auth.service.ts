@@ -10,7 +10,6 @@ import {TokenService} from './token.service';
 export class AuthService {
   private userSubject = new BehaviorSubject<any>(null)
   appUser: any;
-  jwtResponceDTO: any;
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
   currentUser: any = null;
@@ -80,11 +79,9 @@ export class AuthService {
 
           localStorage.removeItem('userData');
           localStorage.removeItem('token');
-          localStorage.removeItem('refreshToken');
 
           localStorage.setItem('userData', JSON.stringify(response.appUser));
-          localStorage.setItem('token', response.jwtResponseDTO.accessToken);
-          localStorage.setItem('refreshToken', response.jwtResponseDTO.refreshToken);
+          localStorage.setItem('token', response.accessTokenResponseDTO.accessToken);
 
           const user = JSON.parse(localStorage.getItem('userData') || '{}');
           console.log('User:', user);
@@ -93,16 +90,40 @@ export class AuthService {
           window.location.reload();
         },
         error: (error: any) => {
-          console.log('Error updating user info:', error);
+          if (error.error?.message?.includes("duplicate key value violates unique constraint") &&
+            error.error?.message?.includes("app_user_email_key")) {
+            alert("This email is already in use. Please enter a different email.");
+          } else {
+            console.log(error);
+            alert("An unexpected error occurred. Please try again later.");
+          }
         }
       });
-
   }
 
   updateUserData(userData: any) {
     this.currentUser = userData;
     this.currentUserSubject.next(this.currentUser);
     localStorage.setItem('userData', JSON.stringify(userData));
+  }
+
+  resetPassword() {
+
+  }
+
+  resetPasswordRequest() {
+
+  }
+
+  deleteBankCard(bankCardId: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.getToken()}`
+    });
+
+    return this.http.delete<any>(`${ApiUrls.DELETE_USER_BANK_CARD_URL}/${bankCardId}`, {
+      headers,
+      withCredentials: true
+    });
   }
 
   logOutUser() {
