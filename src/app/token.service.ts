@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, Observable, tap, throwError} from 'rxjs';
 import {ApiUrls} from './api-urls';
 
 @Injectable({
@@ -19,6 +19,12 @@ export class TokenService {
   }
 
   refreshAccessToken(): Observable<any> {
-    return this.http.post(`${ApiUrls.POST_UPDATE_ACCESS_TOKEN}`, {withCredentials: true});
+    return this.http.post(`${ApiUrls.POST_UPDATE_ACCESS_TOKEN}`, {}, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.error('Ошибка:', error);
+          return throwError(error);
+        })
+      );
   }
 }

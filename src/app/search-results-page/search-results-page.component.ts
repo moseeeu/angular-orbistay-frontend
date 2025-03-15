@@ -335,6 +335,8 @@ export class SearchResultsPageComponent {
       }
     };
 
+    localStorage.setItem('checkInTime', startDate);
+    localStorage.setItem('checkOutTime', endDate);
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
 
     localStorage.removeItem('filteredHotels');

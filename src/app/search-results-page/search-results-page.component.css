@@ -312,8 +312,9 @@
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 20%;
+  width: 28.25%;
   max-height: 300px;
+  margin-top: 1.5vh;
   overflow-y: auto;
 }
 
@@ -505,8 +506,8 @@ mat-calendar{
   border-radius: 4px;
 }
 .filters-fields input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
+  width: 1vw;
+  height: 1vw;
   border: 1px solid #D1D9E6;
   border-radius: 4px;
   cursor: pointer;

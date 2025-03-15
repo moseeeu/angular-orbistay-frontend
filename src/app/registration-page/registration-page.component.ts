@@ -20,7 +20,7 @@ export class RegistrationPageComponent {
   registrationResponse: any;
   token: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private appComponent: AppComponent) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   registerUser() {
     this.authService.registerUser(this.username, this.email, this.password)
@@ -35,7 +35,7 @@ export class RegistrationPageComponent {
             this.authService.getUserInfo().subscribe(
               data => {
                 console.log("This is user: ", data);
-                this.appComponent.updateUserData(data);
+                this.authService.updateUserData(data);
                 this.router.navigate(['']);
               }
             );

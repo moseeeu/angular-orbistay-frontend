@@ -13,8 +13,7 @@ import {AppComponent} from '../app.component';
 export class RedirectAuthenticationPageComponent {
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthService,
-              private appComponent: AppComponent) {}
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -25,7 +24,7 @@ export class RedirectAuthenticationPageComponent {
         localStorage.setItem('refreshToken', refreshToken);
         this.authService.getUserInfo().subscribe(
           data => {
-            this.appComponent.updateUserData(data);
+            this.authService.updateUserData(data);
             this.router.navigate(['']);
           }
         );
