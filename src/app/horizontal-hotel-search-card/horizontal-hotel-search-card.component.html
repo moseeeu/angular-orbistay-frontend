@@ -31,7 +31,7 @@
         <span id="reviews-count">{{hotel.reviewsCount + ' reviews'}}</span>
       </div>
       <div class="hotel-rate-number">
-        <span>{{ hotel.avgRate }}</span>
+        <span>{{ hotel.avgRate | number:'1.1-1'}}</span>
       </div>
     </div>
     <div class="hotel-price-container">

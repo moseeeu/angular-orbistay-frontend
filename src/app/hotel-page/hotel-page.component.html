@@ -25,15 +25,15 @@
             <h3 class="dropdown-header">Popular destinations nearby</h3>
             <div
               class="city-dropdown-item"
-              *ngFor="let city of filteredCities"
+              *ngFor="let city of popularDestinations"
               (click)="selectCity(city)">
               <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#004080" stroke-width="2">
                 <path d="M12 21c-4.5-4.5-7-7.5-7-10a7 7 0 0 1 14 0c0 2.5-2.5 5.5-7 10z" />
                 <circle cx="12" cy="11" r="3" />
               </svg>
               <div class="city-details">
-                <strong>{{ city.name }}</strong>
-                <small>{{ city.country }}</small>
+                <strong>{{ city.city }}</strong>
+                <small>{{ city.country.name }}</small>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
         </div>
 
         <!-- SEARCH BUTTON -->
-        <button routerLink="search" class="search-button">Search</button>
+        <button (click)="searchButtonClick()" class="search-button">Search</button>
       </div>
     </div>
   </div>
@@ -117,19 +117,26 @@
     </div>
 
     <div class="hotel-header" id="overview">
-      <h1>Test hotel name</h1>
+      <h1>{{ hotel.name }}</h1>
       <div class="hotel-headers-btns">
         <div class="hotel-headers-btns-small">
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
-            <path d="M17.5 8C18.8807 8 20 6.8807 20 5.5C20 4.11929 18.8807 3 17.5 3C16.1193 3 15 4.11929 15 5.5C15 6.8807 16.1193 8 17.5 8Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M6.5 14.5C7.8807 14.5 9 13.3807 9 12C9 10.6193 7.8807 9.5 6.5 9.5C5.1193 9.5 4 10.6193 4 12C4 13.3807 5.1193 14.5 6.5 14.5Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M15.0005 6.78711L8.66992 10.6226" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8.66992 13.2822L15.3401 17.2237" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M17.5 16C18.8807 16 20 17.1193 20 18.5C20 19.8807 18.8807 21 17.5 21C16.1193 21 15 19.8807 15 18.5C15 17.1193 16.1193 16 17.5 16Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
-          </svg></span>
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
-<path d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55ZM16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
-</svg></span>
+          <span class="copyURL-btn" (click)="copyPageUrl()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none">
+              <path d="M17.5 8C18.8807 8 20 6.8807 20 5.5C20 4.11929 18.8807 3 17.5 3C16.1193 3 15 4.11929 15 5.5C15 6.8807 16.1193 8 17.5 8Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M6.5 14.5C7.8807 14.5 9 13.3807 9 12C9 10.6193 7.8807 9.5 6.5 9.5C5.1193 9.5 4 10.6193 4 12C4 13.3807 5.1193 14.5 6.5 14.5Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M15.0005 6.78711L8.66992 10.6226" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.66992 13.2822L15.3401 17.2237" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17.5 16C18.8807 16 20 17.1193 20 18.5C20 19.8807 18.8807 21 17.5 21C16.1193 21 15 19.8807 15 18.5C15 17.1193 16.1193 16 17.5 16Z" stroke="#07195F" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="copyURL-btn" (click)="addToFavourites()">
+            <svg *ngIf="!isInFavourite" xmlns="http://www.w3.org/2000/svg" width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none">
+              <path d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55ZM16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
+            </svg>
+            <svg *ngIf="isInFavourite" xmlns="http://www.w3.org/2000/svg" width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none">
+              <path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
+            </svg>
+          </span>
         </div>
         <input type="button" value="Book now" (click)="scrollToSection('info')"/>
       </div>
@@ -137,33 +144,26 @@
 
     <div class="hotel-destination">
       <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
-      <span>Test hotel destination</span>
+      <span>{{ hotel.address }}</span>
     </div>
 
     <div class="hotels-visual">
       <div class="hotels-pictures">
         <div class="hotels-main-pictures">
-          <img class="hotel-main-pic" src="assets/hotel-test-room.jpg"/>
-          <div class="hotel-main-smaller-pics">
-              <img class="hotel-main-smaller-pic" src="assets/hotel-test-room.jpg"/>
-              <img class="hotel-main-smaller-pic" src="assets/hotel-test-room.jpg"/>
-          </div>
+          <img class="hotel-main-pic" src="{{hotel.imagesUrls[0]}}"/>
         </div>
         <div class="hotels-lower-pictures">
-          <img class="hotels-lower-picture" src="assets/hotel-test-room.jpg"/>
-          <img class="hotels-lower-picture" src="assets/hotel-test-room.jpg"/>
-          <img class="hotels-lower-picture" src="assets/hotel-test-room.jpg"/>
-          <img class="hotels-lower-picture" src="assets/hotel-test-room.jpg"/>
+          <img *ngFor="let image of hotelImages" class="hotels-lower-picture" [src]="image" />
         </div>
       </div>
       <div class="hotel-header-review">
         <div class="hotel-review-statistic">
           <div class="rating">
             <div class="rating-text">
-              <span>Very good</span>
-              <p>60 reviews</p>
+              <span style="margin-left: auto;">{{ hotelGrade }}</span>
+              <p>{{ hotel.reviewsCount }} reviews</p>
             </div>
-            <div class="rating-score">8.1</div>
+            <div class="rating-score">{{ hotel.avgRate | number:'1.1-1'}}</div>
           </div>
         </div>
         <hr>
@@ -172,58 +172,42 @@
             <span class="hotel-review-message-header">Guest who stayed here loved</span>
             <div class="hotel-review">
               <span class="hotel-review-date">18.04.2023</span>
-              <span class="hotel-review-comment">“Amazing high-level service, clean room, very friendly staff and unforgettable view from the roof-top bar!
-The breakfast was wonderfully tasty and the decoration of the restaurant was awe-inspiring. The hotel's décor is elegant, sophisticated creating ambiences like an art gallery. I highly recommend this hotel to anyone seeking a luxurious and unforgettable experience. It truly deserves all five stars!”
-</span>
+              <span class="hotel-review-comment">{{ reviews[0].content }}</span>
             </div>
             <div class="hotel-review-owner">
               <div class="account-panel">
                 <div class="photo-container">
-                  <img class="photo-icon" src="{{avatar}}"/>
+                  <img *ngIf="reviews[0].appUser.avatarUrl != null" class="photo-icon" src="{{reviews[0].appUser.avatarUrl}}" />
+                  <span style="font-weight: 700; font-size: 1vw;" *ngIf="reviews[0].appUser.avatarUrl == null">{{reviews[0].appUser.username?.[0]}}</span>
                 </div>
-                <p>{{currentUser.username}}</p>
-              </div>
-              <div class="review-owner-country">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1.5vw" height="1.5vw" viewBox="0 0 30 30" fill="none">
-                  <rect x="0.5" y="0.5" width="29" height="29" rx="14.5" fill="url(#pattern0_874_3819)" stroke="#F6FAF9"/>
-                  <defs>
-                    <pattern id="pattern0_874_3819" patternContentUnits="objectBoundingBox" width="1" height="1">
-                      <use xlink:href="#image0_874_3819" transform="translate(-0.01056) scale(0.01056 0.015625)"/>
-                    </pattern>
-                    <image id="image0_874_3819" width="127" height="69" xlink:href="data:image/png;base64,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"/>
-                  </defs>
-                </svg>
-                <span>USA</span>
+                <p>{{reviews[0].appUser.username}}</p>
               </div>
             </div>
-          </div>
-          <div class="hotel-review-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="22" viewBox="0 0 6 11" fill="none">
-              <path d="M1 9.5L5 5.5L1 1.5" stroke="#0C0C20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
           </div>
         </div>
       </div>
     </div>
 
     <div class="hotel-highlights">
-      <div class="highlight" *ngFor="let highlight of hotel_highlights">
-        <img src="assets/icons/blue-icons/{{highlight.icon}}" [alt]="highlight.name" />
-        <span>{{ highlight.name }}</span>
-      </div>
+      <ng-container *ngFor="let highlight of hotel_highlights">
+        <div class="highlight" *ngIf="checkHighlight(hotel.hotelHighlights, highlight.name)">
+          <img [src]="'assets/icons/blue-icons/' + highlight.icon" [alt]="highlight.name" />
+          <span>{{ highlight.name }}</span>
+        </div>
+      </ng-container>
     </div>
 
+
     <div class="hotel-description">
-      <span>Get the celebrity treatment with world-class service at The Dolder Grand Enjoying a privileged location in natural surroundings above Zurich, next to the cog railway station, The Dolder Grand offers a 4,000 m² spa, 2 award-winning restaurants, and free Wi-Fi access. All rooms have a flat-screen satellite TV and are equipped with bathrobes and slippers.
-
-They offer views over Zurich, Lake Zurich, the Alps, or the nearby forest. The exclusive Dolder Grand Spa (4,000 square metres) includes a large pool with panoramic views, a ladies’ and gentlemen’s spa, fitness facilities, 18 treatment rooms and 2 Spa Suites.
-
-It offers a wide selection of facials, massages and body rituals. In the 15 Gault Millau points awarded Saltz Restaurant and in The Bar, guests can enjoy modern international cuisine and a wide selection of fine wines and drinks. Innovative gourmet dishes are served in The Restaurant, which has been awarded 19 Gault Millau points and 2 Michelin stars. The Japanese restaurant Mikuriya with 16 Gault Millau points creats an experience for all the senses. For vegan and vegitarian dishes, the garden restaurant blooms serves up a relaxing outdoor dining experience to savour and has been awarded with 14 Gault Millau points. The Dolder Hotel AG is Silver Certified by EarthCheck.</span>
+      <span>{{hotel.fullDesc}}</span>
       <div class="hotel-interaction-buttons">
         <button class="hotel-book-btn" (click)="scrollToSection('info')">Book now</button>
-        <button class="hotel-favourite-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2vw" height="2.4vh" viewBox="0 0 24 24" fill="none">
+        <button class="hotel-favourite-btn" (click)="addToFavourites()">
+          <svg *ngIf="!isInFavourite" xmlns="http://www.w3.org/2000/svg" width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none">
             <path d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55ZM16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
+          </svg>
+          <svg *ngIf="isInFavourite" xmlns="http://www.w3.org/2000/svg" width="1.2vw" height="1.2vw" viewBox="0 0 24 24" fill="none">
+            <path d="M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z" fill="#07195F"/>
           </svg>
           <span>Add to favourites</span>
         </button>
@@ -233,63 +217,39 @@ It offers a wide selection of facials, massages and body rituals. In the 15 Gaul
     <div class="hotel-facilities" id="facilities">
       <span>Facilities</span>
       <div class="hotel-facilities-list">
-        <div class="facility" *ngFor="let facility of hotel_facilities">
-          <img src="assets/icons/orange-icons/{{facility.icon}}" [alt]="facility.name" />
+        <div class="facility" *ngFor="let facility of getFilteredFacilities()">
+          <img src="assets/icons/orange-icons/{{ facility.icon }}" [alt]="facility.name" />
           <span>{{ facility.name }}</span>
         </div>
       </div>
     </div>
 
+
     <div class="hotel-availability" id="info">
       <span class="hotel-availability-main-header">Availability</span>
       <div class="availability-search-bar">
-        <div class="search-field" (click)="picker.open()">
+        <div class="search-field-rooms">
           <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
             <path d="M9.85714 3C10.8054 3 11.5714 3.67031 11.5714 4.5V6H18.4286V4.5C18.4286 3.67031 19.1946 3 20.1429 3C21.0911 3 21.8571 3.67031 21.8571 4.5V6H24.4286C25.8482 6 27 7.00781 27 8.25V10.5H3V8.25C3 7.00781 4.15179 6 5.57143 6H8.14286V4.5C8.14286 3.67031 8.90893 3 9.85714 3ZM3 12H27V24.75C27 25.9922 25.8482 27 24.4286 27H5.57143C4.15179 27 3 25.9922 3 24.75V12ZM6.42857 15.75V17.25C6.42857 17.6625 6.81429 18 7.28571 18H9C9.47143 18 9.85714 17.6625 9.85714 17.25V15.75C9.85714 15.3375 9.47143 15 9 15H7.28571C6.81429 15 6.42857 15.3375 6.42857 15.75ZM13.2857 15.75V17.25C13.2857 17.6625 13.6714 18 14.1429 18H15.8571C16.3286 18 16.7143 17.6625 16.7143 17.25V15.75C16.7143 15.3375 16.3286 15 15.8571 15H14.1429C13.6714 15 13.2857 15.3375 13.2857 15.75ZM21 15C20.5286 15 20.1429 15.3375 20.1429 15.75V17.25C20.1429 17.6625 20.5286 18 21 18H22.7143C23.1857 18 23.5714 17.6625 23.5714 17.25V15.75C23.5714 15.3375 23.1857 15 22.7143 15H21ZM6.42857 21.75V23.25C6.42857 23.6625 6.81429 24 7.28571 24H9C9.47143 24 9.85714 23.6625 9.85714 23.25V21.75C9.85714 21.3375 9.47143 21 9 21H7.28571C6.81429 21 6.42857 21.3375 6.42857 21.75ZM14.1429 21C13.6714 21 13.2857 21.3375 13.2857 21.75V23.25C13.2857 23.6625 13.6714 24 14.1429 24H15.8571C16.3286 24 16.7143 23.6625 16.7143 23.25V21.75C16.7143 21.3375 16.3286 21 15.8571 21H14.1429ZM20.1429 21.75V23.25C20.1429 23.6625 20.5286 24 21 24H22.7143C23.1857 24 23.5714 23.6625 23.5714 23.25V21.75C23.5714 21.3375 23.1857 21 22.7143 21H21C20.5286 21 20.1429 21.3375 20.1429 21.75Z" fill="#9E9EA6"/>
           </svg>
-          <div class="calendar">
-            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-              <input matStartDate formControlName="start" placeholder="Start date">
-              <input matEndDate formControlName="end" placeholder="End date">
-            </mat-date-range-input>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1vw" height="1vw" viewBox="0 0 16 10" fill="none">
-            <path d="M2 2L8 8L14 2" stroke="#0C0C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <input type="text" min="0" max="23" step="1" placeholder="Enter check in time" [(ngModel)]="checkInTime"/>
+        </div>
+        <div class="search-field-rooms">
+          <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M9.85714 3C10.8054 3 11.5714 3.67031 11.5714 4.5V6H18.4286V4.5C18.4286 3.67031 19.1946 3 20.1429 3C21.0911 3 21.8571 3.67031 21.8571 4.5V6H24.4286C25.8482 6 27 7.00781 27 8.25V10.5H3V8.25C3 7.00781 4.15179 6 5.57143 6H8.14286V4.5C8.14286 3.67031 8.90893 3 9.85714 3ZM3 12H27V24.75C27 25.9922 25.8482 27 24.4286 27H5.57143C4.15179 27 3 25.9922 3 24.75V12ZM6.42857 15.75V17.25C6.42857 17.6625 6.81429 18 7.28571 18H9C9.47143 18 9.85714 17.6625 9.85714 17.25V15.75C9.85714 15.3375 9.47143 15 9 15H7.28571C6.81429 15 6.42857 15.3375 6.42857 15.75ZM13.2857 15.75V17.25C13.2857 17.6625 13.6714 18 14.1429 18H15.8571C16.3286 18 16.7143 17.6625 16.7143 17.25V15.75C16.7143 15.3375 16.3286 15 15.8571 15H14.1429C13.6714 15 13.2857 15.3375 13.2857 15.75ZM21 15C20.5286 15 20.1429 15.3375 20.1429 15.75V17.25C20.1429 17.6625 20.5286 18 21 18H22.7143C23.1857 18 23.5714 17.6625 23.5714 17.25V15.75C23.5714 15.3375 23.1857 15 22.7143 15H21ZM6.42857 21.75V23.25C6.42857 23.6625 6.81429 24 7.28571 24H9C9.47143 24 9.85714 23.6625 9.85714 23.25V21.75C9.85714 21.3375 9.47143 21 9 21H7.28571C6.81429 21 6.42857 21.3375 6.42857 21.75ZM14.1429 21C13.6714 21 13.2857 21.3375 13.2857 21.75V23.25C13.2857 23.6625 13.6714 24 14.1429 24H15.8571C16.3286 24 16.7143 23.6625 16.7143 23.25V21.75C16.7143 21.3375 16.3286 21 15.8571 21H14.1429ZM20.1429 21.75V23.25C20.1429 23.6625 20.5286 24 21 24H22.7143C23.1857 24 23.5714 23.6625 23.5714 23.25V21.75C23.5714 21.3375 23.1857 21 22.7143 21H21C20.5286 21 20.1429 21.3375 20.1429 21.75Z" fill="#9E9EA6"/>
           </svg>
+          <input type="text" min="0" max="23" step="1"  placeholder="Enter check out time" [(ngModel)]="checkOutTime"/>
         </div>
         <!-- GUEST -->
-        <div class="search-field" (click)="togglePeopleDropdown()">
+        <div class="search-field-rooms" (click)="togglePeopleDropdown()">
           <svg class="search-field-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
             <path d="M14.5 15C16.0913 15 17.6174 14.3679 18.7426 13.2426C19.8679 12.1174 20.5 10.5913 20.5 9C20.5 7.4087 19.8679 5.88258 18.7426 4.75736C17.6174 3.63214 16.0913 3 14.5 3C12.9087 3 11.3826 3.63214 10.2574 4.75736C9.13214 5.88258 8.5 7.4087 8.5 9C8.5 10.5913 9.13214 12.1174 10.2574 13.2426C11.3826 14.3679 12.9087 15 14.5 15ZM12.3578 17.25C7.74063 17.25 4 20.9906 4 25.6078C4 26.3766 4.62344 27 5.39219 27H23.6078C24.3766 27 25 26.3766 25 25.6078C25 20.9906 21.2594 17.25 16.6422 17.25H12.3578Z" fill="#9E9EA6"/>
           </svg>
-          <div class="dropdown">{{ adults }} adults · {{ children }} children</div>
-          <div class="dropdown-content" [class.show]="isPeopleDropdownOpen" (click)="$event.stopPropagation()">
-            <div class="dropdown-item">
-              <span>Adults</span>
-              <div class="counter">
-                <button (click)="changeCount('adults', -1); $event.stopPropagation()">−</button>
-                <span>{{ adults }}</span>
-                <button (click)="changeCount('adults', 1); $event.stopPropagation()">+</button>
-              </div>
-            </div>
-
-            <div class="dropdown-item">
-              <span>Children</span>
-              <div class="counter">
-                <button (click)="changeCount('children', -1); $event.stopPropagation()">−</button>
-                <span>{{ children }}</span>
-                <button (click)="changeCount('children', 1); $event.stopPropagation()">+</button>
-              </div>
-            </div>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1vw" height="1vw" viewBox="0 0 16 10" fill="none">
-            <path d="M2 2L8 8L14 2" stroke="#0C0C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <input type="text" step="1"  placeholder="Enter people count" [(ngModel)]="roomCapacity"/>
         </div>
 
         <!-- SEARCH BUTTON -->
-        <button routerLink="search" class="availability-search-button">Change search</button>
+        <button class="availability-search-button" (click)="filterRoomsClick()">Search rooms</button>
       </div>
 
       <div class="hotel-apartments-list">
@@ -298,13 +258,13 @@ It offers a wide selection of facials, massages and body rituals. In the 15 Gaul
           <span style="width: 25%; border-left: 1px solid rgba(217, 217, 217, 1); border-right: 1px solid rgba(217, 217, 217, 1);" class="hotel-apartments-list-header">Number of quests</span>
           <span style="width: 35%; border-left: 1px solid rgba(217, 217, 217, 1); border-radius: 0 4px 0 0;" class="hotel-apartments-list-header">Today's price</span>
         </div>
-        <div class="hotel-apartment-info">
+        <div class="hotel-apartment-info" *ngFor="let room of hotelRoomsList">
           <div class="hotel-apartment-info-type">
-            <span class="info-type-header" (click)="openModal()">One-Bedroom Apartment-Kurhausstrasse 65</span>
-            <div class="info-bedroom">
-              <span class="bedroom-name">Bedroom 1:</span>
-              <span class="bed-count">double bed</span>
-              <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span class="info-type-header" (click)="openModal(room)">{{ room.name }}</span>
+            <div class="info-bedroom" *ngFor="let bedroom of room.roomBedLinks; let i = index">
+              <span class="bedroom-name">Bedroom {{ i + 1 }}:</span>
+              <span class="bed-count">{{ bedroom.bedType.toLowerCase() }} bed</span>
+              <svg *ngIf="bedroom.bedType.toLowerCase() == 'double'" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.40039 7.875C5.40039 6.83944 6.20628 6 7.20039 6H22.8004C23.7945 6 24.6004 6.83944 24.6004 7.875V14.75H5.40039V7.875Z" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M4.19922 22.25V24.75" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M25.8008 22.25V24.75" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -312,13 +272,22 @@ It offers a wide selection of facials, massages and body rituals. In the 15 Gaul
                 <path d="M21.25 10H17.75C16.7835 10 16 11.3431 16 13V15H23V13C23 11.3431 22.2165 10 21.25 10Z" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M3 16.625C3 15.5894 3.80589 14.75 4.8 14.75H25.2C26.1941 14.75 27 15.5894 27 16.625V22.25H3V16.625Z" fill="#07195F" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
+              <svg *ngIf="bedroom.bedType.toLowerCase() == 'single'" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M5 7.5C5 6.46444 5.83947 5.625 6.875 5.625H23.125C24.1606 5.625 25 6.46444 25 7.5V14.375H5V7.5Z" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.75 21.875V24.375" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26.25 21.875V24.375" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18.125 11.25H11.875C10.8394 11.25 10 12.0894 10 13.125V14.375H20V13.125C20 12.0894 19.1606 11.25 18.125 11.25Z" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2.5 16.25C2.5 15.2144 3.33947 14.375 4.375 14.375H25.625C26.6606 14.375 27.5 15.2144 27.5 16.25V21.875H2.5V16.25Z" fill="#07195F" stroke="#07195F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
             <div class="room-facilities">
               <div class="room-facilities-list">
-                <div class="facility" *ngFor="let facility of hotel_facilities">
-                  <img src="assets/icons/gray-icons/{{facility.icon}}" [alt]="facility.name" />
-                  <span>{{ facility.name }}</span>
-                </div>
+                <ng-container *ngFor="let facility of hotel_facilities">
+                  <div class="facility" *ngIf="checkFacility(room.roomFacilityLinks, facility.name)">
+                    <img [src]="'assets/icons/gray-icons/' + facility.icon" [alt]="facility.name" />
+                    <span>{{ facility.name }}</span>
+                  </div>
+                </ng-container>
               </div>
             </div>
             <hr>
@@ -330,14 +299,17 @@ It offers a wide selection of facials, massages and body rituals. In the 15 Gaul
             </div>
           </div>
           <div class="hotel-apartment-info-quests">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="3vh" viewBox="0 0 448 512"><path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/></svg>
+            <ng-container *ngFor="let _ of [].constructor(room.capacity)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5vw" height="3vh" viewBox="0 0 448 512">
+                <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"/>
+              </svg>
+            </ng-container>
           </div>
           <div class="hotel-apartment-info-price">
             <div class="price-container">
-              <span class="old-price">UAH 30 175</span>
-              <span class="new-price">UAH 15,084</span>
+              <span class="new-price">USD {{ room.costPerNight }}</span>
             </div>
-            <button class="info-book-btn" routerLink="/booking">Book now</button>
+            <button class="info-book-btn" (click)="viewRoomDetails(room,hotel)">Book now</button>
           </div>
         </div>
       </div>
@@ -346,142 +318,76 @@ It offers a wide selection of facials, massages and body rituals. In the 15 Gaul
     <div class="hotel-guest-reviews" id="reviews">
       <span class="hotel-guest-main-header">Guest reviews</span>
       <div class="quest-rating">
-        <div class="quest-rating-score">8.6</div>
+        <div class="quest-rating-score">{{ hotel.avgRate | number:'1.1-1' }}</div>
         <div class="quest-rating-score-text-container">
-          <div class="quest-rating-text">Very good</div>
+          <div class="quest-rating-text">{{ hotelGrade }}</div>
           <div>&bull;</div>
-          <span class="quest-reviews">89 reviews</span>
+          <span class="quest-reviews">{{ hotel.reviewsCount }} reviews</span>
         </div>
       </div>
-      <div class="hotel-reviews-list">
-        <div class="quest-review">
-          <div class="review-header">
-            <div class="review-header-profile">
-              <div class="review-owner">
-                <div class="review-photo-container">
-                  <img class="review-photo-icon" src="{{avatar}}"/>
-                </div>
-                <div class="user-info-container">
-                  <p>{{currentUser.username}}</p>
-                  <div class="review-owner-country">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" fill="none">
-                      <rect x="0.5" y="0.5" width="15" height="15" rx="14.5" fill="url(#pattern0_874_3819)" stroke="#F6FAF9"/>
-                      <defs>
-                        <pattern id="pattern0_874_3819" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_874_3819" transform="translate(-0.01056) scale(0.01056 0.015625)"/>
-                        </pattern>
-                        <image id="image0_874_3819" width="127" height="69" xlink:href="data:image/png;base64,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"/>
-                      </defs>
-                    </svg>
-                    <span class="review-country-name">USA</span>
+      <div class="hotel-reviews-container">
+        <button class="nav-button left-button" (click)="prevReviews()" [disabled]="currentIndex === 0">
+          &#10094;
+        </button>
+
+        <div class="hotel-reviews-list">
+          <div class="quest-review" *ngFor="let review of getVisibleReviews()">
+            <div class="review-header">
+              <div class="review-header-profile">
+                <div class="review-owner">
+                  <div class="review-photo-container">
+                    <img *ngIf="review.appUser.avatarUrl != null" class="review-photo-icon" src="{{review.appUser.avatarUrl}}" />
+                    <span style="font-weight: 700; font-size: 1vw;" *ngIf="review.appUser.avatarUrl == null">{{review.appUser.username?.[0]}}</span>
+                  </div>
+                  <div class="user-info-container">
+                    <p>{{review.appUser.username}}</p>
                   </div>
                 </div>
+                <span class="review-date">{{ review.createdAt | date:'dd.MM.yyyy' }}</span>
               </div>
-              <span class="review-date">18.01.2025</span>
             </div>
-          </div>
 
-          <span class="review-message">
-“Amazing high-level service, clean room, very friendly staff and unforgettable view from the roof-top bar!
-The breakfast was wonderfully tasty and the decoration of the restaurant was awe-inspiring. The hotel's décor is elegant, sophisticated creating ambiences like an art gallery.” 
+            <span class="review-message">{{ review.content }}</span>
 
-          </span>
+            <span class="open-modal-review" (click)="openReviewModal(review)">Read more</span>
 
-          <div class="review-tags">
-            <div class="review-tag">
-              <span>Clean room</span>
-            </div>
-            <div class="review-tag">
-              <span>Price</span>
-            </div>
-          </div>
-        </div>
-        <div class="quest-review">
-          <div class="review-header">
-            <div class="review-header-profile">
-              <div class="review-owner">
-                <div class="review-photo-container">
-                  <img class="review-photo-icon" src="{{avatar}}"/>
-                </div>
-                <div class="user-info-container">
-                  <p>{{currentUser.username}}</p>
-                  <div class="review-owner-country">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" fill="none">
-                      <rect x="0.5" y="0.5" width="15" height="15" rx="14.5" fill="url(#pattern0_874_3819)" stroke="#F6FAF9"/>
-                      <defs>
-                        <pattern id="pattern0_874_3819" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_874_3819" transform="translate(-0.01056) scale(0.01056 0.015625)"/>
-                        </pattern>
-                        <image id="image0_874_3819" width="127" height="69" xlink:href="data:image/png;base64,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"/>
-                      </defs>
-                    </svg>
-                    <span class="review-country-name">USA</span>
-                  </div>
-                </div>
+            <div class="review-tags">
+              <div class="review-tag" *ngIf="review.pros != null">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clip-path="url(#clip0_1206_6133)">
+                    <path d="M18.125 10C18.125 7.84512 17.269 5.77849 15.7452 4.25476C14.2215 2.73102 12.1549 1.875 10 1.875C7.84512 1.875 5.77849 2.73102 4.25476 4.25476C2.73102 5.77849 1.875 7.84512 1.875 10C1.875 12.1549 2.73102 14.2215 4.25476 15.7452C5.77849 17.269 7.84512 18.125 10 18.125C12.1549 18.125 14.2215 17.269 15.7452 15.7452C17.269 14.2215 18.125 12.1549 18.125 10ZM0 10C0 7.34784 1.05357 4.8043 2.92893 2.92893C4.8043 1.05357 7.34784 0 10 0C12.6522 0 15.1957 1.05357 17.0711 2.92893C18.9464 4.8043 20 7.34784 20 10C20 12.6522 18.9464 15.1957 17.0711 17.0711C15.1957 18.9464 12.6522 20 10 20C7.34784 20 4.8043 18.9464 2.92893 17.0711C1.05357 15.1957 0 12.6522 0 10ZM6.9375 12.4258C7.53125 13.0664 8.54688 13.75 10 13.75C11.4531 13.75 12.4688 13.0664 13.0625 12.4258C13.4141 12.0469 14.0078 12.0195 14.3867 12.3711C14.7656 12.7227 14.793 13.3164 14.4414 13.6953C13.582 14.625 12.0977 15.625 10.0039 15.625C7.91016 15.625 6.42188 14.6289 5.56641 13.6953C5.21484 13.3164 5.23828 12.7227 5.62109 12.3711C6.00391 12.0195 6.59375 12.043 6.94531 12.4258H6.9375ZM5.64062 8.125C5.64062 7.79348 5.77232 7.47554 6.00674 7.24112C6.24116 7.0067 6.5591 6.875 6.89062 6.875C7.22215 6.875 7.54009 7.0067 7.77451 7.24112C8.00893 7.47554 8.14062 7.79348 8.14062 8.125C8.14062 8.45652 8.00893 8.77446 7.77451 9.00888C7.54009 9.2433 7.22215 9.375 6.89062 9.375C6.5591 9.375 6.24116 9.2433 6.00674 9.00888C5.77232 8.77446 5.64062 8.45652 5.64062 8.125ZM13.1406 6.875C13.4721 6.875 13.7901 7.0067 14.0245 7.24112C14.2589 7.47554 14.3906 7.79348 14.3906 8.125C14.3906 8.45652 14.2589 8.77446 14.0245 9.00888C13.7901 9.2433 13.4721 9.375 13.1406 9.375C12.8091 9.375 12.4912 9.2433 12.2567 9.00888C12.0223 8.77446 11.8906 8.45652 11.8906 8.125C11.8906 7.79348 12.0223 7.47554 12.2567 7.24112C12.4912 7.0067 12.8091 6.875 13.1406 6.875Z" fill="#07195F"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1206_6133">
+                      <rect width="20" height="20" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>{{ review.pros }}</span>
               </div>
-              <span class="review-date">18.01.2025</span>
-            </div>
-          </div>
-
-          <span class="review-message">
-“Amazing high-level service, clean room, very friendly staff and unforgettable view from the roof-top bar!
-The breakfast was wonderfully tasty and the decoration of the restaurant was awe-inspiring. The hotel's décor is elegant, sophisticated creating ambiences like an art gallery.” 
-
-          </span>
-
-          <div class="review-tags">
-            <div class="review-tag">
-              <span>Clean room</span>
-            </div>
-            <div class="review-tag">
-              <span>Price</span>
-            </div>
-          </div>
-        </div>
-        <div class="quest-review">
-          <div class="review-header">
-            <div class="review-header-profile">
-              <div class="review-owner">
-                <div class="review-photo-container">
-                  <img class="review-photo-icon" src="{{avatar}}"/>
-                </div>
-                <div class="user-info-container">
-                  <p>{{currentUser.username}}</p>
-                  <div class="review-owner-country">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" fill="none">
-                      <rect x="0.5" y="0.5" width="15" height="15" rx="14.5" fill="url(#pattern0_874_3819)" stroke="#F6FAF9"/>
-                      <defs>
-                        <pattern id="pattern0_874_3819" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_874_3819" transform="translate(-0.01056) scale(0.01056 0.015625)"/>
-                        </pattern>
-                        <image id="image0_874_3819" width="127" height="69" xlink:href="data:image/png;base64,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"/>
-                      </defs>
-                    </svg>
-                    <span class="review-country-name">USA</span>
-                  </div>
-                </div>
+              <div class="review-tag" *ngIf="review.cons != null">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clip-path="url(#clip0_1206_6135)">
+                    <path d="M18.125 10C18.125 7.84512 17.269 5.77849 15.7452 4.25476C14.2215 2.73102 12.1549 1.875 10 1.875C7.84512 1.875 5.77849 2.73102 4.25476 4.25476C2.73102 5.77849 1.875 7.84512 1.875 10C1.875 12.1549 2.73102 14.2215 4.25476 15.7452C5.77849 17.269 7.84512 18.125 10 18.125C12.1549 18.125 14.2215 17.269 15.7452 15.7452C17.269 14.2215 18.125 12.1549 18.125 10ZM0 10C0 7.34784 1.05357 4.8043 2.92893 2.92893C4.8043 1.05357 7.34784 0 10 0C12.6522 0 15.1957 1.05357 17.0711 2.92893C18.9464 4.8043 20 7.34784 20 10C20 12.6522 18.9464 15.1957 17.0711 17.0711C15.1957 18.9464 12.6522 20 10 20C7.34784 20 4.8043 18.9464 2.92893 17.0711C1.05357 15.1957 0 12.6522 0 10ZM6.82031 15.0039C6.64453 15.4922 6.10938 15.7422 5.62109 15.5664C5.13281 15.3906 4.88281 14.8555 5.05859 14.3672C5.73828 12.4766 7.76953 11.25 10 11.25C12.2305 11.25 14.2617 12.4766 14.9453 14.3711C15.1211 14.8594 14.8672 15.3945 14.3828 15.5703C13.8984 15.7461 13.3594 15.4922 13.1836 15.0078C12.8203 14.0039 11.6094 13.125 10 13.125C8.39062 13.125 7.17969 14.0039 6.82031 15.0039ZM5.64062 8.125C5.64062 7.79348 5.77232 7.47554 6.00674 7.24112C6.24116 7.0067 6.5591 6.875 6.89062 6.875C7.22215 6.875 7.54009 7.0067 7.77451 7.24112C8.00893 7.47554 8.14062 7.79348 8.14062 8.125C8.14062 8.45652 8.00893 8.77446 7.77451 9.00888C7.54009 9.2433 7.22215 9.375 6.89062 9.375C6.5591 9.375 6.24116 9.2433 6.00674 9.00888C5.77232 8.77446 5.64062 8.45652 5.64062 8.125ZM13.1406 6.875C13.4721 6.875 13.7901 7.0067 14.0245 7.24112C14.2589 7.47554 14.3906 7.79348 14.3906 8.125C14.3906 8.45652 14.2589 8.77446 14.0245 9.00888C13.7901 9.2433 13.4721 9.375 13.1406 9.375C12.8091 9.375 12.4912 9.2433 12.2567 9.00888C12.0223 8.77446 11.8906 8.45652 11.8906 8.125C11.8906 7.79348 12.0223 7.47554 12.2567 7.24112C12.4912 7.0067 12.8091 6.875 13.1406 6.875Z" fill="#A93F05"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1206_6135">
+                      <rect width="20" height="20" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span>{{ review.cons }}</span>
               </div>
-              <span class="review-date">18.01.2025</span>
             </div>
-          </div>
-
-          <span class="review-message">
-“Amazing high-level service, clean room, very friendly staff and unforgettable view from the roof-top bar!
-The breakfast was wonderfully tasty and the decoration of the restaurant was awe-inspiring. The hotel's décor is elegant, sophisticated creating ambiences like an art gallery.” 
-
-          </span>
-
-          <div class="review-tags">
-            <div class="review-tag">
-              <span>Clean room</span>
-            </div>
-            <div class="review-tag">
-              <span>Price</span>
-            </div>
-          </div>
+            <app-guest-review-modal-window *ngIf="selectedReview" [review]="selectedReview" (closeModal)="closeReviewModal()"></app-guest-review-modal-window>
         </div>
+
+        <button class="nav-button right-button" (click)="nextReviews()" [disabled]="currentIndex + reviewsPerPage >= reviews.length">
+          &#10095;
+        </button>
       </div>
     </div>
   </div>
 </div>
-<app-hotel-room-modal-page *ngIf="isModalOpen" (close)="closeModal()"></app-hotel-room-modal-page>
+<app-hotel-room-modal-page *ngIf="isModalOpen" [room]="selectedRoom" (close)="closeModal()"></app-hotel-room-modal-page>
+</div>

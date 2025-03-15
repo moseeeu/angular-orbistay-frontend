@@ -54,7 +54,17 @@
   background-color: white;
   cursor: pointer;
 }
-
+.search-field-rooms {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  text-align: left;
+  border-radius: 4px;
+  padding-right: 10px;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+}
 .search-field label {
   font-weight: 700;
   font-size: 14px;
@@ -291,7 +301,7 @@
   appearance: none;
   width: 100%;
   padding: 10px;
-  font-size: 17px;
+  font-size: calc(2px + 0.6vw);
   border: none;
   outline: none;
   color: #002f5b;
@@ -310,8 +320,9 @@
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 20%;
+  width: 28.25%;
   max-height: 300px;
+  margin-top: 1.5vh;
   overflow-y: auto;
 }
 
@@ -542,6 +553,7 @@ mat-calendar{
   display: flex;
   flex-direction: column;
   width: 70%;
+  height: 100%;
 }
 
 .hotels-main-pictures {
@@ -549,30 +561,17 @@ mat-calendar{
   flex-direction: row;
   gap: 0.5vw;
   align-items: stretch;
+  height: 100%;
+  overflow: hidden;
 }
 
 .hotel-main-pic {
-  display: flex;
-  width: 70%;
-  height: auto;
-  border-radius: 4px;
-  object-fit: cover;
-}
-
-.hotel-main-smaller-pics {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 100%;
-  gap: 0.5vw;
-}
-
-.hotel-main-smaller-pic {
   width: 100%;
-  height: 50%;
+  height: 500px;
   border-radius: 4px;
   object-fit: cover;
 }
+
 .hotels-lower-pictures {
   display: flex;
   flex-direction: row;
@@ -580,15 +579,18 @@ mat-calendar{
   justify-content: space-around;
   margin-top: 0.5vw;
   gap: 1.5%;
-  height: calc(50% - 0.5vw);
+  height: 150px;
 }
 
 .hotels-lower-picture {
-  width: calc(25% - 0.5vw);
+  flex: 1;
+  max-width: 18%;
   height: 100%;
-  border-radius: 4px;
   object-fit: cover;
+  border-radius: 4px;
+  overflow: hidden;
 }
+
 .hotel-header-review {
   width: 30%;
   border: 2px solid rgba(230, 235, 242, 1);
@@ -613,7 +615,7 @@ mat-calendar{
 .rating-score {
   width: 2vw;
   height: 4vh;
-  font-size: calc(5px + 0.8vw);
+  font-size: calc(5px + 0.6vw);
   font-weight: 700;
   background-color: #07195F;
   color: #fff;
@@ -663,7 +665,7 @@ mat-calendar{
 .hotel-review {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   padding: 0.5vw;
 }
 .hotel-review-date {
@@ -875,7 +877,7 @@ mat-calendar{
 .availability-search-bar {
   display: flex;
   gap: 5px;
-  width: 60%;
+  width: 80%;
   height: 80px;
   background: #a93f05;
   border-radius: 4px;
@@ -899,7 +901,25 @@ mat-calendar{
 .availability-search-button:hover {
   background-color: #04437e;
 }
-
+.search-field-rooms input {
+  height: 100%;
+  width: 80%;
+  margin-left: auto;
+  border: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px;
+  font-size: calc(2px + 0.6vw);
+  border: none;
+  outline: none;
+  color: #002f5b;
+  font-weight: 600;
+}
+.search-field-rooms input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+}
 .hotel-apartments-list {
   display: flex;
   flex-direction: column;
@@ -942,11 +962,12 @@ mat-calendar{
 }
 .hotel-apartment-info-quests {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 25%;
   border-right: 1px solid rgba(217, 217, 217, 1);
   border-left: 1px solid rgba(217, 217, 217, 1);
   padding: 2vh 1vw 4vh 1vw;
+  gap: 0.5vw;
 }
 .hotel-apartment-info-price {
   display: flex;
@@ -1081,7 +1102,7 @@ mat-calendar{
 .quest-rating-score {
   width: 2vw;
   height: 4vh;
-  font-size: calc(5px + 0.8vw);
+  font-size: calc(5px + 0.6vw);
   font-weight: 700;
   background-color: #07195F;
   color: #fff;
@@ -1110,7 +1131,7 @@ mat-calendar{
   display: flex;
   flex-direction: column;
   width: 33%;
-  height: 35vh;
+  height: 25vh;
   border: 2px solid rgba(230, 235, 242, 1);
   border-radius: 4px;
   padding: 2vh 1vw 2vh 1vw;
@@ -1126,6 +1147,11 @@ mat-calendar{
   flex-direction: row;
   gap: 0.5vw;
   width: 100%;
+}
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
 .user-info-container p {
   margin: 0;
@@ -1169,14 +1195,24 @@ mat-calendar{
   font-size: calc(4px + 0.4vw);
 }
 .review-date {
+  display:flex;
+  flex-direction: column;
   color: rgba(85, 85, 99, 1);
   font-size: calc(5px + 0.4vw);
   margin-left: auto;
+  align-self: center;
 }
 .review-message {
   width: 100%;
   color: rgba(12, 12, 32, 1);
   font-size: calc(5px + 0.5vw);
+  max-height: 5vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  position: relative;
 }
 .review-tags {
   display: flex;
@@ -1192,4 +1228,77 @@ mat-calendar{
 .review-tag span {
   color: rgba(12, 12, 32, 1);
   font-size: calc(4px + 0.5vw);
+}
+.hotel-reviews-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .hotel-reviews-list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 0.5vw;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(217, 217, 217, 1);
+    color: rgba(12, 12, 32, 1);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    &:hover {
+      background: rgb(119, 119, 119, 0.4);
+    }
+
+    &:disabled {
+      background: rgba(213, 213, 213, 0.3);
+      cursor: not-allowed;
+    }
+  }
+
+  .left-button {
+    left: -20px;
+  }
+
+  .right-button {
+    right: -20px;
+  }
+}
+.open-modal-review {
+  color: rgba(169, 63, 5, 1);
+  font-weight: 600;
+  font-size: calc(5px + 0.5vw);
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+}
+.open-modal-review:hover {
+  color: rgb(126, 48, 4);
+}
+
+.copyURL-btn {
+  transition: ease-in-out 0.2s;
+  cursor: pointer;
+  padding: 0.3vw;
+  border-radius: 100%;
+}
+.copyURL-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
