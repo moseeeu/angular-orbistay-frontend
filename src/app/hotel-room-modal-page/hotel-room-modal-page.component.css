@@ -45,7 +45,7 @@
 
 .main-photo {
   width: 100%;
-  height: auto;
+  height: 500px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -85,26 +85,15 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: flex-start;
+  gap: 0.5vw;
 }
 
 .thumbnail {
-  width: 25%;
-  height: 80px;
+  width: 23.85%;
+  height: 100px;
   border-radius: 4px;
   object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.2s ease, border 0.2s ease;
-  border: 2px solid transparent;
-  box-sizing: border-box;
 }
-
-/* Ховер и активная миниатюра */
-.thumbnail:hover,
-.thumbnail.active {
-  transform: scale(1.05);
-  border: 2px solid #007BFF;
-}
-
 .room-description {
   width: 40%;
   display: flex;

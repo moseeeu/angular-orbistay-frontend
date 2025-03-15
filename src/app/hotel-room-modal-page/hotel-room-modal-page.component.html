@@ -2,22 +2,19 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <div class="photo-container">
       <div class="main-photo-wrapper">
-        <button class="nav-button prev-button">&#10094;</button>
-        <img class="main-photo" src="assets/hotel-test-room.jpg" alt="Hotel Main Photo">
-        <button class="nav-button next-button">&#10095;</button>
+        <button class="nav-button prev-button" (click)="changeImage(room, -1)">&#10094;</button>
+        <img class="main-photo" [src]="room.images[currentImageIndex]" alt="Hotel Main Photo">
+        <button class="nav-button next-button" (click)="changeImage(room, 1)">&#10095;</button>
       </div>
 
+
       <div class="thumbnail-container">
-        <img class="thumbnail" src="assets/hotel-test-room.jpg" alt="Thumbnail 1">
-        <img class="thumbnail" src="assets/hotel-test-room.jpg" alt="Thumbnail 2">
-        <img class="thumbnail" src="assets/hotel-test-room.jpg" alt="Thumbnail 3">
-        <img class="thumbnail" src="assets/hotel-test-room.jpg" alt="Thumbnail 4">
-        <img class="thumbnail" src="assets/hotel-test-room.jpg" alt="Thumbnail 5">
+        <img *ngFor="let room_image of room.images" class="thumbnail" src="{{room_image}}" alt="Thumbnail 1">
       </div>
     </div>
     <div class="room-description">
       <div class="room-description-header">
-        <span class="room-description-header-name">One-Bedroom Apartment - Kurhausstrasse 65</span>
+        <span class="room-description-header-name">{{ room.name }}</span>
         <span class="room-description-close-btn">
           <svg class="close-btn" (click)="closeModal()" style="fill: rgba(85, 85, 99, 1);" xmlns="http://www.w3.org/2000/svg" width="1.8vw" height="3.6vh" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
         </span>
@@ -25,44 +22,38 @@
 
       <div class="room-facilities">
         <div class="room-facilities-list">
-          <div class="facility" *ngFor="let facility of room_facilities">
-            <img src="assets/icons/gray-icons/{{facility.icon}}"/>
-            <span>{{ facility.name }}</span>
-          </div>
+          <ng-container *ngFor="let facility of room_facilities">
+            <div class="facility" *ngIf="checkFacility(room.roomFacilityLinks, facility.name)">
+              <img [src]="'assets/icons/gray-icons/' + facility.icon" [alt]="facility.name" />
+              <span>{{ facility.name }}</span>
+            </div>
+          </ng-container>
         </div>
       </div>
 
       <div class="room-detailed-description">
-        <span class="room-detailed-description-header">Room size</span>
-        <span class="room-detailed-description-text">1 King-sized double bed</span>
-        <span class="room-detailed-description-text">Offering a view over the picturesque old town, these rooms feature a bathroom with bathtub or walk-in shower, a desk, a 40-inch HD flat-screen SAT and Airplay TV, high-speed internet connection and a Nespresso machine.</span>
+        <span class="room-detailed-description-header">Room size: {{ room.area }}</span>
+        <span class="room-detailed-description-text">
+          {{ room.roomBedLinks.length }} {{ room.roomBedLinks[0].bedType | lowercase }}
+          {{ room.roomBedLinks.length > 1 ? 'beds' : 'bed' }}
+        </span>
+
+        <span class="room-detailed-description-text">{{ room.description }}</span>
       </div>
 
       <div class="room-details">
-        <div class="details-section">
-          <h3>In a private bathroom</h3>
-          <ul class="details-list">
-            <li *ngFor="let item of room_private_bath">{{ item }}</li>
-          </ul>
-        </div>
-
-        <div class="details-section">
+        <div class="details-section" *ngIf="getRoomViews().length > 0">
           <h3>View:</h3>
           <ul class="details-list">
-            <li *ngFor="let item of room_view">{{ item }}</li>
+            <li *ngFor="let item of getRoomViews()">{{ item }}</li>
           </ul>
         </div>
 
         <div class="details-section">
           <h3>Amenities and services:</h3>
           <ul class="details-list">
-            <li *ngFor="let item of room_amenities">{{ item }}</li>
+            <li *ngFor="let item of room.roomHighlightLinks">{{ item.name | titlecase}}</li>
           </ul>
-        </div>
-
-        <div class="smoking-details">
-          <span style="font-weight: 700;">Smoking:</span>
-          <span>Forbidden</span>
         </div>
       </div>
     </div>
