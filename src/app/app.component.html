@@ -50,8 +50,6 @@
     <path d="M146.045 32.9934C146.045 31.6331 147.153 30.5234 148.51 30.5234C149.868 30.5234 150.976 31.6331 150.976 32.9934C150.976 34.3537 149.868 35.4634 148.51 35.4634C147.153 35.4634 146.045 34.3537 146.045 32.9934Z" fill="#07195F"/>
   </svg></a>
   <div class="navbar-buttons">
-    <input class="navbar-buttons-input" type="button" value="ENG"/>
-    <input class="navbar-buttons-input" type="button" value="Register own object">
     <div class="auth-btns" *ngIf="!getLoginStatus()">
       <input class="sign-up-btn" routerLink="/registration" type="button" value="Sign up">
       <input class="login-btn" routerLink="/login" type="button" value="Login">
@@ -71,11 +69,27 @@
         </svg>
         <a>My account</a>
       </li>
-      <li>
+      <li routerLink="/myBookings" (click)="togglePopup($event)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="18px" viewBox="0 0 19 18" fill="none">
+          <g clip-path="url(#clip0_1692_4453)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17 5.49004H2C1.83431 5.49004 1.7 5.62435 1.7 5.79004V16.0006C1.7 16.1663 1.83431 16.3006 2 16.3006H17C17.1657 16.3006 17.3 16.1663 17.3 16.0006V5.79004C17.3 5.62435 17.1657 5.49004 17 5.49004ZM2 3.79004C0.895431 3.79004 0 4.68547 0 5.79004V16.0006C0 17.1051 0.895431 18.0006 2 18.0006H17C18.1046 18.0006 19 17.1051 19 16.0006V5.79004C19 4.68547 18.1046 3.79004 17 3.79004H2Z" fill="#07195F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.79805 17.0521L3.79805 4.73633L5.49805 4.73633L5.49805 17.0521L3.79805 17.0521Z" fill="#07195F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.298 17.0532L13.298 3.79004L14.998 3.79004L14.998 17.0532L13.298 17.0532Z" fill="#07195F"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.7 1.7V3.3H12.3V1.7H6.7ZM6 0C5.44772 0 5 0.447715 5 1V4C5 4.55228 5.44772 5 6 5H13C13.5523 5 14 4.55228 14 4V1C14 0.447715 13.5523 0 13 0H6Z" fill="#07195F"/>
+          </g>
+          <defs>
+            <clipPath id="clip0_1692_4453">
+              <rect width="19" height="18" fill="white"/>
+            </clipPath>
+          </defs>
+        </svg>
+        <a>My bookings</a>
+      </li>
+      <li routerLink="/favourite" (click)="togglePopup($event)">
         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="18px" viewBox="0 0 24 24">
           <path d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55ZM16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"/>
         </svg>
-        <a>Saved</a>
+        <a>Favourite</a>
       </li>
       <li>
         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="18px" viewBox="0 0 384 512">

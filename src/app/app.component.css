@@ -162,6 +162,15 @@ ul li:hover a {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.popup-menu ul li svg {
+  width: 20px;
+  height: 18px;
+  transition: fill 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.popup-menu ul li:hover svg path {
+  fill: #A93F05 !important;
+}
 
 .popup-menu ul li:hover svg,
 .popup-menu ul li:hover .icon {

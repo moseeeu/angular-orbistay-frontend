@@ -28,4 +28,7 @@ export class HotelsService {
   setFilteredHotels(hotels: any[]) {
     this.hotelsSubject.next(hotels);
   }
+  getHotelById(hotelId: number): Observable<any> {
+    return this.http.get<any>(`${ApiUrls.GET_HOTEL_BY_ID_URL}/${hotelId}`);
+  }
 }
