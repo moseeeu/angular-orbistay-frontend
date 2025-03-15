@@ -10,6 +10,8 @@ export class ApiUrls {
   static readonly GET_USER_URL:string = `${ApiUrls.BASE_URL}/appUsers/me`;
   static readonly PUT_USER_URL:string = `${ApiUrls.BASE_URL}/appUsers/me`;
   static readonly POST_USER_AVATAR_URL:string = `${ApiUrls.BASE_URL}/appUsers/me/avatar`;
+  static readonly POST_USER_BANK_CARD_URL:string = `${ApiUrls.BASE_URL}/appUsers/me/bankCards`;
+  static readonly DELETE_USER_BANK_CARD_URL:string = `${ApiUrls.BASE_URL}/appUsers/me/bankCards`;
 
   //=================================AUTH API URLS=================================
   static readonly SIGN_IN_URL:string = `${ApiUrls.BASE_URL}/auth/signIn`;

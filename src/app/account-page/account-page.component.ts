@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
 import {BehaviorSubject, count} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {AuthService} from '../auth.service';
 import {NgxSpinnerService} from 'ngx-spinner';
@@ -18,6 +18,7 @@ import {TokenService} from '../token.service';
 export class AccountPageComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   currentUser: any;
+  isEmailVerified: boolean = false;
   userFields: any[] = [];
   activeContent: string = 'content1';
   constructor(public router: Router,
@@ -26,6 +27,13 @@ export class AccountPageComponent {
               private spinner: NgxSpinnerService,
               private tokenService: TokenService) { }
   avatar: string | undefined = '';
+  isCardEdit: boolean = false;
+  bankCards: any;
+  isAddNewCard: boolean = false;
+  addCardName: string = "";
+  addCardNumber: string = "";
+  addCardDate: string = "";
+  addCardCVV: string = "";
 
   passportData = {
     issuingCountryId: 1,
@@ -191,12 +199,12 @@ export class AccountPageComponent {
     console.log("Stored user", storedUser);
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
-
       this.userFields = this.generateUserFields(this.currentUser);
       console.log('First name', this.currentUser.passport.firstName)
       this.passportData.firstName = this.currentUser.passport.firstName;
       this.passportData.lastName = this.currentUser.passport.lastName;
       this.passportData.passportNumber = this.currentUser.passport.passportNumber;
+      this.isEmailVerified = this.currentUser.emailVerification.verified;
       if (this.currentUser.passport?.expirationDate) {
         const [year, month, day] = this.currentUser.passport.expirationDate.split('-');
         this.passportData.validDay = day;
@@ -204,7 +212,12 @@ export class AccountPageComponent {
         this.passportData.validYear = year;
       }
       this.avatar = `${this.currentUser.avatarUrl}?t=${new Date().getTime()}`;
-      console.log("User info", this.currentUser);
+      this.bankCards = this.currentUser.bankCards;
+      this.bankCards = this.currentUser.bankCards.map((card: any) => ({
+        ...card,
+        isEdit: false
+      }));
+      console.log("User bank", this.currentUser);
     } else {
       console.log('No user data found in localStorage');
     }
@@ -310,6 +323,118 @@ export class AccountPageComponent {
       });
   }
 
+  deleteBankCard(card: any) {
+    this.auth.deleteBankCard(card.id).subscribe(
+      (response) => {
+        console.log(response);
+        this.currentUser = JSON.stringify(response);
+        localStorage.setItem('userData',this.currentUser);
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+          window.location.reload();
+        }, 1000);
+      }
+    )
+  }
+
+  clickAddNewCard() {
+    this.isAddNewCard = !this.isAddNewCard;
+  }
+
+  saveNewCard() {
+    const cardNumberRegex = /^\d{16}$/;
+    const cardDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    const cardCVVRegex = /^\d{3}$/;
+
+    for (let i = 0; i < this.bankCards.length; i++) {
+      if (this.addCardNumber == this.bankCards[i].cardNumber) {
+        alert("This card already in list!");
+        return;
+      }
+    }
+
+    if (this.addCardNumber[0] != '4') {
+      alert("Orbistay supports only Visa and Mastercard cards");
+      return;
+    }
+
+    this.validateCardExpiry()
+
+
+    if (!this.addCardName.trim()) {
+      alert("Cardholder's name cannot be empty!");
+      return;
+    }
+
+    if (!this.addCardNumber.match(cardNumberRegex)) {
+      alert("Card number must be 16 digits!");
+      return;
+    }
+
+    if (!this.addCardDate.match(cardDateRegex)) {
+      alert("Expiry date must be in MM/YY format!");
+      return;
+    }
+
+    if (!this.addCardCVV.match(cardCVVRegex)) {
+      alert("CVV must be exactly 3 digits!");
+      return;
+    }
+
+    console.log("Card saved successfully!", {
+      name: this.addCardName,
+      number: this.addCardNumber,
+      expiry: this.addCardDate,
+      cvv: this.addCardCVV,
+    });
+
+    const requestBody = {
+      "cardNumber": this.addCardNumber,
+      "expirationDate": this.addCardDate,
+      "cvv": this.addCardCVV,
+      "cardHolderName": this.addCardName
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.tokenService.getToken()}`
+    });
+
+    this.http.post<any>(ApiUrls.POST_USER_BANK_CARD_URL, requestBody, {headers, withCredentials: true}).subscribe(
+      (response) => {
+        console.log(response);
+        this.currentUser = JSON.stringify(response);
+        localStorage.setItem('userData', JSON.stringify(response));
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+          window.location.reload();
+        }, 1000);
+      },
+    )
+  }
+
+  validateCardExpiry(): boolean {
+    const cardDateRegex = /^(0[1-9]|1[0-2])\/(\d{2})$/;
+    if (!this.addCardDate.match(cardDateRegex)) {
+      alert("Expiry date must be in MM/YY format!");
+      return false;
+    }
+
+    const [month, year] = this.addCardDate.split("/").map(num => parseInt(num, 10));
+
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const currentYear = currentDate.getFullYear() % 100;
+
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+      alert("Card expiry date is invalid or expired!");
+      return false;
+    }
+
+    return true;
+  }
+
 
   showContent(contentId: string) {
     this.activeContent = contentId;
@@ -335,6 +460,11 @@ export class AccountPageComponent {
         this.spinner.hide();
         window.location.reload();
       }, 5000);
+    }
+  }
+  verifyEmail() {
+    if (!this.isEmailVerified) {
+      this.router.navigate(['/verifyEmail']);
     }
   }
 }

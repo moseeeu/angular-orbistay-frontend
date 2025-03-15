@@ -6,7 +6,7 @@
 .main-page-banner {
   background-color: #A93F05;
   padding: 0 20vw 0 20vw;
-  height: 100px;
+  height: 8vh;
   color: white;
   font-family: OpenSans, sans-serif;
   align-content: center;
@@ -75,7 +75,7 @@
 }
 .account-list-item-text {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 0.7vw;
 }
 .personal-details {
   display: flex;
@@ -190,6 +190,17 @@
   color: white;
   padding: 0 0.5vw;
   border-radius: 4px;
+  cursor: pointer;
+}
+.not-verified-plank {
+  background-color: #7c2f04;
+  font-weight: 400;
+  height: 22px;
+  font-size: 0.6vw;
+  color: white;
+  padding: 0 0.5vw;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .description {
   color: rgba(85, 85, 99, 1);
@@ -257,6 +268,11 @@ button {
   flex-direction: column;
   width: 60%;
 }
+.input-div span {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 600;
+  font-size: 0.7vw;
+}
 .input-edit {
   width: 100%;
   padding: 0.5vw;
@@ -309,4 +325,53 @@ label input {
   height: 24px;
   cursor: pointer;
   accent-color: rgba(7, 25, 95, 1);
+}
+.card-fields-main {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.card-fields {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 1vh;
+}
+.card-field {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 1vh;
+}
+.cards-expire-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+  width: 60%;
+}
+.add-card {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5vw;
+  margin-left: 0.5vw;
+  cursor: pointer;
+  width: auto;
+}
+.add-card span {
+  color: rgba(12, 12, 32, 1);
+  font-weight: 400;
+  font-size: 0.7vw;
+}
+.add-card-btn {
+  display: flex;
+  flex-direction: row;
+  color: rgba(85, 85, 99, 1);
+  font-weight: 400;
+  font-size: 1.5vw;
+  border-radius: 4px;
+  background-color: rgba(230, 235, 242, 1);
+  width: 1vw;
+  height: 1vw;
+  align-items: center;
+  justify-content: center;
 }
