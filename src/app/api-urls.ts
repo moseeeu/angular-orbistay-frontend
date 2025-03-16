@@ -28,6 +28,7 @@ export class ApiUrls {
   static readonly GET_HOTEL_BY_ID_URL:string = `${ApiUrls.BASE_URL}/hotels`;
   static readonly GET_HOTEL_ROOMS:string = `${ApiUrls.BASE_URL}/hotels/rooms`;
   static readonly GET_FILTERED_HOTEL_ROOMS:string = `${ApiUrls.BASE_URL}/hotels/rooms/filter`;
+  static readonly POST_HOTEL_REVIEW_ROOMS:string = `${ApiUrls.BASE_URL}/hotels/reviews`;
 
   //=================================DESTINATIONS API URLS=================================
   static readonly GET_POPULAR_DESTINATIONS_URL:string = `${ApiUrls.BASE_URL}/destinations/popular`;

@@ -1302,3 +1302,32 @@ mat-calendar{
 .copyURL-btn:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+.add-review {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 1vw;
+}
+.add-review span {
+  color: #0C0C20;
+  font-weight: 700;
+  font-size: 0.9vw;
+}
+.add-review-btn {
+  display: flex;
+  flex-direction: row;
+  color: rgba(85, 85, 99, 1);
+  font-weight: 400;
+  font-size: 1.5vw;
+  border-radius: 4px;
+  background-color: rgba(230, 235, 242, 1);
+  width: 1vw;
+  height: 1vw;
+  align-items: center;
+  justify-content: center;
+}

@@ -388,6 +388,10 @@
       </div>
     </div>
   </div>
+    <div class="add-review" (click)="openReviewModal(hotel.id)">
+      <div class="add-review-btn">+</div>
+      <span>Add your comment</span>
+    </div>
 </div>
 <app-hotel-room-modal-page *ngIf="isModalOpen" [room]="selectedRoom" (close)="closeModal()"></app-hotel-room-modal-page>
 </div>

@@ -47,7 +47,7 @@ export class HotelPageComponent {
     { id: 'reviews', label: 'Guest reviews' }
   ];
   public avatar: any;
-  public currentUser: any;
+  public currentUser: any = null;
 
   isModalOpen = false;
 
@@ -482,6 +482,9 @@ export class HotelPageComponent {
     this.isModalOpen = true;
   }
   openReviewModal(review: any) {
+    if (review == this.hotel.id && this.currentUser == null) {
+      this.router.navigate(['/login']);
+    }
     this.selectedReview = review;
   }
 
@@ -508,6 +511,10 @@ export class HotelPageComponent {
   }
 
   addToFavourites() {
+    if (this.currentUser == null) {
+      this.router.navigate(['/login']);
+    }
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.tokenService.getToken()}`
     });
