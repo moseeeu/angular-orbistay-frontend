@@ -18,10 +18,9 @@ export class RedirectAuthenticationPageComponent {
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       const accessToken = params['accessToken'];
-      const refreshToken = params['refreshToken'];
-      if (accessToken && refreshToken) {
+      console.log(accessToken);
+      if (accessToken) {
         localStorage.setItem('token', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
         this.authService.getUserInfo().subscribe(
           data => {
             this.authService.updateUserData(data);
