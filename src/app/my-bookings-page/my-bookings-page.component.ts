@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {BookingService} from '../booking.service';
 import {HotelsService} from '../hotels.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ApiUrls} from '../api-urls';
 
 @Component({
   selector: 'app-my-bookings-page',
@@ -14,7 +15,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
   styleUrl: './my-bookings-page.component.css'
 })
 export class MyBookingsPageComponent {
-  hotelsList: any;
+  hotelsList: any = null;
   hotel = {
     id: 1,
     mainImageUrl: "https://orbistayblob.blob.core.windows.net/hotels/cozy-ny-hotel-main.svg",
@@ -72,15 +73,17 @@ export class MyBookingsPageComponent {
       (response) => {
         console.log(response);
 
-        this.hotelsList = response.map((booking: any) => ({
-          ...booking,
-          formattedCheckInDate: this.formatCheckInOut(booking.checkIn, 'date'),
-          formattedCheckInTime: this.formatCheckInOut(booking.checkIn, 'time'),
-          formattedCheckOutDate: this.formatCheckInOut(booking.checkOut, 'date'),
-          formattedCheckOutTime: this.formatCheckInOut(booking.checkOut, 'time'),
-          hotel: null,
-          hotelGrade: "Loading..."
-        }));
+        this.hotelsList = response
+          .filter((booking: any) => booking.status?.status !== "CANCELED")
+          .map((booking: any) => ({
+            ...booking,
+            formattedCheckInDate: this.formatCheckInOut(booking.checkIn, 'date'),
+            formattedCheckInTime: this.formatCheckInOut(booking.checkIn, 'time'),
+            formattedCheckOutDate: this.formatCheckInOut(booking.checkOut, 'date'),
+            formattedCheckOutTime: this.formatCheckInOut(booking.checkOut, 'time'),
+            hotel: null,
+            hotelGrade: "Loading..."
+          }));
 
         this.hotelsList.forEach((booking: { hotelId: number; }, index: string | number) => {
           if (booking.hotelId) {
@@ -110,6 +113,11 @@ export class MyBookingsPageComponent {
     this.bookingService.deleteUserBooking(booking.id, headers).subscribe(
       (response) => {
         console.log(response);
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+          window.location.reload();
+        }, 500);
       }
     )
   }
