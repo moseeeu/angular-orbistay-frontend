@@ -25,6 +25,9 @@ export class RedirectAuthenticationPageComponent {
         this.authService.getUserInfo().subscribe(
           data => {
             this.authService.updateUserData(data);
+            setTimeout(() => {
+              window.location.reload();
+            }, 50);
             this.router.navigate(['']);
           }
         );

@@ -17,7 +17,8 @@ import {BookingService} from '../booking.service';
 })
 export class HotelPageComponent {
   @ViewChild('picker') picker!: MatDateRangePicker<Date>;
-  protected range: FormGroup;
+  range1: FormGroup;
+  range2: FormGroup;
   isCityDropdownOpen = false;
   cities = [
     { name: 'New York', country: 'USA' },
@@ -28,6 +29,7 @@ export class HotelPageComponent {
   filteredCities = [...this.cities];
   selectedCity = '';
   isPeopleDropdownOpen = false;
+  isPeopleRoomsDropdownOpen = false;
   adults = 2;
   children = 0;
   breadcrumb: { label: string; url: string }[] = [];
@@ -166,9 +168,13 @@ export class HotelPageComponent {
               private hotelsService: HotelsService,
               private tokenService: TokenService,
               private bookingService: BookingService) {
-    this.range = this.fb.group({
-      start: [null, Validators.required],
-      end: [null, Validators.required],
+    this.range1 = this.fb.group({
+      start: [null],
+      end: [null],
+    });
+    this.range2 = this.fb.group({
+      start: [null],
+      end: [null],
     });
     const navigation = this.router.getCurrentNavigation();
     this.hotel = navigation?.extras.state?.['hotel'];
@@ -377,6 +383,9 @@ export class HotelPageComponent {
   togglePeopleDropdown() {
     this.isPeopleDropdownOpen = !this.isPeopleDropdownOpen;
   }
+  togglePeopleRoomsDropdown() {
+    this.isPeopleRoomsDropdownOpen = !this.isPeopleRoomsDropdownOpen;
+  }
 
   changeCount(type: 'adults' | 'children', change: number) {
     if (type === 'adults') {
@@ -397,8 +406,8 @@ export class HotelPageComponent {
     const countryId = this.countryId || "";
     const peopleCount = this.adults + this.children || "";
     const isChildrenFriendly = this.children > 0 ? "true" : "false";
-    const startDate = this.range?.value?.start ? this.formatDate(this.range.value.start) : "";
-    const endDate = this.range?.value?.end ? this.formatDate(this.range.value.end) : "";
+    const startDate = this.range1?.value?.start ? this.formatDate(this.range1.value.start) : "";
+    const endDate = this.range1?.value?.end ? this.formatDate(this.range1.value.end) : "";
 
     if (this.selectedCity.length < 2 || startDate == "" || endDate == "" || peopleCount == 0) {
       alert("Please enter valid data in search bar");
@@ -448,23 +457,32 @@ export class HotelPageComponent {
   }
 
   filterRoomsClick() {
-    let filterRoomsRequestBody = {
-      "hotelId": this.hotelId,
-      "peopleCount": this.roomCapacity,
-      "isChildrenFriendly": "true",
-      "checkIn": Date.now(),
-      "checkOut": Date.now(),
-      "minPrice": 0,
-      "maxPrice": 99999
+    const startDate = this.range2?.value?.start ? this.formatDate(this.range2.value.start) : "";
+    const endDate = this.range2?.value?.end ? this.formatDate(this.range2.value.end) : "";
+    const peopleCount = this.adults + this.children || "";
+    const isChildrenFriendly = this.children > 0 ? "true" : "false";
+
+    if (startDate === "" || endDate === "" || peopleCount === 0) {
+      alert("Please enter valid data in search bar");
+      return;
     }
 
-    let params = new HttpParams();
-    Object.keys(filterRoomsRequestBody).forEach(key => {
-      params = params.set(key, (filterRoomsRequestBody as any)[key]);
-    });
+    localStorage.setItem('checkInTime', startDate);
+    localStorage.setItem('checkOutTime', endDate);
 
+    let params = new HttpParams()
+      .set('hotelId', this.hotel.id)
+      .set('peopleCount', peopleCount)
+      .set('isChildrenFriendly', isChildrenFriendly)
+      .set('checkIn', startDate)
+      .set('checkOut', endDate)
+      .set('minPrice', '0')
+      .set('maxPrice', '99999');
+
+    // Выполнение GET-запроса с параметрами
     this.http.get(ApiUrls.GET_FILTERED_HOTEL_ROOMS, { params }).subscribe(response => {
-      console.log("Filtered rooms",response);
+      console.log("Filtered rooms", response);
+      console.log()
     });
   }
 

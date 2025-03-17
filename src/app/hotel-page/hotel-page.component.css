@@ -55,6 +55,7 @@
   cursor: pointer;
 }
 .search-field-rooms {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex: 1;
@@ -64,6 +65,7 @@
   align-items: center;
   background-color: white;
   cursor: pointer;
+  width: 100%;
 }
 .search-field label {
   font-weight: 700;
@@ -128,7 +130,26 @@
   transition: all 0.3s ease-in-out;
   margin-top: 5px;
 }
-
+.dropdown-content-rooms {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-top: 5px;
+}
+.dropdown-content-rooms.show {
+  display: block;
+  animation: dropdownFade 0.3s ease-in-out;
+  width: 100%;
+}
 .dropdown-content.show {
   display: block;
   animation: dropdownFade 0.3s ease-in-out;
@@ -392,10 +413,36 @@ input[matStartDate], input[matEndDate] {
   color: #002f5b;
 }
 ::ng-deep .mat-calendar {
-  margin-top: 30px;
+  width: 16.9vw !important;
   background-color: white !important;
-  border-radius: 4px;
-  box-shadow: 0 6px 8px 0 rgba(7, 25, 85, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  font-size: 16px !important;
+  color: #333 !important;
+  border-radius: 8px;
+}
+::ng-deep .mat-datepicker-content-container{
+  background: white;
+  border-radius: 8px;
+}
+::ng-deep .mat-datepicker-content .mat-calendar {
+  height: auto !important;
+}
+::ng-deep .mat-calendar-header {
+  background-color: white !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #002f5b !important;
+  color: white !important;
+}
+::ng-deep .cdk-overlay-pane {
+  margin-top: 27px;
+  margin-left: -66px;
 }
 
 mat-calendar{
