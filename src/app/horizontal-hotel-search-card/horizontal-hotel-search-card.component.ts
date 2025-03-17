@@ -13,6 +13,28 @@ export class HorizontalHotelSearchCardComponent {
 
   constructor(public router: Router) {}
 
+  hotelGrade: any;
+
+  ngOnInit() {
+    switch (true) {
+      case (this.hotel.avgRate === 0):
+        this.hotelGrade = "No rating";
+        break;
+      case (this.hotel.avgRate < 6):
+        this.hotelGrade = "Value stay";
+        break;
+      case (this.hotel.avgRate < 8 && this.hotel.avgRate >= 6):
+        this.hotelGrade = "Good";
+        break;
+      case (this.hotel.avgRate < 9 && this.hotel.avgRate >= 8):
+        this.hotelGrade = "Very good";
+        break;
+      case (this.hotel.avgRate <= 10 && this.hotel.avgRate >= 9):
+        this.hotelGrade = "Excellent";
+        break;
+    }
+  }
+
   redirectToHotelPage(hotelId: number) {
     this.router.navigate(['/hotel', hotelId]);
   }

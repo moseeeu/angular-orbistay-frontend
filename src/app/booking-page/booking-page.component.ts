@@ -158,6 +158,8 @@ export class BookingPageComponent {
 
   formatDate(inputDate: string): string {
     const date = new Date(inputDate);
+    date.setDate(date.getDate() + 1);
+
     return date.toLocaleDateString('en-GB', {
       weekday: 'short',
       day: '2-digit',
