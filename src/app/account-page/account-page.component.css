@@ -69,7 +69,7 @@
 .account-pages-list ul hr {
   background: #E6EBF2;
   opacity: 10;
-  height: 3px;
+  height: 0.13vw;
   margin: 0;
 }
 .account-pages-list li {
@@ -79,7 +79,7 @@
   height: 6vh;
   align-items: center;
   padding: 0 1vw 0 1vw;
-  gap: 20px;
+  gap: 0.7vw;
   cursor: pointer;
 }
 .account-pages-list li:hover svg path {
@@ -209,7 +209,7 @@
 .verified-plank {
   background-color: rgba(7, 25, 95, 1);
   font-weight: 400;
-  height: 22px;
+  height: 0.9vw;
   font-size: 0.6vw;
   color: white;
   padding: 0 0.5vw;
@@ -219,7 +219,7 @@
 .not-verified-plank {
   background-color: #7c2f04;
   font-weight: 400;
-  height: 22px;
+  height: 0.9vw;
   font-size: 0.6vw;
   color: white;
   padding: 0 0.5vw;
@@ -238,12 +238,23 @@
   justify-content: flex-end;
 }
 button {
+  color: #555563;
+  font-weight: 600;
+  font-size: 0.7vw;
+  background-color: transparent;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+.cancel-btn {
   color: rgba(169, 63, 5, 1);
   font-weight: 600;
   font-size: 0.7vw;
   background-color: transparent;
   border: none;
   transition: 0.2s ease-in-out;
+}
+button:hover {
+  color: rgba(169, 63, 5, 1);
 }
 .customization-preferences {
   display: flex;
@@ -261,14 +272,15 @@ button {
 .save-btn {
   background-color: rgba(7, 25, 95, 1);
   font-weight: 600;
-  font-size: 19px;
+  font-size: 0.7vw;
   border-radius: 4px;
   color: white;
   width: 100%;
   padding: 0.2vw 0.7vw 0.2vw 0.7vw;
 }
 .save-btn:hover {
-  background-color: rgb(62, 77, 147);
+  background-color: #39477f;
+  color: white;
 }
 .input-edit {
   width: 80%;
@@ -326,7 +338,7 @@ button {
   width: 100%;
   color: rgba(85, 85, 99, 1);
   font-weight: 400;
-  font-size: 17px;
+  font-size: 0.72vw;
 }
 .passport_header {
   display: flex;
@@ -345,8 +357,8 @@ label {
 label input {
   border: 1px solid rgba(7, 25, 95, 1);
   border-radius: 4px;
-  width: 24px;
-  height: 24px;
+  width: 1vw;
+  height: 1vw;
   cursor: pointer;
   accent-color: rgba(7, 25, 95, 1);
 }
