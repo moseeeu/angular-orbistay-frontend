@@ -1,6 +1,6 @@
-import {Component, ElementRef, HostListener, Input, ViewChild} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDateRangePicker} from '@angular/material/datepicker';
 import {HotelsService} from '../hotels.service';
 import {ApiUrls} from '../api-urls';
@@ -84,6 +84,27 @@ export class SearchResultsPageComponent {
       this.filteredHotelsList = this.filteredHotels.hotels;
       console.log("Filtered hotels:", this.filteredHotels);
     });
+
+    const checkInTime = localStorage.getItem('checkInTime');
+    const checkOutTime = localStorage.getItem('checkOutTime');
+    if (checkInTime && checkOutTime) {
+      const startDate = new Date(checkInTime);
+      startDate.setDate(startDate.getDate() + 1);
+
+      const endDate = new Date(checkOutTime);
+      endDate.setDate(endDate.getDate() + 1);
+
+      this.range.patchValue({
+        start: startDate,
+        end: endDate,
+      });
+    }
+
+    // @ts-ignore
+    this.adults = localStorage.getItem('adultsSearch') ? +localStorage.getItem('adultsSearch') : 0;
+    // @ts-ignore
+    this.children = localStorage.getItem('childrenSearch') ? +localStorage.getItem('childrenSearch') : 0;
+    this.selectedCity = localStorage.getItem('citySearch') || '';
 
     this.loadFilteredHotels();
   }

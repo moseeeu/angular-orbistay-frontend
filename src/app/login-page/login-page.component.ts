@@ -28,7 +28,6 @@ export class LoginPageComponent {
         (response) => {
           console.log("Login response", response);
           localStorage.setItem('token', response.accessToken);
-          localStorage.setItem('refreshToken', response.refreshToken);
 
           if (this.token != null) {
             this.authService.getUserInfo().subscribe(

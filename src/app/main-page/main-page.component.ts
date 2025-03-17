@@ -115,14 +115,27 @@ export class MainPageComponent {
       }
     );
   }
-  getPopularDestinations(){
-    this.http.get(ApiUrls.GET_POPULAR_DESTINATIONS_URL).subscribe(
+
+  getPopularDestinations() {
+    this.http.get<any[]>(ApiUrls.GET_POPULAR_DESTINATIONS_URL).subscribe(
       (destination) => {
-        this.popularDestinations = destination;
+        const uniqueDestinations: any[] = [];
+
+        for (const dest of destination) {
+          const isDuplicate = uniqueDestinations.some(
+            (item) => item && item.city && item.city === dest.city
+          );
+          if (!isDuplicate) {
+            uniqueDestinations.push(dest);
+          }
+        }
+
+        this.popularDestinations = uniqueDestinations;
         console.log('Popular destin:', this.popularDestinations);
       }
-    )
+    );
   }
+
   getSimilarDestinations(destination: string) {
     const params = { text: destination };
 
@@ -162,6 +175,7 @@ export class MainPageComponent {
   selectCity(pickedCity: { city: string, country: {id: string, name: string, code: string} }) {
     this.selectedCity = pickedCity.city;
     this.isCityDropdownOpen = false;
+    this.getSimilarDestinations(this.selectedCity);
   }
 
   @HostListener('document:click', ['$event'])
@@ -234,6 +248,10 @@ export class MainPageComponent {
 
     localStorage.setItem('checkInTime', startDate);
     localStorage.setItem('checkOutTime', endDate);
+    localStorage.setItem('adultsSearch', this.adults.toString());
+    localStorage.setItem('childrenSearch', this.children.toString());
+    localStorage.setItem('citySearch', this.similarDestinations[0].city);
+    localStorage.setItem('childrenSearch', this.children.toString());
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
 
     localStorage.removeItem('filteredHotels');
