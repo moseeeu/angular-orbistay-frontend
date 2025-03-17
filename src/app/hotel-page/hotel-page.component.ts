@@ -7,6 +7,7 @@ import {ApiUrls} from '../api-urls';
 import {TokenService} from '../token.service';
 import {HotelsService} from '../hotels.service';
 import {BookingService} from '../booking.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-hotel-page',
@@ -27,6 +28,7 @@ export class HotelPageComponent {
     { name: 'Tokyo', country: 'Japan' }
   ];
   filteredCities = [...this.cities];
+  filteredRooms: any[] = [];
   selectedCity = '';
   isPeopleDropdownOpen = false;
   isPeopleRoomsDropdownOpen = false;
@@ -167,7 +169,8 @@ export class HotelPageComponent {
               private router: Router,
               private hotelsService: HotelsService,
               private tokenService: TokenService,
-              private bookingService: BookingService) {
+              private bookingService: BookingService,
+              private spinner: NgxSpinnerService,) {
     this.range1 = this.fb.group({
       start: [null],
       end: [null],
@@ -183,8 +186,44 @@ export class HotelPageComponent {
 
   ngOnInit() {
     const selectedCityCrumb = localStorage.getItem('selectedCityForCrumbBar');
-    const filteredHotelsFromStorage = localStorage.getItem('filteredHotels');
     this.selectedCityForCrumbBar = selectedCityCrumb ? JSON.parse(selectedCityCrumb) : null;
+
+    this.hotelsService.rooms$.subscribe((rooms) => {
+      this.filteredRooms = rooms;
+    });
+
+    const savedRooms = localStorage.getItem('filteredRooms');
+    if (savedRooms) {
+      this.filteredRooms = JSON.parse(savedRooms);
+      this.hotelsService.setFilteredRooms(this.filteredRooms);
+    }
+
+    const checkInTime = localStorage.getItem('checkInTime');
+    const checkOutTime = localStorage.getItem('checkOutTime');
+    if (checkInTime && checkOutTime) {
+      const startDate = new Date(checkInTime);
+      startDate.setDate(startDate.getDate() + 1);
+
+      const endDate = new Date(checkOutTime);
+      endDate.setDate(endDate.getDate() + 1);
+
+      this.range1.patchValue({
+        start: startDate,
+        end: endDate,
+      });
+      this.range2.patchValue({
+        start: startDate,
+        end: endDate,
+      });
+    }
+
+    this.getPopularDestinations();
+
+    // @ts-ignore
+    this.adults = localStorage.getItem('adultsSearch') ? +localStorage.getItem('adultsSearch') : 0;
+    // @ts-ignore
+    this.children = localStorage.getItem('childrenSearch') ? +localStorage.getItem('childrenSearch') : 0;
+    this.selectedCity = localStorage.getItem('citySearch') || '';
 
     this.hotelId = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.selectedCityForCrumbBar);
@@ -301,7 +340,25 @@ export class HotelPageComponent {
       }
     );
   }
+  getPopularDestinations() {
+    this.http.get<any[]>(ApiUrls.GET_POPULAR_DESTINATIONS_URL).subscribe(
+      (destination) => {
+        const uniqueDestinations: any[] = [];
 
+        for (const dest of destination) {
+          const isDuplicate = uniqueDestinations.some(
+            (item) => item && item.city && item.city === dest.city
+          );
+          if (!isDuplicate) {
+            uniqueDestinations.push(dest);
+          }
+        }
+
+        this.popularDestinations = uniqueDestinations;
+        console.log('Popular destin:', this.popularDestinations);
+      }
+    );
+  }
   copyPageUrl() {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
@@ -363,6 +420,7 @@ export class HotelPageComponent {
   selectCity(pickedCity: { city: string, country: {id: string, name: string, code: string} }) {
     this.selectedCity = pickedCity.city;
     this.isCityDropdownOpen = false;
+    this.getSimilarDestinations(this.selectedCity);
   }
 
   @HostListener('document:click', ['$event'])
@@ -401,7 +459,6 @@ export class HotelPageComponent {
   }
 
 
-
   searchButtonClick() {
     const countryId = this.countryId || "";
     const peopleCount = this.adults + this.children || "";
@@ -436,6 +493,9 @@ export class HotelPageComponent {
 
     localStorage.setItem('checkInTime', startDate);
     localStorage.setItem('checkOutTime', endDate);
+    localStorage.setItem('adultsSearch', this.adults.toString());
+    localStorage.setItem('childrenSearch', this.children.toString());
+    localStorage.setItem('citySearch', this.similarDestinations[0].city);
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
 
     localStorage.removeItem('filteredHotels');
@@ -469,6 +529,8 @@ export class HotelPageComponent {
 
     localStorage.setItem('checkInTime', startDate);
     localStorage.setItem('checkOutTime', endDate);
+    localStorage.setItem('adultsSearch', this.adults.toString());
+    localStorage.setItem('childrenSearch', this.children.toString());
 
     let params = new HttpParams()
       .set('hotelId', this.hotel.id)
@@ -479,11 +541,27 @@ export class HotelPageComponent {
       .set('minPrice', '0')
       .set('maxPrice', '99999');
 
-    // Выполнение GET-запроса с параметрами
-    this.http.get(ApiUrls.GET_FILTERED_HOTEL_ROOMS, { params }).subscribe(response => {
-      console.log("Filtered rooms", response);
-      console.log()
-    });
+    this.hotelsService.getFilteredRooms(ApiUrls.GET_FILTERED_HOTEL_ROOMS, params).subscribe(
+      (response) => {
+        console.log("Filtered rooms", response);
+        this.hotelsService.setFilteredRooms(response);
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+          this.filteredRooms = response;
+          localStorage.setItem('filteredRooms', JSON.stringify(response));
+        }, 200);
+      },
+      (error) => {
+        console.error('Error fetching filtered rooms:', error);
+        this.spinner.show();
+        setTimeout(() => {
+          this.spinner.hide();
+          this.hotelsService.setFilteredRooms([]);
+          this.filteredRooms = [];
+        }, 200);
+      }
+    );
   }
 
   formatDateTime(hours: number): string {

@@ -57,7 +57,7 @@ export class GuestReviewModalWindowComponent {
       Authorization: `Bearer ${this.tokenService.getToken()}`
     });
 
-    this.hotelService.createReview(requestBody, headers).subscribe(
+    this.hotelService.createReview(requestBody, {headers, withCredentials: true}).subscribe(
       (response) => {
         console.log(response);
         this.spinner.show();

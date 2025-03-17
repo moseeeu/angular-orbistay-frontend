@@ -103,6 +103,15 @@ export class MainPageComponent {
         this.recentlyViewedHotels = response.length > 4 ? response.slice(0, 4) : response;
       }
     );
+    const startDate = this.range?.value?.start ? this.formatDate(this.range.value.start) : "";
+    const endDate = this.range?.value?.end ? this.formatDate(this.range.value.end) : "";
+
+    localStorage.removeItem('checkInTime');
+    localStorage.removeItem('checkOutTime');
+    localStorage.removeItem('adultsSearch');
+    localStorage.removeItem('childrenSearch');
+    localStorage.removeItem('citySearch');
+    localStorage.removeItem('childrenSearch');
   }
   loadPopularHotels() {
     this.hotelsService.getHotelsByApi(ApiUrls.GET_POPULAR_HOTELS_URL).subscribe(
@@ -251,7 +260,6 @@ export class MainPageComponent {
     localStorage.setItem('adultsSearch', this.adults.toString());
     localStorage.setItem('childrenSearch', this.children.toString());
     localStorage.setItem('citySearch', this.similarDestinations[0].city);
-    localStorage.setItem('childrenSearch', this.children.toString());
     localStorage.setItem('selectedCityForCrumbBar', JSON.stringify(this.selectedCityForCrumbBar));
 
     localStorage.removeItem('filteredHotels');

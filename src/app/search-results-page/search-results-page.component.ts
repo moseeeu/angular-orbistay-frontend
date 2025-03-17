@@ -44,7 +44,7 @@ export class SearchResultsPageComponent {
   minValue: number = 0;
   maxValue: number = 99;
   filteredHotelsList: any[] = [];
-  selectedSorting: any = 'rating';
+  selectedSorting: any = 'expensive';
   starsMapping: { [key: string]: number } = {
     'ONE_STAR': 1,
     'TWO_STARS': 2,
@@ -84,6 +84,8 @@ export class SearchResultsPageComponent {
       this.filteredHotelsList = this.filteredHotels.hotels;
       console.log("Filtered hotels:", this.filteredHotels);
     });
+
+    this.getPopularDestinations();
 
     const checkInTime = localStorage.getItem('checkInTime');
     const checkOutTime = localStorage.getItem('checkOutTime');
@@ -135,6 +137,26 @@ export class SearchResultsPageComponent {
       'FIVE_STARS': 5
     };
     return mapping[hotelStars] || 0;
+  }
+
+  getPopularDestinations() {
+    this.http.get<any[]>(ApiUrls.GET_POPULAR_DESTINATIONS_URL).subscribe(
+      (destination) => {
+        const uniqueDestinations: any[] = [];
+
+        for (const dest of destination) {
+          const isDuplicate = uniqueDestinations.some(
+            (item) => item && item.city && item.city === dest.city
+          );
+          if (!isDuplicate) {
+            uniqueDestinations.push(dest);
+          }
+        }
+
+        this.popularDestinations = uniqueDestinations;
+        console.log('Popular destin:', this.popularDestinations);
+      }
+    );
   }
 
   updateBreadcrumb(): void {
@@ -290,6 +312,7 @@ export class SearchResultsPageComponent {
   selectCity(pickedCity: { city: string, country: {id: string, name: string, code: string} }) {
     this.selectedCity = pickedCity.city;
     this.isCityDropdownOpen = false;
+    this.getSimilarDestinations(this.selectedCity);
   }
 
   @HostListener('document:click', ['$event'])

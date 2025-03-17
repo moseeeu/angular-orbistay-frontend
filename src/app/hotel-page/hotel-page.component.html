@@ -283,7 +283,10 @@
           <span style="width: 25%; border-left: 1px solid rgba(217, 217, 217, 1); border-right: 1px solid rgba(217, 217, 217, 1);" class="hotel-apartments-list-header">Number of quests</span>
           <span style="width: 35%; border-left: 1px solid rgba(217, 217, 217, 1); border-radius: 0 4px 0 0;" class="hotel-apartments-list-header">Today's price</span>
         </div>
-        <div class="hotel-apartment-info" *ngFor="let room of hotelRoomsList">
+        <div *ngIf="filteredRooms.length === 0;" class="no-provided-data">
+          <span>No rooms available</span>
+        </div>
+        <div class="hotel-apartment-info" *ngFor="let room of filteredRooms">
           <div class="hotel-apartment-info-type">
             <span class="info-type-header" (click)="openModal(room)">{{ room.name }}</span>
             <div class="info-bedroom" *ngFor="let bedroom of room.roomBedLinks; let i = index">
