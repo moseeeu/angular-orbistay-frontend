@@ -178,7 +178,20 @@ ul li:hover a {
   color: #A93F05;
   transition: fill 0.3s ease-in-out, color 0.3s ease;
 }
-
+.review-photo-container {
+  position: relative;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  border: 2px solid #07195F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E6EBF2;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left: auto;
+}
 .photo-container {
   position: relative;
   width: 2vw;

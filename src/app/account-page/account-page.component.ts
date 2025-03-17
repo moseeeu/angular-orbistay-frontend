@@ -172,8 +172,10 @@ export class AccountPageComponent {
     } else {
       updatedData[userFieldKey] = field.value;
     }
-    updatedData.citizenshipCountryId = this.selectedCountry.id
-    updatedData.passport.countryOfIssuanceId = this.selectedCountry.id
+    if (this.currentUser.passport != null) {
+      updatedData.citizenshipCountryId = this.selectedCountry.id
+      updatedData.passport.countryOfIssuanceId = this.selectedCountry.id
+    }
 
     console.log("request here ->", updatedData);
     this.auth.updateUserInfo(updatedData);
@@ -200,10 +202,11 @@ export class AccountPageComponent {
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
       this.userFields = this.generateUserFields(this.currentUser);
-      console.log('First name', this.currentUser.passport.firstName)
-      this.passportData.firstName = this.currentUser.passport.firstName;
-      this.passportData.lastName = this.currentUser.passport.lastName;
-      this.passportData.passportNumber = this.currentUser.passport.passportNumber;
+      if (this.currentUser.passport != null) {
+        this.passportData.firstName = this.currentUser.passport.firstName;
+        this.passportData.lastName = this.currentUser.passport.lastName;
+        this.passportData.passportNumber = this.currentUser.passport.passportNumber;
+      }
       this.isEmailVerified = this.currentUser.emailVerification.verified;
       if (this.currentUser.passport?.expirationDate) {
         const [year, month, day] = this.currentUser.passport.expirationDate.split('-');
@@ -263,7 +266,7 @@ export class AccountPageComponent {
       },
       {
         label: 'Nationality',
-        value: user.citizenship.name || 'Select the country/region you are from',
+        value: (user.citizenship?.name && user.citizenship.name !== 0) ? user.citizenship.name : 'Select the country/region you are from',
         type: '',
         verified: false,
         description: '',
@@ -281,7 +284,7 @@ export class AccountPageComponent {
       },
       {
         label: 'Address',
-        value: user.residency.street + ' ' + user.residency.id + ', ' + user.residency.city || 'Add your address',
+        value: (user.resresidency != null) ? user.residency.street + ' ' + user.residency.id + ', ' + user.residency.city : 'Add your address',
         type: '',
         verified: false,
         description: '',
@@ -464,7 +467,7 @@ export class AccountPageComponent {
   }
   verifyEmail() {
     if (!this.isEmailVerified) {
-      this.router.navigate(['/verifyEmail']);
+      this.router.navigate(['/verify-email']);
     }
   }
 }

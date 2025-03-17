@@ -55,8 +55,9 @@
       <input class="login-btn" routerLink="/login" type="button" value="Login">
     </div>
     <div class="account-panel" (click)="togglePopup($event)" *ngIf="getLoginStatus()">
-      <div class="photo-container">
-        <img class="photo-icon" src="{{avatar}}"/>
+      <div class="review-photo-container">
+        <img *ngIf="currentUser.avatarUrl != null" class="photo-icon" src="{{currentUser.avatarUrl}}" />
+        <span style="font-weight: 700; font-size: 1vw;" *ngIf="currentUser.avatarUrl == null">{{currentUser.username?.[0] | uppercase}}</span>
       </div>
       <p>{{currentUser.username}}</p>
     </div>
