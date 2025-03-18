@@ -33,7 +33,6 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 2vw;
 }
 .create-content {
   display: flex;
@@ -66,13 +65,13 @@
   background-color: #E6EBF2;
   overflow: hidden;
   cursor: pointer;
-  margin-left: auto;
 }
 .review-owner {
   display: flex;
   flex-direction: row;
   gap: 0.5vw;
   align-self: start;
+  width: 37%;
 }
 .your-comment-input {
   width: 100%;
@@ -164,13 +163,13 @@ button.selected {
 
 }
 .review-photo-icon {
+  width: 2vw;
+  height: 2vw;
   position: relative;
   z-index: 1;
   color: #07195F;
   font-weight: bold;
   font-size: 1.5vw;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 .user-info-container {
@@ -202,7 +201,7 @@ button.selected {
   width: 100%;
   color: rgba(12, 12, 32, 1);
   font-size: calc(5px + 0.5vw);
-  max-height: 5vh;
+  max-height: 2.5vw;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -214,7 +213,7 @@ button.selected {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 0.5vh;
+  gap: 0.25vw;
 }
 .review-tag {
   display: flex;
@@ -232,7 +231,7 @@ button.selected {
 }
 .quest-rating-score {
   width: 2vw;
-  height: 4vh;
+  height: 2vw;
   font-size: calc(5px + 0.6vw);
   font-weight: 700;
   background-color: #07195F;

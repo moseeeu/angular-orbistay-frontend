@@ -6,7 +6,7 @@
 .main-page-banner {
   background-color: #A93F05;
   padding: 0 20vw 0 20vw;
-  height: 8vh;
+  height: 4vw;
   color: white;
   font-family: OpenSans, sans-serif;
   align-content: center;
@@ -24,7 +24,7 @@
 .main-page-content {
   display: flex;
   flex-direction: row;
-  padding: 2vh 20vw 2vh 20vw;
+  padding: 1vw 20vw 1vw 20vw;
   width: 100%;
   height: 100%;
   gap: 1.5vw;
@@ -76,7 +76,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 6vh;
+  height: 3vw;
   align-items: center;
   padding: 0 1vw 0 1vw;
   gap: 0.7vw;
@@ -371,13 +371,13 @@ label input {
   display: flex;
   flex-direction: column;
   width: 90%;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .card-field {
   display: flex;
   flex-direction: column;
   width: 50%;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .cards-expire-fields {
   display: flex;

@@ -2,53 +2,44 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 20vw;
-  box-sizing: border-box;
-  overflow-x: hidden;
+  margin-bottom: 2vw;
 }
-
 .main-page-banner {
   position: relative;
-  width: 100vw;
-  left: 50%;
-  transform: translateX(-50%);
   background-color: #A93F05;
-  padding: 20px 20vw 0 20vw;
-  height: 200px;
+  padding: 1.04vw 18vw 0 20vw;
+  height: 9.2vw;
   color: white;
-  font-family: 'Open Sans', sans-serif;
-  box-sizing: border-box;
+  font-family: OpenSans, sans-serif;
 }
-
 .main-page-banner-content {
-  width: 100%;
+  max-width: 100%;
 }
 
 .banner-text {
   display: flex;
   flex-direction: column;
 }
-
 .main-text {
   font-size: 2vw;
   font-weight: 800;
-  margin: 10px 0;
+  margin: 0.52vw 0;
   font-family: "Open Sans", sans-serif;
 }
 
 .sub-text {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 0.94vw;
+  margin-bottom: 1.04vw;
 }
 
 .search-bar {
   display: flex;
-  gap: 5px;
+  gap: 0.26vw;
   width: 60%;
-  height: 80px;
+  height: 3.5vw;
   background: #002f5b;
   border-radius: 8px;
-  padding: 5px;
+  padding: 0.26vw;
   position: absolute;
 }
 
@@ -58,126 +49,63 @@
   flex: 1;
   text-align: left;
   border-radius: 4px;
+  padding-right: 0.52vw;
   align-items: center;
   background-color: white;
   cursor: pointer;
-  padding: 15px;
 }
-.city-selector-field {
+.search-field-rooms {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex: 1;
   text-align: left;
   border-radius: 4px;
+  padding-right: 0.52vw;
   align-items: center;
   background-color: white;
   cursor: pointer;
-  padding-right: 10px;
-}
-
-.city-selector-input {
-  appearance: none;
   width: 100%;
-  padding: 10px;
-  font-size: 17px;
-  border: none;
-  outline: none;
-  color: #002f5b;
-  font-weight: 600;
-  cursor: pointer;
-  align-self: center;
-}
-
-.city-dropdown-content {
-  display: none;
-  position: absolute;
-  top: 61px;
-  left: 0;
-  background-color: white;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10000;
-  width: 28%;
-  max-height: 300px;
-  margin-top: 1.5vh;
-  overflow-y: auto;
-}
-
-.city-dropdown-content.show {
-  display: block;
-  width: 27%;
-  margin-left: 0.2vw;
-  height: 300px;
-  z-index: 10000;
-}
-
-.dropdown-header {
-  font-weight: bold;
-  margin: 0 0 10px 10px;
-  color: #002f5b;
-}
-
-.city-dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #f0f0f0;
-  transition: background 0.3s;
-}
-
-.city-dropdown-item:last-child {
-  border-bottom: none;
-}
-
-.city-dropdown-item:hover {
-  background-color: #f0f0f0;
-  color: #004080;
-  font-weight: bold;
-}
-
-.location-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-.city-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.city-details strong {
-  font-size: 16px;
-  color: #004080;
-}
-
-.city-details small {
-  color: gray;
-}
-input[matStartDate], input[matEndDate] {
-  cursor: pointer;
 }
 .search-field label {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 0.75vw;
   font-family: "Open Sans", sans-serif;
 }
 
 .field-title {
   display: block;
-  font-size: 12px;
+  font-size: 0.63vw;
   color: #002f5b;
-  margin-bottom: 5px;
+  margin-bottom: 0.26vw;
   font-weight: bold;
 }
+.custom-slider {
+  width: 90%;
+}
 
+.mat-slider-thumb {
+  background-color: #e6e9f0 !important;
+  border: 0.10vw solid #4a4a4a !important;
+  width: 1.04vw !important;
+  height: 1.04vw !important;
+}
+
+.mat-slider-track-fill {
+  background-color: #07195F !important;
+  height: 0.31vw !important;
+}
+
+.mat-slider-track-background {
+  background-color: #ccc !important;
+  height: 0.31vw !important;
+}
 .dropdown {
   appearance: none;
   width: 100%;
-  padding: 20px;
-  font-size: 17px;
-  height: 70px;
+  padding: 1.04vw;
+  font-size: calc(0.10vw + 0.7vw);
+  height: 3.65vw;
   border-radius: 4px;
   border: none;
   outline: none;
@@ -186,47 +114,77 @@ input[matStartDate], input[matEndDate] {
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   align-content: center;
-  z-index: 10000;
 }
 .dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
+  left: 0;
   background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10000;
-  padding: 10px;
+  border: 0.05vw solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0.52vw;
   width: 100%;
   transition: all 0.3s ease-in-out;
+  margin-top: 0.26vw;
 }
-
+.dropdown-content-rooms {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 0.05vw solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0.52vw;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-top: 0.26vw;
+}
+.dropdown-content-rooms.show {
+  display: block;
+  animation: dropdownFade 0.3s ease-in-out;
+  width: 100%;
+}
 .dropdown-content.show {
   display: block;
-  border: none;
-  width: 28.5%;
-  border-radius: 0 0 4px 4px;
   animation: dropdownFade 0.3s ease-in-out;
 }
 
 @keyframes dropdownFade {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-0.52vw);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
+.no-provided-data {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.no-provided-data span {
+  color: #B5BACF;
+  font-size: 1.7vw;
+  font-weight: 700;
+  padding: 5vw;
+}
 .dropdown-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 0.63vw;
   cursor: pointer;
   transition: 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 0.05vw solid #f0f0f0;
 }
 
 .dropdown-item:last-child {
@@ -242,15 +200,15 @@ input[matStartDate], input[matEndDate] {
 .counter {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.52vw;
 }
 
 .counter button {
   background-color: transparent;
-  border: 1px solid #ccc;
+  border: 0.05vw solid #ccc;
   border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 18px;
+  padding: 0.26vw 0.52vw;
+  font-size: 0.94vw;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -261,21 +219,21 @@ input[matStartDate], input[matEndDate] {
 }
 
 .counter span {
-  font-size: 16px;
+  font-size: 0.83vw;
   font-weight: bold;
   color: #002f5b;
 }
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 80px;
+  top: 3.2vw;
   right: 0;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 0.05vw solid #ddd;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   transition: all 0.3s ease-in-out;
   width: 28%;
   margin-right: 9.2vw;
@@ -283,13 +241,13 @@ input[matStartDate], input[matEndDate] {
 .people-dropdown-content{
   display: none;
   position: absolute;
-  top: 80px;
+  top: 4.17vw;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 0.05vw solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   transition: all 0.3s ease-in-out;
   width: 28%;
   margin-right: 9.2vw;
@@ -303,7 +261,7 @@ input[matStartDate], input[matEndDate] {
 @keyframes dropdownFade {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-0.52vw);
   }
   to {
     opacity: 1;
@@ -315,11 +273,11 @@ input[matStartDate], input[matEndDate] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 0.63vw;
   transition: 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 0.05vw solid #f0f0f0;
   border-radius: 4px;
-  font-size: 17px;
+  font-size: calc(0.10vw + 0.7vw);
   color: #002f5b;
   font-weight: 700;
   cursor: auto;
@@ -336,8 +294,8 @@ input[matStartDate], input[matEndDate] {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  border: 2px solid rgba(230, 235, 242, 1);
+  gap: 0.52vw;
+  border: 0.10vw solid rgba(230, 235, 242, 1);
   border-radius: 4px;
 }
 
@@ -345,8 +303,8 @@ input[matStartDate], input[matEndDate] {
   background-color: transparent;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 18px;
+  padding: 0.26vw 0.52vw;
+  font-size: 0.94vw;
   cursor: pointer;
   color: #A93F05;
 }
@@ -355,11 +313,102 @@ input[matStartDate], input[matEndDate] {
   color: #A93F05;
 }
 .counter span {
-  font-size: 17px;
+  font-size: calc(0.10vw + 0.7vw);
   color: #002f5b;
   font-weight: 700;
 }
+.city-selector-field {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  text-align: left;
+  border-radius: 4px;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  padding-right: 0.52vw;
+}
 
+.city-selector-input {
+  appearance: none;
+  width: 100%;
+  padding: 0.52vw;
+  font-size: calc(0.10vw + 0.7vw);
+  border: none;
+  outline: none;
+  color: #002f5b;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: center;
+}
+
+.city-dropdown-content {
+  display: none;
+  position: absolute;
+  top: 2.72vw;
+  left: 0.2vw;
+  background-color: white;
+  border: 0.05vw solid #ddd;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 16.5vw;
+  max-height: 15.63vw;
+  margin-top: 0.75vw;
+  overflow-y: auto;
+}
+
+.city-dropdown-content.show {
+  display: block;
+}
+
+.dropdown-header {
+  font-weight: bold;
+  font-size: 0.8vw;
+  color: #002f5b;
+}
+
+.city-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.52vw;
+  cursor: pointer;
+  border-bottom: 0.05vw solid #f0f0f0;
+  transition: background 0.3s;
+}
+
+.city-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.city-dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #004080;
+  font-weight: bold;
+}
+
+.location-icon {
+  width: 1.04vw;
+  height: 1.04vw;
+  margin-right: 0.52vw;
+}
+
+.city-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.city-details strong {
+  font-size: 0.83vw;
+  color: #004080;
+}
+
+.city-details small {
+  color: gray;
+}
+input[matStartDate], input[matEndDate] {
+  cursor: pointer;
+}
 
 .calendar {
   display: flex;
@@ -370,19 +419,20 @@ input[matStartDate], input[matEndDate] {
   align-self: center;
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
-  font-size: 17px;
-  padding: 0 10px 0 20px;
+  font-size: calc(0.10vw + 0.7vw);
+  padding: 0 0.52vw 0 1.04vw;
   color: #002f5b;
+
 }
 ::ng-deep .mat-calendar {
-  width: 16.9vw !important;
+  width: 16.5vw !important;
   background-color: white !important;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
 }
 
 ::ng-deep .mat-calendar-body-cell-content {
-  font-size: 16px !important;
+  font-size: 0.83vw !important;
   color: #333 !important;
   border-radius: 8px;
 }
@@ -403,8 +453,8 @@ input[matStartDate], input[matEndDate] {
   color: white !important;
 }
 ::ng-deep .cdk-overlay-pane {
-  margin-top: 27px;
-  margin-left: -76px;
+  margin-top: 1.15vw;
+  margin-left: -3.1vw;
 }
 
 mat-calendar{
@@ -415,9 +465,9 @@ mat-calendar{
   display: block;
 }
 .search-field-icon {
-  width: 50px;
-  height: 50px;
-  padding: 8px 0 8px 8px;
+  width: 2.60vw;
+  height: 2.60vw;
+  padding: 0.42vw 0 0.42vw 0.42vw;
   align-self: center;
 }
 
@@ -426,20 +476,21 @@ mat-calendar{
 }
 
 .search-button {
-  background-color: #002f5b;
+  background-color: #07195f;
   color: white;
   width: 15%;
-  height: 70px;
-  padding: 10px 20px;
-  font-size: 1vw;
+  height: 3vw;
+  padding: 0.52vw 1.04vw;
+  font-size: 1.20vw;
   font-weight: bold;
-  border: 2px solid white;
+  border: 0.10vw solid white;
   border-radius: 4px;
   cursor: pointer;
+  transition: ease-in-out 0.2s;
 }
 
 .search-button:hover {
-  background-color: #00509e;
+  background-color: #39477f;
 }
 
 .search-field select:focus,
@@ -450,9 +501,11 @@ mat-calendar{
 .main-page-cards-content {
   display: flex;
   flex-direction: column;
-  padding: 100px 0 0 0;
-  gap: 50px;
-  margin-bottom: 100px;
+  padding: 3vw 0 0 0;
+  gap: 3vw;
+  width: 100%;
+  align-items: center;
+  margin-left: -4.4vw;
 }
 
 .main-page-cards-content-part {
@@ -461,16 +514,14 @@ mat-calendar{
 }
 
 .main-page-cards-content-part-name {
-  font-size: 24px;
+  font-size: 1.2vw;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 1vw;
 }
 .cards-container {
   display: flex;
   gap: 6.5%;
 }
-
-
 
 .no-provided-data {
   display: flex;

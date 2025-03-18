@@ -20,17 +20,17 @@ hr {
   display: flex;
   flex-direction: column;
   width: 30%;
-  gap: 2vh;
+  gap: 1vw;
 }
 .booking-hotel-details {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border: 2px solid rgba(217, 217, 217, 1);
   border-radius: 4px;
-  gap: 0.5vh;
+  gap: 0.25vw;
 }
 .hotel-details-name {
   color: rgba(7, 25, 95, 1);
@@ -46,7 +46,7 @@ hr {
   display: flex;
   align-items: center;
   gap: 0.5vw;
-  margin-top: 1vh;
+  margin-top: 1vw;
 }
 .quest-rating-score-text-container {
   display: flex;
@@ -56,7 +56,7 @@ hr {
 }
 .quest-rating-score {
   width: 2vw;
-  height: 4vh;
+  height: 2vw;
   font-size: calc(5px + 0.8vw);
   font-weight: 700;
   background-color: #07195F;
@@ -79,8 +79,8 @@ hr {
 .your-booking-details {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  gap: 1vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border: 2px solid rgba(217, 217, 217, 1);
   border-radius: 4px;
 }
@@ -94,7 +94,7 @@ hr {
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  gap: 0.5vh;
+  gap: 0.25vw;
 }
 .check-in, .check-out {
   width: auto;
@@ -123,7 +123,7 @@ hr {
   font-weight: 600;
 }
 .stay-length strong {
-  font-size: 14px;
+  font-size: 0.6vw;
   color: #0c0c20;
 }
 .separator {
@@ -155,7 +155,7 @@ hr {
   justify-content: space-between;
   align-items: center;
   background-color: #e6ebf2;
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border-radius: 4px;
   width: 100%;
 }
@@ -182,9 +182,9 @@ hr {
 .cancellation-container {
   border: 2px solid rgba(217, 217, 217, 1);
   border-radius: 4px;
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   width: 100%;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .cancellation-title {
   font-size: calc(5px + 0.6vw);
@@ -193,6 +193,7 @@ hr {
 .free-cancellation {
   color: #b44600;
   font-weight: 700;
+  font-size: calc(5px + 0.6vw);
 }
 .cancellation-fee {
   display: flex;
@@ -202,21 +203,18 @@ hr {
   color: #0c0c20;
 }
 
-
-
-
 .booking-user-info-container {
   display: flex;
   flex-direction: column;
   width: 70%;
-  gap: 2vh;
+  gap: 1vw;
 }
 .booking-user-account {
   display: flex;
   flex-direction: row;
   width: 100%;
   border: 2px solid rgba(217, 217, 217, 1);
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border-radius: 4px;
   gap: 0.5vw;
 }
@@ -261,8 +259,8 @@ hr {
   width: 100%;
   border: 2px solid rgba(217, 217, 217, 1);
   border-radius: 4px;
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
-  gap: 1vh;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
+  gap: 0.5vw;
 }
 .details-header {
   color: rgba(7, 25, 95, 1);
@@ -278,13 +276,13 @@ hr {
   display: flex;
   flex-direction: column;
   width: 30%;
-  gap: 0.4vh;
+  gap: 0.2vw;
 }
 .input-field input, select {
   width: 100%;
   border: 1px solid rgba(12, 12, 32, 1);
   border-radius: 4px;
-  padding: 0.8vh 0.4vw 0.8vh 0.4vw;
+  padding: 0.4vw;
 }
 .input-field-header {
   display: flex;
@@ -315,13 +313,13 @@ hr {
   display: flex;
   flex-direction: column;
   width: 90%;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .card-field {
   display: flex;
   flex-direction: column;
   width: 50%;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .cards-expire-fields {
   display: flex;
@@ -343,7 +341,7 @@ hr {
   width: 100%;
   border: 1px solid rgba(12, 12, 32, 1);
   border-radius: 4px;
-  padding: 0.8vh 0.4vw 0.8vh 0.4vw;
+  padding: 0.4vw;
 }
 .input-valid-edit {
   width: 30%;
@@ -367,7 +365,7 @@ hr {
   flex-direction: column;
   width: 100%;
   border: 2px solid rgba(217, 217, 217, 1);
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border-radius: 4px;
   gap: 0.5vw;
 }
@@ -383,7 +381,7 @@ hr {
   flex-direction: column;
   width: 100%;
   border: 2px solid rgba(217, 217, 217, 1);
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border-radius: 4px;
   gap: 0.5vw;
 }
@@ -400,7 +398,7 @@ hr {
 .full-guest-name-field {
   display: flex;
   flex-direction: column;
-  gap: 0.8vh;
+  gap: 0.4vw;
   width: 40%;
 }
 .guest-count {
@@ -412,14 +410,14 @@ hr {
   color: rgba(0, 0, 0, 1);
   font-weight: 600;
   font-size: 0.7vw;
-  margin-bottom: -0.7vh;
+  margin-bottom: -0.35vw;
 }
 .requests-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   border: 2px solid rgba(217, 217, 217, 1);
-  padding: 1.4vh 0.8vw 1.4vh 0.8vw;
+  padding: 0.7vw 0.8vw 0.7vw 0.8vw;
   border-radius: 4px;
   gap: 0.5vw;
 }
@@ -435,10 +433,10 @@ hr {
   font-size: 0.6vw;
 }
 .input-request {
-  height: 10vh;
+  height: 5vw;
   border: 1px solid rgba(12, 12, 32, 1);
   border-radius: 4px;
-  padding: 0.5vw 1vh;
+  padding: 0.5vw 0.5vw;
 }
 .info-book-btn {
   display: flex;
@@ -454,8 +452,8 @@ hr {
   align-self: end;
   justify-content: center;
   border: none;
-  margin-top: 2vh;
-  margin-bottom: 4vh;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
 }
 .info-book-btn:hover {
   background-color: #39477f;
@@ -495,7 +493,7 @@ hr {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 2vh;
+  gap: 1vw;
 }
 .prev-next-buttons {
   display: flex;
@@ -609,12 +607,10 @@ hr {
   font-size: 0.7vw;
 }
 
-/* Скрываем стандартные радио-кнопки */
 .payment-method input {
   display: none;
 }
 
-/* Стили кастомного радио */
 .custom-radio {
   width: 1vw;
   height: 1vw;
@@ -627,7 +623,6 @@ hr {
   position: relative;
 }
 
-/* Внутренний кружок (изначально пустой) */
 .custom-radio::after {
   content: "";
   width: 0.5vw;
@@ -637,7 +632,6 @@ hr {
   transition: background-color 0.3s ease;
 }
 
-/* Стили для выбранной радио-кнопки */
 .payment-method input:checked + .custom-radio {
   border-color: #A93F05;
 }
@@ -682,8 +676,8 @@ hr {
   align-self: end;
   justify-content: center;
   border: none;
-  margin-top: 2vh;
-  margin-bottom: 4vh;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
   align-items: center;
   gap: 0.5vw;
 }

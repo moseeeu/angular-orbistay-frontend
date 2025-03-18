@@ -7,8 +7,8 @@
 .main-page-banner {
   position: relative;
   background-color: #A93F05;
-  padding: 20px 18vw 0 20vw;
-  height: 100px;
+  padding: 1.04vw 18vw 0 20vw;
+  height: 5.21vw;
   color: white;
   font-family: OpenSans, sans-serif;
 }
@@ -23,24 +23,24 @@
 .main-text {
   font-size: 2vw;
   font-weight: 800;
-  margin: 10px 0;
+  margin: 0.52vw 0;
   font-family: "Open Sans", sans-serif;
 }
 
 .sub-text {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 0.94vw;
+  margin-bottom: 1.04vw;
 }
 .search-bar {
   display: flex;
-  gap: 5px;
+  gap: 0.26vw;
   width: 60%;
-  height: 80px;
+  height: 3.5vw;
   background: #002f5b;
   border-radius: 8px;
-  padding: 5px;
+  padding: 0.26vw;
   position: absolute;
-  margin-top: 40px;
+  margin-top: 2.08vw;
 }
 
 .search-field {
@@ -49,7 +49,7 @@
   flex: 1;
   text-align: left;
   border-radius: 4px;
-  padding-right: 10px;
+  padding-right: 0.52vw;
   align-items: center;
   background-color: white;
   cursor: pointer;
@@ -61,7 +61,7 @@
   flex: 1;
   text-align: left;
   border-radius: 4px;
-  padding-right: 10px;
+  padding-right: 0.52vw;
   align-items: center;
   background-color: white;
   cursor: pointer;
@@ -69,15 +69,15 @@
 }
 .search-field label {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 0.75vw;
   font-family: "Open Sans", sans-serif;
 }
 
 .field-title {
   display: block;
-  font-size: 12px;
+  font-size: 0.63vw;
   color: #002f5b;
-  margin-bottom: 5px;
+  margin-bottom: 0.26vw;
   font-weight: bold;
 }
 .custom-slider {
@@ -86,26 +86,26 @@
 
 .mat-slider-thumb {
   background-color: #e6e9f0 !important;
-  border: 2px solid #4a4a4a !important;
-  width: 20px !important;
-  height: 20px !important;
+  border: 0.10vw solid #4a4a4a !important;
+  width: 1.04vw !important;
+  height: 1.04vw !important;
 }
 
 .mat-slider-track-fill {
   background-color: #07195F !important;
-  height: 6px !important;
+  height: 0.31vw !important;
 }
 
 .mat-slider-track-background {
   background-color: #ccc !important;
-  height: 6px !important;
+  height: 0.31vw !important;
 }
 .dropdown {
   appearance: none;
   width: 100%;
-  padding: 20px;
-  font-size: 17px;
-  height: 70px;
+  padding: 1.04vw;
+  font-size: calc(0.10vw + 0.7vw);
+  height: 3.65vw;
   border-radius: 4px;
   border: none;
   outline: none;
@@ -121,14 +121,14 @@
   top: 100%;
   left: 0;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 0.05vw solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   width: 100%;
   transition: all 0.3s ease-in-out;
-  margin-top: 5px;
+  margin-top: 0.26vw;
 }
 .dropdown-content-rooms {
   display: none;
@@ -136,14 +136,14 @@
   top: 100%;
   left: 0;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 0.05vw solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   width: 100%;
   transition: all 0.3s ease-in-out;
-  margin-top: 5px;
+  margin-top: 0.26vw;
 }
 .dropdown-content-rooms.show {
   display: block;
@@ -158,7 +158,7 @@
 @keyframes dropdownFade {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-0.52vw);
   }
   to {
     opacity: 1;
@@ -181,10 +181,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 0.63vw;
   cursor: pointer;
   transition: 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 0.05vw solid #f0f0f0;
 }
 
 .dropdown-item:last-child {
@@ -200,15 +200,15 @@
 .counter {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.52vw;
 }
 
 .counter button {
   background-color: transparent;
-  border: 1px solid #ccc;
+  border: 0.05vw solid #ccc;
   border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 18px;
+  padding: 0.26vw 0.52vw;
+  font-size: 0.94vw;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -219,21 +219,21 @@
 }
 
 .counter span {
-  font-size: 16px;
+  font-size: 0.83vw;
   font-weight: bold;
   color: #002f5b;
 }
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 80px;
+  top: 3.2vw;
   right: 0;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 0.05vw solid #ddd;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   transition: all 0.3s ease-in-out;
   width: 28%;
   margin-right: 9.2vw;
@@ -241,13 +241,13 @@
 .people-dropdown-content{
   display: none;
   position: absolute;
-  top: 80px;
+  top: 4.17vw;
   background-color: white;
-  border: 1px solid #ddd;
+  border: 0.05vw solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  padding: 10px;
+  padding: 0.52vw;
   transition: all 0.3s ease-in-out;
   width: 28%;
   margin-right: 9.2vw;
@@ -261,7 +261,7 @@
 @keyframes dropdownFade {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-0.52vw);
   }
   to {
     opacity: 1;
@@ -273,11 +273,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 0.63vw;
   transition: 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 0.05vw solid #f0f0f0;
   border-radius: 4px;
-  font-size: 17px;
+  font-size: calc(0.10vw + 0.7vw);
   color: #002f5b;
   font-weight: 700;
   cursor: auto;
@@ -294,8 +294,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  border: 2px solid rgba(230, 235, 242, 1);
+  gap: 0.52vw;
+  border: 0.10vw solid rgba(230, 235, 242, 1);
   border-radius: 4px;
 }
 
@@ -303,8 +303,8 @@
   background-color: transparent;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 18px;
+  padding: 0.26vw 0.52vw;
+  font-size: 0.94vw;
   cursor: pointer;
   color: #A93F05;
 }
@@ -313,7 +313,7 @@
   color: #A93F05;
 }
 .counter span {
-  font-size: 17px;
+  font-size: calc(0.10vw + 0.7vw);
   color: #002f5b;
   font-weight: 700;
 }
@@ -326,14 +326,14 @@
   align-items: center;
   background-color: white;
   cursor: pointer;
-  padding-right: 10px;
+  padding-right: 0.52vw;
 }
 
 .city-selector-input {
   appearance: none;
   width: 100%;
-  padding: 10px;
-  font-size: calc(2px + 0.6vw);
+  padding: 0.52vw;
+  font-size: calc(0.10vw + 0.7vw);
   border: none;
   outline: none;
   color: #002f5b;
@@ -345,16 +345,16 @@
 .city-dropdown-content {
   display: none;
   position: absolute;
-  top: 60px;
-  left: 0;
+  top: 2.72vw;
+  left: 0.2vw;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 0.05vw solid #ddd;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 28.25%;
-  max-height: 300px;
-  margin-top: 1.5vh;
+  width: 16.5vw;
+  max-height: 15.63vw;
+  margin-top: 0.75vw;
   overflow-y: auto;
 }
 
@@ -364,16 +364,16 @@
 
 .dropdown-header {
   font-weight: bold;
-  margin: 0 0 10px 10px;
+  font-size: 0.8vw;
   color: #002f5b;
 }
 
 .city-dropdown-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 0.52vw;
   cursor: pointer;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 0.05vw solid #f0f0f0;
   transition: background 0.3s;
 }
 
@@ -388,9 +388,9 @@
 }
 
 .location-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 1.04vw;
+  height: 1.04vw;
+  margin-right: 0.52vw;
 }
 
 .city-details {
@@ -399,7 +399,7 @@
 }
 
 .city-details strong {
-  font-size: 16px;
+  font-size: 0.83vw;
   color: #004080;
 }
 
@@ -419,19 +419,20 @@ input[matStartDate], input[matEndDate] {
   align-self: center;
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
-  font-size: 17px;
-  padding: 0 10px 0 20px;
+  font-size: calc(0.10vw + 0.7vw);
+  padding: 0 0.52vw 0 1.04vw;
   color: #002f5b;
+
 }
 ::ng-deep .mat-calendar {
-  width: 16.9vw !important;
+  width: 16.5vw !important;
   background-color: white !important;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.21vw 0.42vw rgba(0, 0, 0, 0.1);
 }
 
 ::ng-deep .mat-calendar-body-cell-content {
-  font-size: 16px !important;
+  font-size: 0.83vw !important;
   color: #333 !important;
   border-radius: 8px;
 }
@@ -452,8 +453,8 @@ input[matStartDate], input[matEndDate] {
   color: white !important;
 }
 ::ng-deep .cdk-overlay-pane {
-  margin-top: 27px;
-  margin-left: -66px;
+  margin-top: 1.15vw;
+  margin-left: -3.1vw;
 }
 
 mat-calendar{
@@ -464,9 +465,9 @@ mat-calendar{
   display: block;
 }
 .search-field-icon {
-  width: 50px;
-  height: 50px;
-  padding: 8px 0 8px 8px;
+  width: 2.60vw;
+  height: 2.60vw;
+  padding: 0.42vw 0 0.42vw 0.42vw;
   align-self: center;
 }
 
@@ -475,20 +476,21 @@ mat-calendar{
 }
 
 .search-button {
-  background-color: #002f5b;
+  background-color: #07195f;
   color: white;
   width: 15%;
-  height: 70px;
-  padding: 10px 20px;
-  font-size: 23px;
+  height: 3vw;
+  padding: 0.52vw 1.04vw;
+  font-size: 1.20vw;
   font-weight: bold;
-  border: 2px solid white;
+  border: 0.10vw solid white;
   border-radius: 4px;
   cursor: pointer;
+  transition: ease-in-out 0.2s;
 }
 
 .search-button:hover {
-  background-color: #00509e;
+  background-color: #39477f;
 }
 
 .search-field select:focus,
@@ -506,7 +508,7 @@ mat-calendar{
   display: flex;
   flex-direction: column;
   padding: 0 20vw 0 20vw;
-  margin-top: 65px;
+  margin-top: 2.5vw;
   height: 100%;
 }
 
@@ -514,11 +516,18 @@ mat-calendar{
   color: rgba(169, 63, 5, 1);
   font-weight: 400;
   text-decoration: none;
+  font-size: 0.7vw;
+}
+.breadcrumb-bar-item-last {
+  color: #0c0c20;
+  font-weight: 400;
+  text-decoration: none;
+  font-size: 0.7vw;
 }
 .breadcrumb {
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 0.42vw;
 }
 .breadcrumb-arrow {
   display: flex;
@@ -530,7 +539,6 @@ mat-calendar{
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-top: 2vh;
 }
 .anchor {
   display: flex;
@@ -543,23 +551,24 @@ mat-calendar{
   font-weight: 400;
   font-size: 0.8vw;
   text-align: center;
-  border-bottom: 2px solid rgba(230, 235, 242, 1);
+  border-bottom: 0.10vw solid rgba(230, 235, 242, 1);
   cursor: pointer;
   transition: ease-in-out 0.2s;
 }
 .anchor span.active {
-  border-bottom: 2px solid #A93F05;
+  border-bottom: 0.10vw solid #A93F05;
 }
 .hotel-header {
   display: flex;
   flex-direction: row;
-  margin-top: 2vh;
+  margin-top: 1vw;
   width: 100%;
 }
 .hotel-header h1 {
   color: rgba(7, 25, 95, 1);
   font-weight: 700;
   width: 70%;
+  font-size: 1.6vw;
 }
 .hotel-headers-btns {
   width: 30%;
@@ -573,10 +582,14 @@ mat-calendar{
   background-color: rgba(7, 25, 95, 1);
   color: rgba(255, 255, 255, 1);
   font-weight: 700;
-  width: 50%;
-  height: 100%;
+  width: 10vw;
+  height: 2.2vw;
   font-size: 0.9vw;
   border-radius: 4px;
+  transition: ease-in-out 0.2s;
+}
+.hotel-headers-btns input:hover {
+  background-color: #39477f;
 }
 .hotel-headers-btns-small {
   display: flex;
@@ -589,7 +602,7 @@ mat-calendar{
   flex-direction: row;
   width: 100%;
   align-items: center;
-  margin-top: 0.5vh;
+  margin-top: 0.25vw;
   gap: 0.1vw;
 }
 
@@ -605,7 +618,7 @@ mat-calendar{
   width: 100%;
   height: 100%;
   gap: 0.5vw;
-  margin-top: 1vh;
+  margin-top: 0.5vw;
 }
 .hotels-pictures {
   display: flex;
@@ -625,7 +638,7 @@ mat-calendar{
 
 .hotel-main-pic {
   width: 100%;
-  height: 500px;
+  height: 26.04vw;
   border-radius: 4px;
   object-fit: cover;
 }
@@ -637,7 +650,7 @@ mat-calendar{
   justify-content: space-around;
   margin-top: 0.5vw;
   gap: 1.5%;
-  height: 150px;
+  height: 7.81vw;
 }
 
 .hotels-lower-picture {
@@ -672,7 +685,7 @@ mat-calendar{
 }
 .rating-score {
   width: 2vw;
-  height: 4vh;
+  height: 2vw;
   font-size: calc(5px + 0.6vw);
   font-weight: 700;
   background-color: #07195F;
@@ -798,7 +811,7 @@ mat-calendar{
 .hotel-highlights {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 2vh;
+  margin-top: 1vw;
   gap: 0.8vw;
   justify-content: flex-start;
   width: 100%;
@@ -809,7 +822,7 @@ mat-calendar{
   align-items: center;
   width: auto;
   gap: 0.5vw;
-  padding: 1.2vh 0.8vw 1.2vh 0.8vw;
+  padding: 0.6vw 0.8vw 0.6vw 0.8vw;
   border: 2px solid rgba(230, 235, 242, 1);
   border-radius: 4px;
 }
@@ -827,7 +840,7 @@ mat-calendar{
 .hotel-description {
   display: flex;
   flex-direction: row;
-  margin-top: 4vh;
+  margin-top: 2vw;
   width: 100%;
   justify-content: space-between;
 }
@@ -844,7 +857,7 @@ mat-calendar{
   width: 25%;
   height: 100%;
   padding: 1vw;
-  gap: 1vh;
+  gap: 0.5vw;
 }
 .hotel-interaction-buttons button {
   display: flex;
@@ -852,7 +865,9 @@ mat-calendar{
   width: 100%;
   padding: calc(3px + 0.4vw) 0 calc(3px + 0.4vw) 0 ;
   border-radius: 4px;
+  gap: 0.5vw;
   justify-content: center;
+  align-items: center;
 }
 .hotel-book-btn {
   background-color: #07195F;
@@ -863,8 +878,8 @@ mat-calendar{
   transition: ease-in-out 0.2s;
 }
 .hotel-book-btn:hover {
-  background-color: #3750a1;
-  border: 2px solid #3750a1
+  background-color: #39477f;
+  border: 2px solid #39477f
 }
 .hotel-favourite-btn {
   background-color: white;
@@ -887,7 +902,7 @@ mat-calendar{
 .hotel-facilities {
   display: flex;
   flex-direction: column;
-  margin-top: 2vh;
+  margin-top: 1vw;
 }
 .hotel-facilities span {
   font-size: calc(8px + 0.8vw);
@@ -897,7 +912,7 @@ mat-calendar{
 .hotel-facilities-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 2vh;
+  margin-top: 1vw;
   gap: 0.8vw;
   justify-content: flex-start;
   width: 70%;
@@ -925,7 +940,7 @@ mat-calendar{
 .hotel-availability {
   display: flex;
   flex-direction: column;
-  margin-top: 4vh;
+  margin-top: 2vw;
 }
 .hotel-availability-main-header {
   font-size: calc(10px + 1vw);
@@ -934,39 +949,38 @@ mat-calendar{
 }
 .availability-search-bar {
   display: flex;
-  gap: 5px;
+  gap: 0.26vw;
   width: 80%;
-  height: 80px;
+  height: 3.5vw;
   background: #a93f05;
   border-radius: 4px;
-  padding: 5px;
-  margin-top: 1vh;
+  padding: 0.26vw;
+  margin-top: 0.5vw;
 }
 .availability-search-button {
   background-color: #07195f;
   color: white;
   width: auto;
-  height: 70px;
+  height: 3vw;
   padding: 0.5vw 2vw 0.5vw 2vw;
-  font-size: 23px;
+  font-size: 1.20vw;
   font-weight: bold;
-  border: 2px solid white;
+  border: 0.10vw solid white;
   border-radius: 4px;
   cursor: pointer;
   transition: ease-in-out 0.2s;
 }
-
 .availability-search-button:hover {
-  background-color: #04437e;
+  background-color: #39477f;
 }
+
 .search-field-rooms input {
   height: 100%;
-  width: 80%;
   margin-left: auto;
   border: none;
   appearance: none;
   width: 100%;
-  padding: 10px;
+  padding: 0.52vw;
   font-size: calc(2px + 0.6vw);
   border: none;
   outline: none;
@@ -985,7 +999,7 @@ mat-calendar{
   border-radius: 4px;
   border: none;
   height: auto;
-  margin-top: 3vh;
+  margin-top: 1.5vw;
 }
 .hotel-apartments-list-headers {
   display: flex;
@@ -1015,8 +1029,8 @@ mat-calendar{
   flex-direction: column;
   width: 40%;
   border-right: 1px solid rgba(217, 217, 217, 1);
-  padding: 2vh 1vw 4vh 1vw;
-  gap: 2vh;
+  padding: 1vw 1vw 2vw 1vw;
+  gap: 1vw;
 }
 .hotel-apartment-info-quests {
   display: flex;
@@ -1024,7 +1038,7 @@ mat-calendar{
   width: 25%;
   border-right: 1px solid rgba(217, 217, 217, 1);
   border-left: 1px solid rgba(217, 217, 217, 1);
-  padding: 2vh 1vw 4vh 1vw;
+  padding: 1vw 1vw 2vw 1vw;
   gap: 0.5vw;
 }
 .hotel-apartment-info-price {
@@ -1032,7 +1046,7 @@ mat-calendar{
   flex-direction: column;
   width: 35%;
   border-left: 1px solid rgba(217, 217, 217, 1);
-  padding: 2vh 1vw 4vh 1vw;
+  padding: 1vw 1vw 2vw 1vw;
 }
 .info-type-header {
   color: #a93f05;
@@ -1130,15 +1144,15 @@ mat-calendar{
   border: none;
 }
 .info-book-btn:hover {
-  background-color: #3750a1;
+  background-color: #39477f;
 }
 
 .hotel-guest-reviews {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 6vh;
-  gap: 1vh;
+  margin-top: 3vw;
+  gap: 0.5vw;
 }
 .hotel-guest-main-header {
   font-size: calc(10px + 1vw);
@@ -1159,7 +1173,7 @@ mat-calendar{
 }
 .quest-rating-score {
   width: 2vw;
-  height: 4vh;
+  height: 2vw;
   font-size: calc(5px + 0.6vw);
   font-weight: 700;
   background-color: #07195F;
@@ -1189,10 +1203,10 @@ mat-calendar{
   display: flex;
   flex-direction: column;
   width: 33%;
-  height: 25vh;
+  height: 17.5vw;
   border: 2px solid rgba(230, 235, 242, 1);
   border-radius: 4px;
-  padding: 2vh 1vw 2vh 1vw;
+  padding: 1vw;
   gap: 1vw;
 }
 .review-header {
@@ -1264,7 +1278,7 @@ mat-calendar{
   width: 100%;
   color: rgba(12, 12, 32, 1);
   font-size: calc(5px + 0.5vw);
-  max-height: 5vh;
+  max-height: 2.5vw;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -1276,7 +1290,7 @@ mat-calendar{
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 0.5vh;
+  gap: 0.25vw;
 }
 .review-tag {
   display: flex;

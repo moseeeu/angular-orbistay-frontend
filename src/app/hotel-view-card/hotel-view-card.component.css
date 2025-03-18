@@ -2,7 +2,7 @@
   width: 12vw;
   height: 18vw;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.10vw 0.21vw rgba(0, 0, 0, 0.25);
   overflow: hidden;
   font-family: "Open Sans", sans-serif;
   display: flex;
@@ -14,19 +14,20 @@
 
 .image-container {
   position: relative;
-  height: 20vw;
+  height: 10.8vw; /* 60% от общей высоты 18vw */
+  overflow: hidden;
 }
 
 .card-image {
-  width: auto;
-  height: 265px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
 .favorite-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0.52vw;
+  right: 0.52vw;
   background: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 50%;
@@ -44,12 +45,14 @@
 }
 
 .card-content {
-  padding: 0 16px 16px 16px;
+  padding: 0 0.83vw 0.83vw 0.83vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
+  height: 7.2vw; /* 40% от общей высоты 18vw */
+  overflow: hidden;
 }
+
 .card-header {
   display: flex;
   flex-direction: column;
@@ -58,25 +61,28 @@
   height: auto;
   padding: 0;
 }
+
 .card-title {
-  font-size: 19px;
+  font-size: 0.9vw;
   font-weight: bold;
-  margin: 0;
+  margin: 0.4vw 0 -0.1vw 0;
   overflow: hidden;
   text-overflow: ellipsis;
   overflow-wrap: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  line-height: 1.2;
 }
 
 .card-location {
-  font-size: 17px;
+  font-size: 0.75vw;
   color: #666;
-  margin: 4px 0 16px;
-  height: 20px;
+  margin: 0.21vw 0 0.83vw;
+  height: 1.04vw;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-footer {
@@ -91,13 +97,14 @@
 .rating {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.26vw;
+  margin-top: auto;
 }
 
 .rating-score {
-  width: 40px;
-  height: 40px;
-  font-size: 19px;
+  width: 2.08vw;
+  height: 2.08vw;
+  font-size: 0.9vw;
   font-weight: 700;
   background-color: #07195F;
   color: #fff;
@@ -108,13 +115,13 @@
 }
 
 .rating-text {
-  font-size: 17px;
+  font-size: 0.7vw;
   color: #0C0C20B2;
   font-weight: 400;
 }
 
 .reviews {
-  font-size: 17px;
+  font-size: 0.7vw;
   color: #0C0C20B2;
   margin: 0;
   font-weight: 400;
