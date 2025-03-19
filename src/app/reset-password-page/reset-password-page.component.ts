@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {TokenService} from '../token.service';
 import {HttpClient} from '@angular/common/http';
 import {interval, Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-reset-password-page',
@@ -15,14 +16,20 @@ export class ResetPasswordPageComponent {
     isButtonDisabled = false;
     email: string = "";
     timer = 60;
+    isTokenPresent: boolean = false;
     private timerSubscription: Subscription | null = null;
 
   constructor(private http : HttpClient,
-                private tokenService: TokenService) {
+              private tokenService: TokenService,
+              private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-
+      this.route.queryParams.subscribe(params => {
+        if (params['token']) {
+          this.isTokenPresent = true;
+        }
+      });
     }
 
   sendCodeToMail() {

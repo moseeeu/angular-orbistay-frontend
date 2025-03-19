@@ -1,18 +1,31 @@
 <div class="body">
   <hr class="up-hr" style="margin-top: -1px">
   <div class="booking-page">
-    <div class="booking-details-container">
-      <span class="main-header">Please verify your email</span>
-      <span *ngIf="isCodeSend" class="description">We send you a code to <strong>{{ currentUser.email }}</strong> Please enter the code to continue.</span>
-      <div class="code-inputs" *ngIf="isCodeSend">
-        <input class="code-input" (input)="moveToNext($event, 0)" maxlength="1">
-        <input class="code-input" (input)="moveToNext($event, 1)" maxlength="1">
-        <input class="code-input" (input)="moveToNext($event, 2)" maxlength="1">
-        <input class="code-input" (input)="moveToNext($event, 3)" maxlength="1">
-        <input class="code-input" (input)="moveToNext($event, 4)" maxlength="1">
-        <input class="code-input" (input)="moveToNext($event, 5)" maxlength="1">
-      </div>
-      <button (click)="sendCodeToMail()" class="info-book-btn">Send code</button>
+    <div class="booking-details-container" *ngIf="!isTokenPresent">
+      <span class="main-header">{{ isCodeSend ? "Check your email" :"Enter your email" }}</span>
+      <span class="description" *ngIf="!isCodeSend">Please provide your email so that we can send you a letter with link to reset your password.</span>
+      <span class="description" *ngIf="isCodeSend">We send email to {{ email }}. Please follow the instructions in the email to continue.</span>
+      <input type="text" *ngIf="!isCodeSend" [(ngModel)]="email" placeholder="Enter your email"/>
+      <button class="info-book-btn" [class.info-book-btn-disabled]="isButtonDisabled" [disabled]="isButtonDisabled" (click)="sendCodeToMail()">{{ isCodeSend ? "Send letter again" :"Send letter" }}</button>
+      <span class="timer" *ngIf="isCodeSend">
+      Didn’t receive the letter? Please check your spam folder or request another one in <b>{{ timer }}</b> seconds.</span>
+      <span routerLink="/login" class="back-to-login">Return to sign up page</span>
+      <hr class="down-hr">
+      <span class="copyright">Copyright © 2024–2025 Orbistay.com™. All rights reserved.</span>
+    </div>
+    <div class="booking-confirm-container" *ngIf="isTokenPresent">
+      <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vw" viewBox="0 0 100 100" fill="none">
+        <g clip-path="url(#clip0_1077_2951)">
+          <path d="M50 9.375C60.7744 9.375 71.1076 13.6551 78.7262 21.2738C86.3449 28.8925 90.625 39.2256 90.625 50C90.625 60.7744 86.3449 71.1076 78.7262 78.7262C71.1076 86.3449 60.7744 90.625 50 90.625C39.2256 90.625 28.8925 86.3449 21.2738 78.7262C13.6551 71.1076 9.375 60.7744 9.375 50C9.375 39.2256 13.6551 28.8925 21.2738 21.2738C28.8925 13.6551 39.2256 9.375 50 9.375ZM50 100C63.2608 100 75.9785 94.7322 85.3553 85.3553C94.7322 75.9785 100 63.2608 100 50C100 36.7392 94.7322 24.0215 85.3553 14.6447C75.9785 5.26784 63.2608 0 50 0C36.7392 0 24.0215 5.26784 14.6447 14.6447C5.26784 24.0215 0 36.7392 0 50C0 63.2608 5.26784 75.9785 14.6447 85.3553C24.0215 94.7322 36.7392 100 50 100ZM72.0703 40.8203C73.9062 38.9844 73.9062 36.0156 72.0703 34.1992C70.2344 32.3828 67.2656 32.3633 65.4492 34.1992L43.7695 55.8789L34.5898 46.6992C32.7539 44.8633 29.7852 44.8633 27.9688 46.6992C26.1523 48.5352 26.1328 51.5039 27.9688 53.3203L40.4688 65.8203C42.3047 67.6562 45.2734 67.6562 47.0898 65.8203L72.0703 40.8203Z" fill="#9E9EA6"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_1077_2951">
+            <rect width="100" height="100" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+      <span class="main-header">Email verified!</span>
+      <button routerLink="/" class="info-book-btn">Continue</button>
       <hr class="down-hr">
       <span class="copyright">Copyright © 2024–2025 Orbistay.com™. All rights reserved.</span>
     </div>

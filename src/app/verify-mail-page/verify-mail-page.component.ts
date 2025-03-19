@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TokenService} from '../token.service';
 import {ApiUrls} from '../api-urls';
+import {interval, Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-verify-mail-page',
@@ -12,70 +14,46 @@ import {ApiUrls} from '../api-urls';
 })
 export class VerifyMailPageComponent {
   isCodeSend = false;
-  currentUser: any;
-  code: string[] = new Array(6).fill('');
-  correctCode: string = "F9KN4A";
-  isError: boolean = false;
-
+  isButtonDisabled = false;
+  email: string = "";
+  timer = 60;
+  isTokenPresent: boolean = false;
+  private timerSubscription: Subscription | null = null;
 
   constructor(private http : HttpClient,
-              private tokenService: TokenService) {
+              private tokenService: TokenService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('userData');
-    console.log("Stored user", storedUser);
-    if (storedUser) {
-      this.currentUser = JSON.parse(storedUser);
-    }
+    this.route.queryParams.subscribe(params => {
+      if (params['token']) {
+        this.isTokenPresent = true;
+        console.log('Token найден:', params['token']);
+      }
+    });
   }
 
   sendCodeToMail() {
-    const token = this.currentUser.emailVerification.token;
+    if (this.validateEmail(this.email)) {
+      this.isCodeSend = true;
+      this.isButtonDisabled = true;
+      this.timer = 60;
 
-    const url = `${ApiUrls.POST_VERIFY_EMAIL_URL}?token=${token}`;
-
-    this.isCodeSend = true;
-
-    this.http.post(url, {}, { withCredentials: true }).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.error("Error sending code:", error);
-      }
-    );
-  }
-
-
-  moveToNext(event: any, index: number) {
-    const inputs = document.querySelectorAll<HTMLInputElement>('.code-input');
-    const inputValue = event.target.value;
-
-    if (inputValue.length === 1 && index < inputs.length - 1) {
-      inputs[index + 1].focus();
-    }
-
-    if (event.inputType === 'deleteContentBackward' && index > 0) {
-      inputs[index - 1].focus();
-    }
-  }
-
-  validateCode() {
-    const enteredCode = this.getEnteredCode();
-    console.log("Введённый код:", enteredCode);
-
-    if (enteredCode !== this.correctCode) {
-      this.isError = true;
-      console.log("Код неверный!");
+      this.timerSubscription = interval(1000).subscribe(() => {
+        if (this.timer > 0) {
+          this.timer--;
+        } else {
+          this.isButtonDisabled = false;
+          this.timerSubscription?.unsubscribe();
+        }
+      });
     } else {
-      this.isError = false;
-      console.log("Код правильный!");
+      alert("Enter a valid email address");
     }
   }
-
-  getEnteredCode(): string {
-    const inputs = document.querySelectorAll<HTMLInputElement>('.code-input');
-    return Array.from(inputs).map(input => input.value).join('');
+  validateEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
   }
 }
