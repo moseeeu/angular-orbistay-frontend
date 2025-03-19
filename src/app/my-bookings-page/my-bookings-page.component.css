@@ -216,7 +216,7 @@
   margin-top: auto;
   width: 100%;
 }
-.hotel-price-container input {
+.view-button {
   border: none;
   background: #07195F;
   color: white;
@@ -229,7 +229,24 @@
   margin-top: 0.52vw;
   transition: ease-in-out 0.2s;
 }
-.hotel-price-container input:hover {
+.cancel-button {
+  border: none;
+  background: transparent;
+  color: #555563;
+  font-weight: 700;
+  font-size: 0.7vw;
+  border-radius: 4px;
+  width: auto;
+  margin-left: auto;
+  height: 2vw;
+  margin-top: 0.52vw;
+  transition: ease-in-out 0.2s;
+  text-align-last: end;
+}
+.cancel-button:hover {
+  color: #a93f05;
+}
+.view-button:hover {
   background: #355ba8;
 }
 #new-price {

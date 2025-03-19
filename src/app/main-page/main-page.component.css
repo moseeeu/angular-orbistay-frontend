@@ -535,14 +535,6 @@ mat-calendar{
   font-weight: 700;
   padding: 5vw;
 }
-app-hotel-view-card {
-  cursor: pointer;
-  transition: ease-in-out 0.2s;
-}
-app-hotel-view-card:hover {
-  cursor: pointer;
-  transform: scale(1.01);
-}
 mat-datepicker-content .mat-calendar {
   width: 20vw;
   height: auto;

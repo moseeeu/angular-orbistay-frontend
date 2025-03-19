@@ -161,16 +161,16 @@ export class HotelPageComponent {
     return Array.from(uniqueFacilities.values());
   }
 
-
-
-  constructor(private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private http: HttpClient,
-              private router: Router,
-              private hotelsService: HotelsService,
-              private tokenService: TokenService,
-              private bookingService: BookingService,
-              private spinner: NgxSpinnerService,) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private hotelsService: HotelsService,
+    private tokenService: TokenService,
+    private bookingService: BookingService,
+    private spinner: NgxSpinnerService
+  ) {
     this.range1 = this.fb.group({
       start: [null],
       end: [null],
@@ -219,65 +219,31 @@ export class HotelPageComponent {
 
     this.getPopularDestinations();
 
-    // @ts-ignore
-    this.adults = localStorage.getItem('adultsSearch') ? +localStorage.getItem('adultsSearch') : 0;
-    // @ts-ignore
-    this.children = localStorage.getItem('childrenSearch') ? +localStorage.getItem('childrenSearch') : 0;
+    this.adults = localStorage.getItem('adultsSearch') ? +localStorage.getItem('adultsSearch')! : 0;
+    this.children = localStorage.getItem('childrenSearch') ? +localStorage.getItem('childrenSearch')! : 0;
     this.selectedCity = localStorage.getItem('citySearch') || '';
 
     this.hotelId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.selectedCityForCrumbBar);
     if (this.hotelId) {
       this.loadHotelData();
       this.tokenService.refreshAccessToken();
-      let token = this.tokenService.getToken();
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${this.tokenService.getToken()}`
       });
-      console.log(`${ApiUrls.POST_RECENTLY_VIEWED_HOTEL}/${this.hotelId}`)
-      this.http.post<any>(`${ApiUrls.POST_RECENTLY_VIEWED_HOTEL}/${this.hotelId}`,{}, { headers, withCredentials: true}).subscribe(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.error('Ошибка:', error);
-        }
+      this.http.post<any>(`${ApiUrls.POST_RECENTLY_VIEWED_HOTEL}/${this.hotelId}`, {}, { headers, withCredentials: true }).subscribe(
+        (response) => console.log(response),
+        (error) => console.error('Ошибка:', error)
       );
     }
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.tokenService.getToken()}`
+
+    this.hotelsService.favouriteHotels$.subscribe((favourites) => {
+      this.isInFavourite = favourites.some((hotel) => hotel.id === this.hotelId);
     });
-
-
-    this.http.get<any>(ApiUrls.GET_RECENTLY_VIEWED_HOTELS, { headers, withCredentials: true }).subscribe(
-      (response) => {
-        console.log("REECENTLY",response);
-      }
-    );
-
-    this.http.get<any>(ApiUrls.GET_HOTEL_TO_FAVOURITES, { headers, withCredentials: true }).subscribe(
-      (response) => {
-        console.log("FAVOURITES ME",response);
-        for (let i = 0; i < response.length; i++) {
-          console.log(this.hotelId)
-          if (response[i].id == this.hotelId) {
-            this.favouriteId = response[i].id;
-            this.isInFavourite = true;
-            break;
-          }
-          else this.isInFavourite = false;
-        }
-        console.log("IS IN FAV",this.isInFavourite)
-      }
-    )
 
     this.updateBreadcrumb();
-    this.router.events.subscribe(() => {
-      this.updateBreadcrumb();
-    });
+    this.router.events.subscribe(() => this.updateBreadcrumb());
 
     const storedUser = localStorage.getItem('userData');
-    console.log("Stored user", storedUser);
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
       this.avatar = this.currentUser.avatarUrl;
@@ -315,11 +281,7 @@ export class HotelPageComponent {
             break;
         }
 
-
-        console.log(this.hotelGrade);
-        console.log("My hotel",this.hotel);
         this.reviews = this.hotel.reviews;
-        console.log(this.reviews);
       }
     }, 1000);
   }
@@ -466,8 +428,17 @@ export class HotelPageComponent {
     const startDate = this.range1?.value?.start ? this.formatDate(this.range1.value.start) : "";
     const endDate = this.range1?.value?.end ? this.formatDate(this.range1.value.end) : "";
 
-    if (this.selectedCity.length < 2 || startDate == "" || endDate == "" || peopleCount == 0) {
+    if (this.selectedCity.length < 2 || startDate === "" || endDate === "" || peopleCount === 0) {
       alert("Please enter valid data in search bar");
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const startDateObj = new Date(startDate);
+
+    if (startDateObj < today) {
+      alert("Check-in date cannot be earlier than today");
       return;
     }
 
@@ -482,12 +453,8 @@ export class HotelPageComponent {
       filters: {
         minPrice: "0",
         maxPrice: "99999",
-        valuations: [
-          "EXCELLENT"
-        ],
-        stars: [
-          "ONE_STAR"
-        ]
+        valuations: ["EXCELLENT"],
+        stars: ["ONE_STAR"]
       }
     };
 
@@ -503,11 +470,8 @@ export class HotelPageComponent {
     this.hotelsService.getFilteredHotels(ApiUrls.GET_FILTER_HOTELS_URL, this.requestBody).subscribe(
       (hotels) => {
         console.log("Hotels received:", hotels);
-
         this.hotelsService.setFilteredHotels(hotels);
-
         localStorage.setItem('filteredHotels', JSON.stringify(hotels));
-
         this.router.navigate(['/search']);
       },
       (error) => {
@@ -524,6 +488,15 @@ export class HotelPageComponent {
 
     if (startDate === "" || endDate === "" || peopleCount === 0) {
       alert("Please enter valid data in search bar");
+      return;
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const startDateObj = new Date(startDate);
+
+    if (startDateObj < today) {
+      alert("Check-in date cannot be earlier than today");
       return;
     }
 
@@ -607,45 +580,15 @@ export class HotelPageComponent {
   }
 
   addToFavourites() {
-    if (this.currentUser == null) {
+    if (!this.tokenService.hasToken()) {
       this.router.navigate(['/login']);
+      return;
     }
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.tokenService.getToken()}`
-    });
-
-    console.log(this.isInFavourite)
     if (!this.isInFavourite) {
-      this.http.post<any>(
-        `${ApiUrls.POST_HOTEL_TO_FAVOURITES}/${this.hotelId}`,
-        {},
-        { headers, withCredentials: true }
-      ).subscribe(
-        (response) => {
-          console.log("Add to favourite", response);
-          this.isInFavourite = true;
-        },
-        (error) => {
-          console.error("Error adding to favourites", error);
-        }
-      );
-      this.isInFavourite = true;
-    }
-    else {
-      this.http.delete<any>(
-        `${ApiUrls.DELETE_HOTEL_TO_FAVOURITES}/${this.favouriteId}`,
-        { headers, withCredentials: true }
-      ).subscribe(
-        (response) => {
-          console.log("Remove from favourites", response);
-        },
-        (error) => {
-          console.log(`${ApiUrls.DELETE_HOTEL_TO_FAVOURITES}/${this.favouriteId}`)
-          console.error("Error delete from favourites", error);
-        }
-      );
-      this.isInFavourite = false;
+      this.hotelsService.addToFavourites(this.hotelId!);
+    } else {
+      this.hotelsService.removeFromFavourites(this.hotelId!);
     }
   }
 

@@ -65,8 +65,8 @@
             </div>
             <div class="hotel-price-container">
               <span *ngIf="booking.payment != null" id="new-price">USD {{booking.payment.amount}}</span>
-              <input type="button" value="View" (click)="redirectToHotelPage(hotel.id)"/>
-              <input type="button" value="Cancel" (click)="deleteBooking(booking)"/>
+              <input class="view-button" type="button" value="View" (click)="redirectToHotelPage(hotel.id)"/>
+              <input class="cancel-button" type="button" value="Cancel" (click)="deleteBooking(booking)"/>
             </div>
           </div>
         </div>

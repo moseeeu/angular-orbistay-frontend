@@ -359,6 +359,15 @@ export class SearchResultsPageComponent {
       return;
     }
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const startDateObj = new Date(startDate);
+
+    if (startDateObj < today) {
+      alert("Check-in date cannot be earlier than today");
+      return;
+    }
+
     this.requestBody = {
       name: "",
       city: this.selectedCity || "",

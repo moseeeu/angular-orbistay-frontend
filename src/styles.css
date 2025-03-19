@@ -9,7 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: fl
   flex-direction: column;
   width: 100%;
   align-self: center;
-  height: auto;
+  height: 6vw;
   padding: 1vw;
   gap: 1vw;
   background-color: rgba(230, 235, 242, 1);
@@ -18,7 +18,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: fl
 .main-page-footer span{
   align-self: center;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 0.65vw;
   color: rgba(85, 85, 99, 1);
 }
 .main-page-footer svg{

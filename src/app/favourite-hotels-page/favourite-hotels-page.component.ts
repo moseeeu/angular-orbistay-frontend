@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiUrls} from '../api-urls';
 import {TokenService} from '../token.service';
 import {Router} from '@angular/router';
+import {HotelsService} from '../hotels.service';
 
 @Component({
   selector: 'app-favourite-hotels-page',
@@ -12,23 +13,20 @@ import {Router} from '@angular/router';
   styleUrl: './favourite-hotels-page.component.css'
 })
 export class FavouriteHotelsPageComponent {
-  favouriteHotelsList: any;
+  favouriteHotelsList: any[] = [];
 
   constructor(private http: HttpClient,
               private tokenService: TokenService,
-              private router: Router,) {}
+              private router: Router,
+              private hotelService: HotelsService) {}
 
   ngOnInit(): void {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.tokenService.getToken()}`
-    });
-
-    this.http.get<any>(ApiUrls.GET_HOTEL_TO_FAVOURITES, { headers, withCredentials: true }).subscribe(
-      (response) => {
-        this.favouriteHotelsList = response;
+    this.hotelService.refreshFavouriteHotels();
+    this.hotelService.favouriteHotels$.subscribe(
+      (hotels) => {
+        this.favouriteHotelsList = hotels;
       }
-    )
-
+    );
   }
   redirectToHotelPage(hotelId: number) {
     this.router.navigate(['/hotel', hotelId]);

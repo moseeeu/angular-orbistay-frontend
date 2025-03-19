@@ -52,6 +52,7 @@ hr {
 }
 .input-field span {
   font-weight: 600;
+  font-size: 0.7vw;
   color: rgba(12, 12, 32, 1);
 }
 input[type="text"],[type="password"] {

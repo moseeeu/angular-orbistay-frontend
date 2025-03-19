@@ -21,7 +21,8 @@
       </div>
     </div>
       <div *ngIf="favouriteHotelsList.length != 0" class="cards-container">
-      <app-hotel-view-card class="hotel-card" *ngFor="let hotel of favouriteHotelsList" (click)="redirectToHotelPage(hotel.id)"
+      <app-hotel-view-card [style.z-index]="1" *ngFor="let hotel of favouriteHotelsList"
+                           [hotelId]="hotel.id"
                            [title]="hotel.name"
                            [location]="hotel.shortDesc"
                            [rating]="hotel.avgRate"

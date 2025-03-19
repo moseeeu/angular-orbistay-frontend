@@ -3,16 +3,16 @@
   flex-direction: row;
   background: white;
   width: 100%;
-  height: 80px;
+  height: 4vw;
   padding-left: 20vw;
   padding-right: 20vw;
   font-weight: bold;
-  min-height: 80px;
+  min-height: 4.17vw;
 }
 .navbar a {
   color: black;
   text-decoration: none;
-  font-size: 2.5vh;
+  font-size: 1.75vw;
 }
 .navbar-buttons {
   display: flex;
@@ -26,42 +26,49 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 17px;
+  font-size: 0.89vw;
   font-weight: 700;
   font-family: "Open Sans", sans-serif;
   color: black;
   white-space: nowrap;
-  border: 0px;
-  border-radius: 4px;
+  border-radius: 0.21vw;
   background-color: transparent;
 }
 .login-btn {
   color: #07195F;
-  width: 120px;
-  height: 33px;
-  padding: 4px 10px 4px 10px;
-  border-radius: 4px;
+  width: 6.25vw;
+  height: 1.72vw;
+  padding: 0.21vw 0.52vw 0.21vw 0.52vw;
+  border-radius: 0.21vw;
   border: 1px solid rgba(7, 25, 95, 0.1);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 0.89vw;
   font-family: "Open Sans", sans-serif;
   background-color: transparent;
+  transition: ease-in-out 0.2s;
+}
+.login-btn:hover {
+  border: 1px solid #07195F;
 }
 .sign-up-btn {
   color: #07195F;
-  width: 120px;
-  height: 33px;
-  padding: 4px 10px 4px 10px;
-  border-radius: 4px;
-  border: 0px;
+  width: 6.25vw;
+  height: 1.72vw;
+  padding: 0.21vw 0.52vw 0.21vw 0.52vw;
+  border-radius: 0.21vw;
+  border: 1px solid #e6e8ef;
   font-weight: 700;
-  font-size: 17px;
+  font-size: 0.89vw;
   font-family: "Open Sans", sans-serif;
   background-color: rgba(7, 25, 95, 0.1);
+  transition: ease-in-out 0.2s;
+}
+.sign-up-btn:hover {
+  border: 1px solid #07195F;
 }
 .account-btn {
-  width: 50px;
-  height: 50px;
+  width: 2.60vw;
+  height: 2.60vw;
   background-color: #E6EBF2;
   border: 2px solid #07195FCC;
   border-radius: 25px;
@@ -88,22 +95,22 @@
 .account-panel p {
   margin: 0;
   align-content: center;
-  font-size: 20px;
+  font-size: 1.04vw;
   font-weight: 700;
 }
 .account-panel span {
   color: #07195F;
   font-weight: 700;
-  font-size: 27px;
+  font-size: 1.41vw;
 }
 .popup-menu {
   position: absolute;
-  top: 80px;
+  top: 4.17vw;
   margin-right: 19.5vw;
-  right: 10px;
+  right: 0.52vw;
   background-color: white;
-  border-radius: 0 0 8px 8px;
-  padding: 10px 10px 0 10px;
+  border-radius: 0 0 0.42vw 0.42vw;
+  padding: 0.52vw 0.52vw 0 0.52vw;
   display: none;
   z-index: 10;
   box-shadow: 0 6px 8px 0 rgba(7, 25, 85, 0.2);
@@ -119,7 +126,7 @@
 }
 
 .popup-menu li {
-  padding: 10px 35px;
+  padding: 0.52vw 1.82vw;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -140,8 +147,8 @@ ul li:hover a {
 
 .popup-menu li a {
   text-decoration: none;
-  margin-left: 10px;
-  font-size: 19px;
+  margin-left: 0.52vw;
+  font-size: 0.99vw;
   color: #07195F;
   transition: ease-in-out 0.2s;
 }
@@ -150,21 +157,20 @@ ul li:hover a {
 }
 
 .popup-menu li .icon {
-  font-size: 19px;
+  font-size: 0.99vw;
   color: #07195F;
-
 }
 .popup-menu ul li {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px;
+  gap: 0.42vw;
+  padding: 0.52vw;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .popup-menu ul li svg {
-  width: 20px;
-  height: 18px;
+  width: 1.04vw;
+  height: 0.94vw;
   transition: fill 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 

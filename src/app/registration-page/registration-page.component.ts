@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {AppComponent} from '../app.component';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-registration-page',
@@ -20,7 +21,9 @@ export class RegistrationPageComponent {
   registrationResponse: any;
   token: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService,
+              private router: Router,
+              private spinner: NgxSpinnerService) { }
 
   registerUser() {
     this.authService.registerUser(this.username, this.email, this.password)
@@ -28,15 +31,19 @@ export class RegistrationPageComponent {
         (response) => {
           this.token = response.accessToken;
           this.registrationResponse = response;
-          console.log('Registration successful:', response);
           localStorage.setItem('token', this.token);
-          this.router.navigate(['']);
           if (this.token != null) {
             this.authService.getUserInfo().subscribe(
               data => {
-                console.log("This is user: ", data);
                 this.authService.updateUserData(data);
-                this.router.navigate(['']);
+                this.spinner.show();
+                setTimeout(() => {
+                  this.spinner.hide();
+                  window.location.reload();
+                }, 1000);
+                setTimeout(() => {
+                  this.router.navigate(['']);
+                }, 950);
               }
             );
           }
@@ -49,6 +56,9 @@ export class RegistrationPageComponent {
           }
         }
       );
+  }
+  loginUserByGoogle() {
+    this.authService.loginUserByGoogle()
   }
 
   getEmailValid() {
