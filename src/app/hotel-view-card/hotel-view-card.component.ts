@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HotelsService} from '../hotels.service';
 import {ApiUrls} from '../api-urls';
 import {TokenService} from '../token.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-hotel-view-card',
@@ -25,6 +26,7 @@ export class HotelViewCardComponent implements OnInit {
 
   constructor(
     private hotelsService: HotelsService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -50,4 +52,8 @@ export class HotelViewCardComponent implements OnInit {
       this.hotelsService.removeFromFavourites(+this.hotelId);
     }
   }
+  redirectToHotelPage() {
+    this.router.navigate(['/hotel', this.hotelId]);
+  }
+
 }

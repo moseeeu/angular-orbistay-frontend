@@ -16,6 +16,7 @@ import {ApiUrls} from '../api-urls';
 })
 export class MyBookingsPageComponent {
   hotelsList: any = null;
+  hotelRouteId: any;
   hotel = {
     id: 1,
     mainImageUrl: "https://orbistayblob.blob.core.windows.net/hotels/cozy-ny-hotel-main.svg",
@@ -90,6 +91,7 @@ export class MyBookingsPageComponent {
             this.hotelService.getHotelById(booking.hotelId).subscribe(
               (hotel) => {
                 this.hotelsList[index].hotel = hotel;
+                this.hotelRouteId = hotel.id;
                 this.hotelsList[index].hotelGrade = this.getHotelGrade(hotel.avgRate);
               },
               (error) => {
@@ -161,7 +163,7 @@ export class MyBookingsPageComponent {
     return '';
   }
 
-  redirectToHotelPage(hotelId: number) {
-    this.router.navigate(['/hotel', hotelId]);
+  redirectToHotelPage() {
+    this.router.navigate(['/hotel', this.hotelRouteId]);
   }
 }
